@@ -19,10 +19,7 @@ body {
           <div class="card">
             <div class="card-body">
 
-              <h1>2023 Scouting System</h1>
-              
-              Please reach out to Head Scout for any urgent support!
-            
+              <h1>2024 Scouting System</h1>              
             </div>
           </div>
         </div>

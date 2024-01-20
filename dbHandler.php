@@ -20,20 +20,14 @@ class dbHandler
         'matchNumber' => 'VARCHAR(10) NOT NULL',
         'teamNumber' => 'VARCHAR(10) NOT NULL',
         'autoMobility' => 'BOOLEAN NOT NULL',
-        'autoConeLevel1' => 'SMALLINT NOT NULL',
-        'autoConeLevel2' => 'SMALLINT NOT NULL',
-        'autoConeLevel3' => 'SMALLINT NOT NULL',
-        'autoCubeLevel1' => 'SMALLINT NOT NULL',
-        'autoCubeLevel2' => 'SMALLINT NOT NULL',
-        'autoCubeLevel3' => 'SMALLINT NOT NULL',
-        'autoChargeStation' => 'VARCHAR(60) NULL',
-        'teleopConeLevel1' => 'SMALLINT NOT NULL',
-        'teleopConeLevel2' => 'SMALLINT NOT NULL',
-        'teleopConeLevel3' => 'SMALLINT NOT NULL',
-        'teleopCubeLevel1' => 'SMALLINT NOT NULL',
-        'teleopCubeLevel2' => 'SMALLINT NOT NULL',
-        'teleopCubeLevel3' => 'SMALLINT NOT NULL',
-        'teleopChargeStation' => 'VARCHAR(60) NULL',
+        'autoAmpNote' => 'SMALLINT NOT NULL',
+        'autoSpeakerNote' => 'SMALLINT NOT NULL',
+        'autoPath' => 'LONGTEXT NOT NULL',
+        'teleopAmpNote' => 'SMALLINT NOT NULL',
+        'teleopSpeaker' => 'SMALLINT NOT NULL',
+        'teleopSpeakerAmplified' => 'SMALLINT NOT NULL',
+        'climb' => 'VARCHAR(100) NULL',
+        'climbSpotlighted' => 'BOOLEAN NOT NULL',
         'cannedComments' => 'TEXT NULL',
         'textComments' => 'TEXT NULL'
       )
@@ -46,7 +40,8 @@ class dbHandler
         'team3' => 'SMALLINT NOT NULL',
         'team4' => 'SMALLINT NOT NULL',
         'team5' => 'SMALLINT NOT NULL',
-        'team6' => 'SMALLINT NOT NULL'
+        'team6' => 'SMALLINT NOT NULL',
+        'matchComments' => 'TEXT NOT NULL'
       )
     ),
     'pitScouttable' => array(
@@ -56,7 +51,7 @@ class dbHandler
         'numBatteries' => 'SMALLINT NOT NULL',
         'chargedBatteries' => 'SMALLINT NOT NULL',
         'codeLanguage' => 'VARCHAR(10) NOT NULL',
-		'drivetrainType' => 'VARCHAR(60) NOT NULL',
+		    'drivetrainType' => 'VARCHAR(60) NOT NULL',
         'autoPath' => 'VARCHAR(60) NOT NULL',
         'framePerimeterDimensions' => 'VARCHAR(60) NOT NULL',
         'pitComments' => 'TEXT NULL'
