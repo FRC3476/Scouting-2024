@@ -61,22 +61,13 @@
                     </label>
                   </div>
                   <div class="row">
+                  <h2 style="text-align: center"> Scoring Location </h2>
                     <div class="col-md-5">
-                      <h2 style="text-align: center"> Cone </h2>
-                      <button class="border border-dark disable-dbl-tap-zoom-yellow" type="button" onClick="updateAConeUpper()" id="bigFont">Top <div id="buttonAConeUpper" class="enlargedtext"></div></button>
-                      <br>
-                      <button class="border border-dark disable-dbl-tap-zoom-yellow" type="button" onClick="updateAConeMid()" id="bigFont">Middle <div id="buttonAConeMid" class="enlargedtext"></div></button>
-                      <br>
-                      <button class="border border-dark disable-dbl-tap-zoom-yellow" type="button" onClick="updateAConeLower()" id="bigFont">Bottom <div id="buttonAConeLower" class="enlargedtext"></div></button>
+                      <button class="border border-dark disable-dbl-tap-zoom-coral-rose" type="button" onClick="updateAAmp()" id="bigFont">Amp <div id="buttonAAmp" class="enlargedtext"></div></button>
                       <br>
                     </div>
                     <div class="col-md-5">
-                      <h2 style="text-align: center"> Cube </h2>
-                      <button class="border border-dark disable-dbl-tap-zoom-purple" type="button" onClick="updateACubeUpper()" id="bigFont">Top <div id="buttonACubeUpper" class="enlargedtext"></div></button>
-                      <br>
-                      <button class="border border-dark disable-dbl-tap-zoom-purple" type="button" onClick="updateACubeMid()" id="bigFont">Middle <div id="buttonACubeMid" class="enlargedtext"></div></button>
-                      <br>
-                      <button class="border border-dark disable-dbl-tap-zoom-purple" type="button" onClick="updateACubeLower()" id="bigFont">Bottom <div id="buttonACubeLower" class="enlargedtext"></div></button>
+                      <button class="border border-dark disable-dbl-tap-zoom-sunkist-coral" type="button" onClick="updateASpeaker()" id="bigFont">Speaker <div id="buttonASpeaker" class="enlargedtext"></div></button>
                       <br>
                     </div>
                   </div>
@@ -84,14 +75,7 @@
                     <br>
                     <button class="disable-dbl-tap-zoom-danger" type="button" onClick="makeIncrementFalse()" id="bigFont">Subtract: <div id="negativeAIncrementButton" class="enlargedtext"></div></button>
                   </div>
-                  <div class="mb-3">
-                    <label for="autoChargeStation" class="form-label">Auto Charge Station State</label>
-                    <select id="autoChargeStation" class="form-select" aria-label="Asd">
-                      <option value="NONE" selected>Not on Charge Station</option>
-                      <option value="DOCKED">Docking with Charge Station</option>
-                      <option value="ENGAGED">Engaging with Charge Station</option>
-                    </select>
-                  </div>
+                  
                 </div>
 
                 <!--Teleop Scouting-->
@@ -99,24 +83,19 @@
                   <br>
                   <br>
                   <div class="row">
+                  <h2 style="text-align: center"> Scoring Location </h2>
                     <div class="col-md-5">
-                      <h2 style="text-align: center"> Cone </h2>
-                      <button class="border border-dark disable-dbl-tap-zoom-yellow" type="button" onClick="updateTConeUpper()" id="bigFont">Top <div id="buttonTConeUpper" class="enlargedtext"></div></button>
+                      <button class="border border-dark disable-dbl-tap-zoom-coral-rose" type="button" onClick="updateTAmp()" id="bigFont">Amp <div id="buttonTAmp" class="enlargedtext"></div></button>
+                      <button class="border border-dark disable-dbl-tap-zoom-ok-coral" type="button" onClick="updateTrap()" id="bigFont">Trap <div id="buttonTrap" class="enlargedtext"></div></button>
                       <br>
-                      <button class="border border-dark disable-dbl-tap-zoom-yellow" type="button" onClick="updateTConeMid()" id="bigFont">Middle <div id="buttonTConeMid" class="enlargedtext"></div></button>
-                      <br>
-                      <button class="border border-dark disable-dbl-tap-zoom-yellow" type="button" onClick="updateTConeLower()" id="bigFont">Bottom <div id="buttonTConeLower" class="enlargedtext"></div></button>
+                    </div>
+                    <div class="col-md-5">
+                      <button class="border border-dark disable-dbl-tap-zoom-sunkist-coral" type="button" onClick="updateTSpeaker()" id="bigFont">Speaker <div id="buttonTSpeaker" class="enlargedtext"></div></button>
+                      <button class="border border-dark disable-dbl-tap-zoom-dusty-coral" type="button" onClick="updateTAmpedSpeaker()" id="bigFont">Amplified Speaker <div id="buttonTAmpedSpeaker" class="enlargedtext"></div></button>
                       <br>
                     </div>
                     <br>
-                    <div class="col-md-5">
-                      <h2 style="text-align: center"> Cube </h2>
-                      <button class="border border-dark disable-dbl-tap-zoom-purple" type="button" onClick="updateTCubeUpper()" id="bigFont">Top <div id="buttonTCubeUpper" class="enlargedtext"></div></button>
-                      <br>
-                      <button class="border border-dark disable-dbl-tap-zoom-purple" type="button" onClick="updateTCubeMid()" id="bigFont">Middle <div id="buttonTCubeMid" class="enlargedtext"></div></button>
-                      <br>
-                      <button class="border border-dark disable-dbl-tap-zoom-purple" type="button" onClick="updateTCubeLower()" id="bigFont">Bottom <div id="buttonTCubeLower" class="enlargedtext"></div></button>
-                    </div>
+                    
                   </div>
                   <div class="center">
                     <br>
@@ -128,13 +107,18 @@
                   <div>
                     <h3>Endgame</h3>
                     <div class="mb-3">
-                      <label for="teleopChargeStation" class="form-label">Teleop Charge Station State</label>
+                      <label for="teleopChargeStation" class="form-label">Teleop Stage State</label>
                       <select id="teleopChargeStation" class="form-select" aria-label="Asd">
-                        <option value="NONE" selected>Not on Charge Station</option>
-                        <option value="DOCKED">Docking with Charge Station</option>
-                        <option value="ENGAGED">Engaging with Charge Station</option>
-                        <option value="COMMUNITY">In the Community</option>
+                        <option value="NONE" selected>Not in Stage</option>
+                        <option value="PARKED">In Stage</option>
+                        <option value="ONSTAGE">Climbed</option>
+                        <option value="TRAP">Trap While Climb</option>
                       </select>
+                      <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="autoMobility">
+                      <label class="form-check-label" for="autoMobility">
+                        Spotlighted?
+                      </label>
                     </div>
                     <br>
                     <a>Comments</a>
@@ -147,20 +131,22 @@
                         <span class="badge rounded-pill text-bg-primary cannedComments">Good Defense</span>
                         <span class="badge rounded-pill text-bg-primary cannedComments">Bad Defense</span>
                         <span class="badge rounded-pill text-bg-primary cannedComments">Attempted Endgame</span>
-                        <span class="badge rounded-pill text-bg-primary cannedComments">Can Pick Up Fallen Cones</span>
+                        <span class="badge rounded-pill text-bg-primary cannedComments">Source Pickup</span>
                         <span class="badge rounded-pill text-bg-primary cannedComments">Floor Pickup</span>
-                        <span class="badge rounded-pill text-bg-primary cannedComments">Double Substation</span>
-                        <span class="badge rounded-pill text-bg-primary cannedComments">Single Substation</span>
+                        <span class="badge rounded-pill text-bg-primary cannedComments">Harmony with one</span>
+                        <span class="badge rounded-pill text-bg-primary cannedComments">Harmony with two</span>
                         <span class="badge rounded-pill text-bg-primary cannedComments">Strategic Placement</span>
-                        <span class="badge rounded-pill text-bg-primary cannedComments">Supercharge Cones</span>
-                        <span class="badge rounded-pill text-bg-primary cannedComments">Supercharge Cubes</span>
+                        <span class="badge rounded-pill text-bg-primary cannedComments">Held more than one note</span>
                         <span class="badge rounded-pill text-bg-primary cannedComments">Drops Game Pieces</span>
                         <span class="badge rounded-pill text-bg-primary cannedComments">Lots of Fouls</span>
                         <span class="badge rounded-pill text-bg-primary cannedComments">Tipped</span>
-                        <span class="badge rounded-pill text-bg-primary cannedComments">Stuck on Charge Station</span>
+                        <span class="badge rounded-pill text-bg-primary cannedComments">Can go under stage</span>
                         <span class="badge rounded-pill text-bg-primary cannedComments">Didn't Move</span>
                         <span class="badge rounded-pill text-bg-primary cannedComments">Broken</span>
                         <span class="badge rounded-pill text-bg-primary cannedComments">Did Not Show Up</span>
+                        <span class="badge rounded-pill text-bg-primary cannedComments">Slid down chain</span>
+                        <span class="badge rounded-pill text-bg-primary cannedComments">Did not slide down chain</span>
+                        <span class="badge rounded-pill text-bg-primary cannedComments">Climb fast</span>
                         <span class="badge rounded-pill text-bg-primary cannedComments">Bumpers Fell Off</span>
                         <span class="badge rounded-pill text-bg-primary cannedComments">DNP</span>
                         <br><br>
@@ -197,20 +183,12 @@
 
 <script>
   // Var
-  aConeLower = 0;
-  aConeMid = 0;
-  aConeUpper = 0;
-  aCubeLower = 0;
-  aCubeMid = 0;
-  aCubeUpper = 0;
-
-  tConeLower = 0;
-  tConeMid = 0;
-  tConeUpper = 0;
-  tCubeLower = 0;
-  tCubeMid = 0;
-  tCubeUpper = 0;
-
+  aAmp = 0;
+  aSpeaker = 0;
+  tAmp = 0;
+  tSpeaker = 0;
+  tAmpedSpeaker = 0;
+  tTrap = 0;
   isIncrement = true;
   makeIncrementTrue();
 
@@ -227,185 +205,106 @@
   }
 
   // Auto Functions
-  function updateAConeLower() {
+  function updateAAmp() {
     if (isIncrement == true) {
-      aConeLower++;
+      aAmp++;
     } else {
-      if (aConeLower != 0) {
-        aConeLower--;
+      if (aAmp != 0) {
+        aAmp--;
         makeIncrementTrue();
       } else {
         makeIncrementTrue();
       }
     }
-    document.getElementById("buttonAConeLower").innerHTML = aConeLower;
-    console.log(aConeLower);
+    document.getElementById("buttonAAmp").innerHTML = aAmp;
+    console.log(aAmp);
   }
 
-  function updateAConeMid() {
+  function updateASpeaker() {
     if (isIncrement == true) {
-      aConeMid++;
+      aSpeaker++;
     } else {
-      if (aConeMid != 0) {
-        aConeMid--;
+      if (aSpeaker != 0) {
+        aSpeaker--;
         makeIncrementTrue();
       } else {
         makeIncrementTrue();
       }
     }
-    document.getElementById("buttonAConeMid").innerHTML = aConeMid;
-    console.log(aConeMid);
+    document.getElementById("buttonASpeaker").innerHTML = aSpeaker;
+    console.log(aSpeaker);
   }
 
-  function updateAConeUpper() {
-    if (isIncrement == true) {
-      aConeUpper++;
-    } else {
-      if (aConeUpper != 0) {
-        aConeUpper--;
-        makeIncrementTrue();
-      } else {
-        makeIncrementTrue();
-      }
-    }
-    document.getElementById("buttonAConeUpper").innerHTML = aConeUpper;
-    console.log(aConeUpper);
-  }
+  
 
-  function updateACubeLower() {
-    if (isIncrement == true) {
-      aCubeLower++;
-    } else {
-      if (aCubeLower != 0) {
-        aCubeLower--;
-        makeIncrementTrue();
-      } else {
-        makeIncrementTrue();
-      }
-    }
-    document.getElementById("buttonACubeLower").innerHTML = aCubeLower;
-    console.log(aCubeLower);
-  }
+  
 
-  function updateACubeMid() {
-    if (isIncrement == true) {
-      aCubeMid++;
-    } else {
-      if (aCubeMid != 0) {
-        aCubeMid--;
-        makeIncrementTrue();
-      } else {
-        makeIncrementTrue();
-      }
-    }
-    document.getElementById("buttonACubeMid").innerHTML = aCubeMid;
-    console.log(aCubeMid);
-  }
-
-  function updateACubeUpper() {
-    if (isIncrement == true) {
-      aCubeUpper++;
-    } else {
-      if (aCubeUpper != 0) {
-        aCubeUpper--;
-        makeIncrementTrue();
-      } else {
-        makeIncrementTrue();
-      }
-    }
-    document.getElementById("buttonACubeUpper").innerHTML = aCubeUpper;
-    console.log(aCubeUpper);
-  }
+ 
   // Teleop Functions
-  function updateTConeLower() {
+  function updateTAmp() {
     if (isIncrement == true) {
-      tConeLower++;
+      tAmp++;
     } else {
-      if (tConeLower != 0) {
-        tConeLower--;
+      if (tAmp != 0) {
+        tAmp--;
         makeTIncrementTrue();
       } else {
         makeTIncrementTrue();
       }
     }
-    document.getElementById("buttonTConeLower").innerHTML = tConeLower;
-    console.log(tConeLower);
+    document.getElementById("buttonTAmp").innerHTML = tAmp;
+    console.log(tAmp);
+  } 
+
+  function updateTSpeaker() {
+    if (isIncrement == true) {
+      tSpeaker++;
+    } else {
+      if (tSpeaker != 0) {
+        tSpeaker--;
+        makeTIncrementTrue();
+      } else {
+        makeTIncrementTrue();
+      }
+    }
+    document.getElementById("buttonTSpeaker").innerHTML = tSpeaker;
+    console.log(tSpeaker);
+  }
+  
+
+  function updateTAmpedSpeaker() {
+    if (isIncrement == true) {
+      tAmpedSpeaker++;
+    } else {
+      if (tAmpedSpeaker != 0) {
+        tAmpedSpeaker--;
+        makeTIncrementTrue();
+      } else {
+        makeTIncrementTrue();
+      }
+    }
+    document.getElementById("buttonTAmpedSpeaker").innerHTML = tAmpedSpeaker;
+    console.log(tAmpedSpeaker);
   }
 
-  function updateTConeMid() {
-    if (isIncrement == true) {
-      tConeMid++;
+  function updateTrap() {
+    if (isIncrement == true && tTrap == 3) {
+      console.log('should not update');
+    } else if (isIncrement == true) {
+      tTrap++;
     } else {
-      if (tConeMid != 0) {
-        tConeMid--;
+      if (tTrap != 0) {
+        tTrap--;
         makeTIncrementTrue();
       } else {
         makeTIncrementTrue();
       }
     }
-    document.getElementById("buttonTConeMid").innerHTML = tConeMid;
-    console.log(tConeMid);
+    document.getElementById("buttonTrap").innerHTML = tTrap;
+    console.log(tTrap);
   }
 
-  function updateTConeUpper() {
-    if (isIncrement == true) {
-      tConeUpper++;
-    } else {
-      if (tConeUpper != 0) {
-        tConeUpper--;
-        makeTIncrementTrue();
-      } else {
-        makeTIncrementTrue();
-      }
-    }
-    document.getElementById("buttonTConeUpper").innerHTML = tConeUpper;
-    console.log(tConeUpper);
-  }
-
-  function updateTCubeLower() {
-    if (isIncrement == true) {
-      tCubeLower++;
-    } else {
-      if (tCubeLower != 0) {
-        tCubeLower--;
-        makeTIncrementTrue();
-      } else {
-        makeTIncrementTrue();
-      }
-    }
-    document.getElementById("buttonTCubeLower").innerHTML = tCubeLower;
-    console.log(tCubeLower);
-  }
-
-  function updateTCubeMid() {
-    if (isIncrement == true) {
-      tCubeMid++;
-    } else {
-      if (tCubeMid != 0) {
-        tCubeMid--;
-        makeTIncrementTrue();
-      } else {
-        makeTIncrementTrue();
-      }
-    }
-    document.getElementById("buttonTCubeMid").innerHTML = tCubeMid;
-    console.log(tCubeMid);
-  }
-
-  function updateTCubeUpper() {
-    if (isIncrement == true) {
-      tCubeUpper++;
-    } else {
-      if (tCubeUpper != 0) {
-        tCubeUpper--;
-        makeTIncrementTrue();
-      } else {
-        makeTIncrementTrue();
-      }
-    }
-    document.getElementById("buttonTCubeUpper").innerHTML = tCubeUpper;
-    console.log(tCubeUpper);
-  }
+  
   // Increment Functions
   function makeIncrementFalse() {
     isIncrement = false;
@@ -497,19 +396,13 @@
     //data['autoMobility'] needs to be an integer when not checked.
     if (!mobile) mobile = 0;
     data['autoMobility'] = mobile;
-    data['autoConeLevel1'] = aConeLower; // Either form input or 0 if no form input
-    data['autoConeLevel2'] = aConeMid; // Either form input or 0 if no form input
-    data['autoConeLevel3'] = aConeUpper; // Either form input or 0 if no form input
-    data['autoCubeLevel1'] = aCubeLower; // Either form input or 0 if no form input
-    data['autoCubeLevel2'] = aCubeMid; // Either form input or 0 if no form input
-    data['autoCubeLevel3'] = aCubeUpper; // Either form input or 0 if no form input
+    data['autoAmpNote'] = aAmp; // Either form input or 0 if no form input
+    data['autoSpeakerNote'] = aSpeaker; // Either form input or 0 if no form input
     data['autoChargeStation'] = $('#autoChargeStation').val();
-    data['teleopConeLevel1'] = tConeLower; // Either form input or 0 if no form input
-    data['teleopConeLevel2'] = tConeMid; // Either form input or 0 if no form input
-    data['teleopConeLevel3'] = tConeUpper; // Either form input or 0 if no form input
-    data['teleopCubeLevel1'] = tCubeLower; // Either form input or 0 if no form input
-    data['teleopCubeLevel2'] = tCubeMid; // Either form input or 0 if no form input
-    data['teleopCubeLevel3'] = tCubeUpper; // Either form input or 0 if no form input
+    data['teleopAmpNote'] = tAmp; // Either form input or 0 if no form input
+    data['teleopSpeaker'] = tSpeaker; // Either form input or 0 if no form input
+    data['teleopSpeakerAmplified'] = tAmpedSpeaker; // Either form input or 0 if no form input
+    data['teleopTrap'] = tTrap; // Either form input or 0 if no form input
     data['teleopChargeStation'] = $('#teleopChargeStation').val();
     data['cannedComments'] = getCannedComments();
     data['textComments'] = $('#miscComments').val();
@@ -622,19 +515,14 @@
     $('#matchNumber').val('');
     $('#teamNumber').val('');
     $('#autoMobility').prop('checked', false);
-    $('#buttonAConeLower').val('0');
-    $('#buttonAConeMid').val('0');
-    $('#buttonAConeUpper').val('0');
-    $('#buttonACubeLower').val('0');
-    $('#buttonACubeMid').val('0');
-    $('#buttonACubeUpper').val('0');
+    $('#buttonaSpeaker').val('0');
+    $('#buttonAAmp').val('0');
+    $('#buttonASpeaker').val('0');
     $('#autoChargeStation').val('NONE');
-    $('#buttonTConeLower').val('0');
-    $('#buttonTConeMid').val('0');
-    $('#buttonTConeUpper').val('0');
-    $('#buttonTCubeLower').val('0');
-    $('#buttonTCubeMid').val('0');
-    $('#buttonTCubeUpper').val('0');
+    $('#buttontAmp').val('0');
+    $('#buttontSpeaker').val('0');
+    $('#buttonTAmp').val('0');
+    $('#buttonTrap').val('0');
     $('#teleopChargeStation').val('NONE');
     $('#cannedComents').val('');
     $('#miscComments').val('');
@@ -747,6 +635,58 @@
     font-weight: bold;
     /*To get rid of weird 3D affect in some browsers*/
     border: solid rgb(222, 169, 24);
+    height: 100px;
+    width: 500px;
+  }
+
+  .disable-dbl-tap-zoom-sunkist-coral {
+    touch-action: manipulation;
+    background-color: rgb(234,102,118);
+    color: white;
+    border-radius: 2px solid black;
+    font-family: Helvetica;
+    font-weight: bold;
+    /*To get rid of weird 3D affect in some browsers*/
+    border: solid rgb(234,102,118);
+    height: 100px;
+    width: 500px;
+  }
+
+  .disable-dbl-tap-zoom-ok-coral {
+    touch-action: manipulation;
+    background-color: rgb(208, 115, 96);
+    color: white;
+    border-radius: 2px solid black;
+    font-family: Helvetica;
+    font-weight: bold;
+    /*To get rid of weird 3D affect in some browsers*/
+    border: solid rgb(208, 115, 96);
+    height: 100px;
+    width: 500px;
+  }
+
+  .disable-dbl-tap-zoom-coral-rose {
+    touch-action: manipulation;
+    background-color: rgb(243,119,77);
+    color: white;
+    border-radius: 2px solid black;
+    font-family: Helvetica;
+    font-weight: bold;
+    /*To get rid of weird 3D affect in some browsers*/
+    border: solid rgb(243,119,77);
+    height: 100px;
+    width: 500px;
+  }
+
+  .disable-dbl-tap-zoom-dusty-coral {
+    touch-action: manipulation;
+    background-color: rgb(245,183,177);
+    color: white;
+    border: 2px solid black;
+    font-family: Helvetica;
+    font-weight: bold;
+    /*To get rid of weird 3D affect in some browsers*/
+    border: solid rgb(245,183,177);
     height: 100px;
     width: 500px;
   }

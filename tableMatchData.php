@@ -21,20 +21,14 @@
                     <th scope="col">Match</th>
                     <th scope="col">Scout</th>
                     <th scope="col">Auto Mobility</th>
-                    <th scope="col">Auto Cone Level 1</th>
-                    <th scope="col">Auto Cone Level 2</th>
-                    <th scope="col">Auto Cone Level 3</th>
-                    <th scope="col">Auto Cube Level 1</th>
-                    <th scope="col">Auto Cube Level 2</th>
-                    <th scope="col">Auto Cube Level 3</th>
-                    <th scope="col">Auto Charge Station</th>
-                    <th scope="col">Teleop Cone Level 1</th>
-                    <th scope="col">Teleop Cone Level 2</th>
-                    <th scope="col">Teleop Cone Level 3</th>
-                    <th scope="col">Teleop Cube Level 1</th>
-                    <th scope="col">Teleop Cube Level 2</th>
-                    <th scope="col">Teleop Cube Level 3</th>
-                    <th scope="col">Teleop Charge Station</th>
+                    <th scope="col">Auto Amp</th>
+                    <th scope="col">Auto Speaker</th>
+                    <th scope="col">Teleop Amp</th>
+                    <th scope="col">Teleop Speaker</th>
+                    <th scope="col">Teleop Amplified Speaker</th>
+                    <th scope="col">Teleop Stage</th>
+                    <th scope="col">Teleop Trap</th>
+                    <th scope="col">Spotlighted</th>
                     <th scope="col">Canned Comments</th>
                     <th scope="col">Additional Comments</th>
                   </tr>
@@ -71,20 +65,15 @@ function createRow(rowData){
                   `  <td>${rowData['matchNumber']}</td>`,
                   `  <td>${rowData['scout']}</td>`,
                   `  <td>${rowData['autoMobility']}</td>`,
-                  `  <td>${rowData['autoConeLevel1']}</td>`,
-                  `  <td>${rowData['autoConeLevel2']}</td>`,
-                  `  <td>${rowData['autoConeLevel3']}</td>`,
-                  `  <td>${rowData['autoCubeLevel1']}</td>`,
-                  `  <td>${rowData['autoCubeLevel2']}</td>`,
-                  `  <td>${rowData['autoCubeLevel3']}</td>`,
-                  `  <td>${rowData['autoChargeStation']}</td>`,
-                  `  <td>${rowData['teleopConeLevel1']}</td>`,
-                  `  <td>${rowData['teleopConeLevel2']}</td>`,
-                  `  <td>${rowData['teleopConeLevel3']}</td>`,
-                  `  <td>${rowData['teleopCubeLevel1']}</td>`,
-                  `  <td>${rowData['teleopCubeLevel2']}</td>`,
-                  `  <td>${rowData['teleopCubeLevel3']}</td>`,
-                  `  <td>${rowData['teleopChargeStation']}</td>`,
+                  `  <td>${rowData['autoAmpNote']}</td>`,
+                  `  <td>${rowData['autoSpeakerNote']}</td>`,
+                  `  <td>${rowData['autoPath']}</td>`,
+                  `  <td>${rowData['teleopAmpNote']}</td>`,
+                  `  <td>${rowData['teleopSpeaker']}</td>`,
+                  `  <td>${rowData['teleopSpeakerAmplified']}</td>`,
+                  `  <td>${rowData['teleopTrap']}</td>`,
+                  `  <td>${rowData['climb']}</td>`,
+                  `  <td>${rowData['climbSpotlighted']}</td>`,
                   `  <td>${rowData['cannedComments']}</td>`,
                   `  <td>${rowData['textComments']}</td>`,
                   `</tr>`];
