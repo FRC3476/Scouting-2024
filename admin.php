@@ -17,8 +17,8 @@
               <h4>Database Status: <span id="databaseStatus" class="badge bg-warning">Not Connected</span></h4>
               <h4>Data Table Status: <span id="dataTableStatus" class="badge bg-warning">Not Connected</span></h4>
               <h4>TBA Table Status: <span id="tbaTableStatus" class="badge bg-warning">Not Connected</span></h4>
-              <h4>Pit Table Status: <span id="pitScoutTableStatus" class="badge bg-warning">Not Connected</span></h4>
-			  <h4>Strike Table Status: <span id="strikeScoutTableStatus" class="badge bg-warning">Not Connected</span></h4>
+              <h4>Pit Table Status: <span id="pitTableStatus" class="badge bg-warning">Not Connected</span></h4>
+			  <h4>Strike Table Status: <span id="strikeTableStatus" class="badge bg-warning">Not Connected</span></h4>
               <h4>LS Table Status: <span id="LSTableStatus" class="badge bg-warning">Not Connected</span></h4>
               <h4>Server: <span id="serverName" class="badge bg-primary">????</span></h4>
               <h4>Database: <span id="databaseName" class="badge bg-primary">????</span></h4>
@@ -28,8 +28,8 @@
               <h4>Event Code: <span id="eventCode" class="badge bg-primary">????</span></h4>
               <h4>Data Table: <span id="dataTableName" class="badge bg-primary">????</span></h4>
               <h4>TBA Table: <span id="tbaTableName" class="badge bg-primary">????</span></h4>
-              <h4>Pit Scout Table: <span id="pitScoutTableName" class="badge bg-primary">????</span></h4>
-			  <h4>Strike Scout Table: <span id="strikeScoutTableName" class="badge bg-primary">????</span></h4>
+              <h4>Pit Scout Table: <span id="pitTableName" class="badge bg-primary">????</span></h4>
+			  <h4>Strike Scout Table: <span id="strikeTableName" class="badge bg-primary">????</span></h4>
               <h4>LS Table: <span id="LSTableName" class="badge bg-primary">????</span></h4>
             </div>
           </div>
@@ -57,12 +57,12 @@
                 <input type="text" class="form-control" id="writeTBATable" aria-describedby="writeTBATable">
               </div>
               <div class="mb-3">
-                <label for="writePitScoutTable" class="form-label">Pit Scout Table Name</label>
-                <input type="text" class="form-control" id="writePitScoutTable" aria-describedby="writePitScoutTable">
+                <label for="writePitTable" class="form-label">Pit Scout Table Name</label>
+                <input type="text" class="form-control" id="writePitTable" aria-describedby="writePitTable">
               </div>
 			  <div class="mb-3">
-                <label for="writeStrikeScoutTable" class="form-label">Strike Scout Table Name</label>
-                <input type="text" class="form-control" id="writeStrikeScoutTable" aria-describedby="writeStrikeScoutTable">
+                <label for="writeStrikeTable" class="form-label">Strike Scout Table Name</label>
+                <input type="text" class="form-control" id="writeStrikeTable" aria-describedby="writeStrikeTable">
               </div>
               <div class="mb-3">
                 <label for="writeLSTable" class="form-label">LS Table Name</label>
@@ -120,21 +120,21 @@
     $("#serverName").text(statusArray["server"]);
     $("#databaseName").text(statusArray["db"]);
     $("#userName").text(statusArray["username"]);
-    $("#teamNumber").text(statusArray["teamnumber"]);
-    $("#tbaKey").text(statusArray["tbakey"]);
-    $("#eventCode").text(statusArray["eventcode"]);
-    $("#dataTableName").text(statusArray["datatable"]);
-    $("#tbaTableName").text(statusArray["tbatable"]);
-    $("#pitScoutTableName").text(statusArray["pitScouttable"]);
-	  $("#strikeScoutTableName").text(statusArray["strikeScouttable"]);
+    $("#teamNumber").text(statusArray["teamNumber"]);
+    $("#tbaKey").text(statusArray["tbaKey"]);
+    $("#eventCode").text(statusArray["eventCode"]);
+    $("#dataTableName").text(statusArray["dataTable"]);
+    $("#tbaTableName").text(statusArray["tbaTable"]);
+    $("#pitTableName").text(statusArray["pitTable"]);
+	  $("#strikeTableName").text(statusArray["strikeTable"]);
     $("#LSTableName").text(statusArray["LSTable"]);
     
     setStatusBadge(statusArray["dbExists"], "databaseStatus");
     setStatusBadge(statusArray["serverExists"], "serverStatus");
-    setStatusBadge(statusArray["datatableExists"], "dataTableStatus");
-    setStatusBadge(statusArray["tbatableExists"], "tbaTableStatus");
-    setStatusBadge(statusArray["pitScouttableExists"], "pitScoutTableStatus");
-	setStatusBadge(statusArray["strikeScouttableExists"], "strikeScoutTableStatus");
+    setStatusBadge(statusArray["dataTableExists"], "dataTableStatus");
+    setStatusBadge(statusArray["tbaTableExists"], "tbaTableStatus");
+    setStatusBadge(statusArray["pitTableExists"], "pitTableStatus");
+	setStatusBadge(statusArray["strikeTableExists"], "strikeTableStatus");
     setStatusBadge(statusArray["LSTableExists"], "LSTableStatus");
     
     console.log(statusArray);
@@ -150,8 +150,8 @@
                         'tbakey' : $('#writeTBAKey').val(),
                         'datatable' : $('#writeDataTable').val(),
                         'tbatable' : $('#writeTBATable').val(),
-                        'pitScouttable' : $('#writePitScoutTable').val(),
-						'strikeScouttable' : $('#writeStrikeScoutTable').val(),
+                        'pitTable' : $('#writePitTable').val(),
+						            'strikeTable' : $('#writeStrikeTable').val(),
                         'LSTable' : $('#writeLSTable').val()};
     var writeData = {};
     for (const prop in allWriteData){
