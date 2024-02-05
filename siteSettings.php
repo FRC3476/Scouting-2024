@@ -5,8 +5,8 @@ class siteSettings{
   private $dbIniFile = './db_config.ini';
   private $configKeys = array(
     'server', 'db', 'username', 'password',
-    'teamnumber', 'eventcode', 'tbakey',
-    'datatable', 'tbatable', 'pitScouttable', 'strikeScouttable', 'LSTable'
+    'teamNumber', 'eventCode', 'tbaKey',
+    'dataTable', 'tbaTable', 'pitTable', 'strikeTable', 'LSTable'
   );
   public $settings;
   
@@ -71,14 +71,15 @@ class siteSettings{
     $out['server']          	= $this->settings['server'];
     $out['db']              	= $this->settings['db'];
     $out['username']        	= $this->settings['username'];
-    $out['teamnumber']      	= $this->settings['teamnumber'];
-    $out['eventcode']       	= $this->settings['eventcode'];
-    $out['tbakey']          	= substr($this->settings['tbakey'], 0, 3) . '******';
-    $out['datatable']       	= $this->settings['datatable'];
-    $out['tbatable']        	= $this->settings['tbatable'];
-    $out['pitScouttable']   	= $this->settings['pitScouttable'];
-	$out['strikeScouttable']   	= $this->settings['strikeScouttable'];
+    $out['teamNumber']      	= $this->settings['teamNumber'];
+    $out['eventCode']       	= $this->settings['eventCode'];
+    $out['tbaKey']          	= substr($this->settings['tbaKey'], 0, 3) . '******';
+    $out['dataTable']       	= $this->settings['dataTable'];
+    $out['tbaTable']        	= $this->settings['tbaTable'];
+    $out['pitTable']   	= $this->settings['pitTable'];
+    $out['strikeTable']   	= $this->settings['strikeTable'];
     $out['LSTable']        	   	= $this->settings['LSTable'];
+    $out['pictureFolder']       = $this->settings['pictureFolder'];
     return $out;
   }
 }

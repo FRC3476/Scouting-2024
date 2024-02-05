@@ -13,7 +13,7 @@ class dbHandler
   public $settings;
   
   private $tableMapping = array(
-    'datatable' => array(
+    'dataTable' => array(
       'keys' => array(
         'matchKey' => 'VARCHAR(60) NOT NULL PRIMARY KEY',
         'scout' => 'VARCHAR(60) NOT NULL',
@@ -44,7 +44,7 @@ class dbHandler
         'matchComments' => 'TEXT NOT NULL'
       )
     ),
-    'pitScouttable' => array(
+    'pitTable' => array(
       'keys' => array(
         'pitTeamNumber' => 'VARCHAR(5) NOT NULL PRIMARY KEY',
         'disorganized' => 'VARCHAR(60) NOT NULL',
@@ -57,7 +57,7 @@ class dbHandler
         'pitComments' => 'TEXT NULL'
       )
     ),
-	'strikeScouttable' => array(
+	'strikeTable' => array(
       'keys' => array(
         'strikeTeamNumber' => 'VARCHAR(5) NOT NULL PRIMARY KEY',
         'vibes' => 'VARCHAR(60) NOT NULL',
@@ -67,7 +67,7 @@ class dbHandler
         'strikeComments' => 'TEXT NULL'
       )
     ),
-    'tbatable' => array(
+    'tbaTable' => array(
       'keys' => array(
         'requestURI' => 'VARCHAR(100) NOT NULL PRIMARY KEY',
         'expiryTime' => 'BIGINT NOT NULL',
