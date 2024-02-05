@@ -73,7 +73,10 @@
                   </div>
                   <div class="col-md-3">
                     <br>
-                    <button class="disable-dbl-tap-zoom-danger" type="button" onClick="makeIncrementFalse()" id="bigFont">Subtract: <div id="negativeAIncrementButton" class="enlargedtext"></div></button>
+                    <button class="disable-dbl-tap-zoom-danger" type="button" onClick="makeIncrementFalse();subtractToggle('toggleAButton','negativeAIncrementButton', 'subtractNameA')" id="toggleAButton">
+                    <div id="subtractNameA">Subtract:</div>
+                      <div id="negativeAIncrementButton" class="enlargedtext">-1</div>                      
+                    </button>
                   </div>
                   
                 </div>
@@ -91,7 +94,7 @@
                     </div>
                     <div class="col-md-5">
                       <button class="border border-dark disable-dbl-tap-zoom-sunkist-coral" type="button" onClick="updateTSpeaker()" id="bigFont">Speaker <div id="buttonTSpeaker" class="enlargedtext"></div></button>
-                      <button class="border border-dark disable-dbl-tap-zoom-dusty-coral" type="button" onClick="updateTAmpedSpeaker()" id="bigFont">Amplified Speaker <div id="buttonTAmpedSpeaker" class="enlargedtext"></div></button>
+                      <button class="border border-dark disable-dbl-tap-zoom-sunkist-coral" type="button" onClick="updateTAmpedSpeaker()" id="bigFont">Amplified Speaker <div id="buttonTAmpedSpeaker" class="enlargedtext"></div></button>
                       <br>
                     </div>
                     <br>
@@ -99,7 +102,10 @@
                   </div>
                   <div class="center">
                     <br>
-                    <button class="disable-dbl-tap-zoom-danger" type="button" onClick="makeTIncrementFalse()" id="bigFont">Subtract: <div id="negativeTIncrementButton" class="enlargedtext"></div></button>
+                    <button class="disable-dbl-tap-zoom-danger" type="button" onClick="makeTIncrementFalse();subtractToggle('toggleTButton','negativeTIncrementButton', 'subtractNameT')" id="toggleTButton">
+                    <div id="subtractNameT">Subtract:</div>
+                      <div id="negativeTIncrementButton" class="enlargedtext">-1</div>                      
+                    </button>
                   </div>
                   <br>
                   <br>
@@ -204,6 +210,7 @@
     });
   }
 
+
   // Auto Functions
   function updateAAmp() {
     if (isIncrement == true) {
@@ -211,7 +218,11 @@
     } else {
       if (aAmp != 0) {
         aAmp--;
-        makeIncrementTrue();
+        //checks to make sure it isn't zero yet for the toggle
+        if (aAmp == 0){
+          makeTIncrementTrue();
+          subtractToggle('toggleAButton','negativeAIncrementButton', 'subtractNameA');
+        }
       } else {
         makeIncrementTrue();
       }
@@ -226,7 +237,11 @@
     } else {
       if (aSpeaker != 0) {
         aSpeaker--;
-        makeIncrementTrue();
+        //checks to make sure it isn't zero yet for the toggle
+        if (aSpeaker == 0){
+          makeTIncrementTrue();
+          subtractToggle('toggleAButton','negativeAIncrementButton', 'subtractNameA');
+        }
       } else {
         makeIncrementTrue();
       }
@@ -247,7 +262,11 @@
     } else {
       if (tAmp != 0) {
         tAmp--;
-        makeTIncrementTrue();
+        //checks to make sure it isn't zero yet for the toggle
+        if (tAmp == 0){
+          makeTIncrementTrue();
+          subtractToggle('toggleTButton','negativeTIncrementButton', 'subtractNameT');
+        }
       } else {
         makeTIncrementTrue();
       }
@@ -262,7 +281,11 @@
     } else {
       if (tSpeaker != 0) {
         tSpeaker--;
-        makeTIncrementTrue();
+        //checks to make sure it isn't zero yet for the toggle
+        if (tSpeaker == 0){
+          makeTIncrementTrue();
+          subtractToggle('toggleTButton','negativeTIncrementButton', 'subtractNameT');
+        }
       } else {
         makeTIncrementTrue();
       }
@@ -278,7 +301,11 @@
     } else {
       if (tAmpedSpeaker != 0) {
         tAmpedSpeaker--;
-        makeTIncrementTrue();
+        //checks to make sure it isn't zero yet for the toggle
+        if (tAmpedSpeaker == 0){
+          makeTIncrementTrue();
+          subtractToggle('toggleTButton','negativeTIncrementButton', 'subtractNameT');
+        }
       } else {
         makeTIncrementTrue();
       }
@@ -295,7 +322,10 @@
     } else {
       if (tTrap != 0) {
         tTrap--;
-        makeTIncrementTrue();
+        if (tTrap == 0){
+          makeTIncrementTrue();
+          subtractToggle('toggleTButton','negativeTIncrementButton', 'subtractNameT');
+        }
       } else {
         makeTIncrementTrue();
       }
@@ -308,24 +338,46 @@
   // Increment Functions
   function makeIncrementFalse() {
     isIncrement = false;
-    document.getElementById("negativeAIncrementButton").innerHTML = -1;
   }
+
+
+
 
   function makeIncrementTrue() {
     isIncrement = true;
-    document.getElementById("negativeAIncrementButton").innerHTML = 1;
   }
 
   function makeTIncrementFalse() {
     isIncrement = false;
-    document.getElementById("negativeTIncrementButton").innerHTML = -1;
+    
   }
 
   function makeTIncrementTrue() {
     isIncrement = true;
-    document.getElementById("negativeTIncrementButton").innerHTML = 1;
+    
   }
-
+  
+  //subtract button functions
+  //this is just to change the style of the subtract button
+  function addStyles(element, style) {
+    element.style = style;
+  }
+  //changes the color and text of the subtract button 
+  function subtractToggle(elementName, innerElement, subtractButtonId) {
+    var count = document.getElementById(innerElement).innerHTML;
+    var myElement = document.getElementById(elementName);
+    if (count == -1){
+      addStyles(myElement, "background: rgb(86, 196, 130); border: solid rgb(86, 196, 130);");
+      document.getElementById(subtractButtonId).innerHTML = "Add";
+      document.getElementById(innerElement).innerHTML = 1;
+      makeIncrementFalse();
+    } else {
+      addStyles(myElement, "background: rgb(245, 108, 108); border: solid rgb(245, 108, 108);");
+      document.getElementById(subtractButtonId).innerHTML = "Subtract";
+      document.getElementById(innerElement).innerHTML = -1; 
+      makeIncrementTrue();
+    }
+  }
 
   // Comment Functions
   function getCannedComments() {
@@ -649,7 +701,7 @@
     /*To get rid of weird 3D affect in some browsers*/
     border: solid rgb(234,102,118);
     height: 100px;
-    width: 500px;
+    width: 515px;
   }
 
   .disable-dbl-tap-zoom-ok-coral {
@@ -659,10 +711,11 @@
     border-radius: 2px solid black;
     font-family: Helvetica;
     font-weight: bold;
+    padding: 10px
     /*To get rid of weird 3D affect in some browsers*/
     border: solid rgb(208, 115, 96);
     height: 100px;
-    width: 500px;
+    width: 515px;
   }
 
   .disable-dbl-tap-zoom-coral-rose {
@@ -675,7 +728,7 @@
     /*To get rid of weird 3D affect in some browsers*/
     border: solid rgb(243,119,77);
     height: 100px;
-    width: 500px;
+    width: 515px;
   }
 
   .disable-dbl-tap-zoom-dusty-coral {
@@ -688,7 +741,7 @@
     /*To get rid of weird 3D affect in some browsers*/
     border: solid rgb(245,183,177);
     height: 100px;
-    width: 500px;
+    width: 515px;
   }
 
   .disable-dbl-tap-zoom-danger {
@@ -704,6 +757,7 @@
     height: 50px;
     width: 500px;
   }
+
 </style>
 
 </html>
