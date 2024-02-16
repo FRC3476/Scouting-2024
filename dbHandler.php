@@ -22,7 +22,6 @@ class dbHandler
         'autoMobility' => 'BOOLEAN NOT NULL',
         'autoAmpNote' => 'SMALLINT NOT NULL',
         'autoSpeakerNote' => 'SMALLINT NOT NULL',
-        'autoPath' => 'LONGTEXT NOT NULL',
         'teleopAmpNote' => 'SMALLINT NOT NULL',
         'teleopSpeaker' => 'SMALLINT NOT NULL',
         'teleopSpeakerAmplified' => 'SMALLINT NOT NULL',

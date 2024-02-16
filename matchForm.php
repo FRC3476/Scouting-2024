@@ -61,7 +61,6 @@
                     </label>
                   </div>
                   <div class="row">
-                  <h2 style="text-align: center"> Scoring Location </h2>
                     <div class="col-md-5">
                       <button class="border border-dark disable-dbl-tap-zoom-coral-rose" type="button" onClick="updateAAmp()" id="bigFont">Amp <div id="buttonAAmp" class="enlargedtext"></div></button>
                       <br>
@@ -113,8 +112,8 @@
                   <div>
                     <h3>Endgame</h3>
                     <div class="mb-3">
-                      <label for="teleopChargeStation" class="form-label">Teleop Stage State</label>
-                      <select id="teleopChargeStation" class="form-select" aria-label="Asd">
+                      <label for="teleopStage" class="form-label">Teleop Stage State</label>
+                      <select id="teleopStage" class="form-select" aria-label="Asd">
                         <option value="NONE" selected>Not in Stage</option>
                         <option value="PARKED">In Stage</option>
                         <option value="ONSTAGE">Climbed</option>
@@ -157,12 +156,13 @@
                         <span class="badge rounded-pill text-bg-primary cannedComments">DNP</span>
                         <br><br>
                       </div>
-                      <br>
                       <div class="form-floating">
                         <textarea class="form-control" placeholder="Misc" id="miscComments"></textarea>
                         <label for="miscComments">Comments</label>
                       </div>
-                      <br>
+                      <div class="col-md-3">
+                        <button id="submit" class="btn btn-primary" onClick="submitData()">Submit</button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -171,8 +171,8 @@
                 <div class="tab-pane fade" id="qrcode-tab-pane" role="tabpanel" aria-labelledby="qrcode-tab" tabindex="0">
                   <br>
                   <div id="data-qr-code"></div>
-				  <div class="col-md-3">
-                    <button id="submit" class="btn btn-primary">Submit</button>
+				          <div class="col-md-3">
+                    <button id="qrcode-tab" class="btn btn-primary">Submit</button>
                   </div>
                 </div>
               </div>
@@ -422,7 +422,7 @@
   function createSuccessAlert(successMessage) {
     /* Creats a success alert. 
     
-    Args:
+    Args:fau
       successMessage: String of message to send.
     */
     var alertValue = [`<div class="alert alert-success alert-dismissible" role="alert">`,
@@ -450,12 +450,11 @@
     data['autoMobility'] = mobile;
     data['autoAmpNote'] = aAmp; // Either form input or 0 if no form input
     data['autoSpeakerNote'] = aSpeaker; // Either form input or 0 if no form input
-    data['autoChargeStation'] = $('#autoChargeStation').val();
     data['teleopAmpNote'] = tAmp; // Either form input or 0 if no form input
     data['teleopSpeaker'] = tSpeaker; // Either form input or 0 if no form input
     data['teleopSpeakerAmplified'] = tAmpedSpeaker; // Either form input or 0 if no form input
     data['teleopTrap'] = tTrap; // Either form input or 0 if no form input
-    data['teleopChargeStation'] = $('#teleopChargeStation').val();
+    data['teleopStage'] = $('#teleopStage').val();
     data['cannedComments'] = getCannedComments();
     data['textComments'] = $('#miscComments').val();
     return data;
@@ -468,20 +467,14 @@
     data.push(originalJSON['matchNumber']);
     data.push(originalJSON['teamNumber']);
     data.push(originalJSON['autoMobility']);
-    data.push(originalJSON['autoConeLevel1']);
-    data.push(originalJSON['autoConeLevel2']);
-    data.push(originalJSON['autoConeLevel3']);
-    data.push(originalJSON['autoCubeLevel1']);
-    data.push(originalJSON['autoCubeLevel2']);
-    data.push(originalJSON['autoCubeLevel3']);
-    data.push(originalJSON['autoChargeStation']);
-    data.push(originalJSON['teleopConeLevel1']);
-    data.push(originalJSON['teleopConeLevel2']);
-    data.push(originalJSON['teleopConeLevel3']);
-    data.push(originalJSON['teleopCubeLevel1']);
-    data.push(originalJSON['teleopCubeLevel2']);
-    data.push(originalJSON['teleopCubeLevel3']);
-    data.push(originalJSON['teleopChargeStation']);
+    data.push(originalJSON['autoAmpNote']);
+    data.push(originalJSON['autoSpeakerNote']);
+    data.push(originalJSON['teleopAmpNote']);
+    data.push(originalJSON['teleopSpeaker']);
+    data.push(originalJSON['teleopSpeakerAmplified']);
+    data.push(originalJSON['teleopTrap']);
+    data.push(originalJSON['teleopStage']);
+    data.push(originalJSON['textComments']);
     data.push(originalJSON['cannedComments']);
     return data;
   }
@@ -567,15 +560,12 @@
     $('#matchNumber').val('');
     $('#teamNumber').val('');
     $('#autoMobility').prop('checked', false);
-    $('#buttonaSpeaker').val('0');
     $('#buttonAAmp').val('0');
     $('#buttonASpeaker').val('0');
-    $('#autoChargeStation').val('NONE');
-    $('#buttontAmp').val('0');
-    $('#buttontSpeaker').val('0');
+    $('#buttonTSpeaker').val('0');
     $('#buttonTAmp').val('0');
     $('#buttonTrap').val('0');
-    $('#teleopChargeStation').val('NONE');
+    $('#teleopStage').val('NONE');
     $('#cannedComents').val('');
     $('#miscComments').val('');
   }
