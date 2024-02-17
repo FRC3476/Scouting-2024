@@ -30,10 +30,7 @@ function getOrPost($key){
 }
 
 function getEventCode($tba){
-  if (getOrPost('eventCode')){
-    return getOrPost('eventCode');
-  }
-  return $tba->db->settings->get('eventcode');
+  return $tba->db->settings->get('eventCode');
 }
 
 if (getOrPost('getEventCode')){
