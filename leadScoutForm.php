@@ -36,6 +36,52 @@
 				  </div>
 			   </div>
 			</div>
+
+      <div class="row pt-3 pb-3 mb-3 justify-content-md-center">
+
+				<div class="col-6 gx-3">
+					<div class="card">
+            <div class="card-body">
+							<h3>Team List</h3>
+							<table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Color</th>
+                    <th scope="col">Team #</th>
+                  </tr>
+                </thead>
+                <tbody id="rawAllianceRows">
+                </tbody>
+              </table>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-6 gx-3">
+					<div class="card">
+            <div class="card-body">
+							<h3>Rank</h3>
+							<table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Color</th>
+                    <th scope="col">Team #</th>
+                  </tr>
+                </thead>
+                <tbody id="sortedAllianceRank">
+                </tbody>
+              </table>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="row pt-78 pb-3 mb-3 justify-content-md-center">
+      	<button id="submitData" type="button" class="btn btn-success">Submit Ranking</button>
+    	</div>
 <!-- Red 1  -->
 			<div class="row pt-3 pb-3 mb-3 gap-0 row-gap-3">
         	  <div class="col-lg-4 col-sm-12 col-xs-12 gx-3">
@@ -68,7 +114,6 @@
                     	 <th scope="col">Avg Telop Amp</th>
                     	 <th scope="col">Teleop Climb %</th>
                          <th scope="col">Teleop Park %</th>
-						 <th scope="col">Comments</th>
                   		</thead>
                   		<tbody id='dataRed1'></tbody>
                 	   </table>
@@ -108,7 +153,6 @@
                     	<th scope="col">Avg Telop Amp</th>
                     	<th scope="col">Teleop Climb %</th>
                     	<th scope="col">Teleop Park %</th>
-						<th scope="col">Comments</th>
                       </thead>
                       <tbody id='dataRed2'></tbody>
                     </table>
@@ -147,7 +191,6 @@
                     	<th scope="col">Avg Teleop Amp</th>
                     	<th scope="col">Teleop Climb %</th>
                     	<th scope="col">Teleop Park %</th>
-						<th scope="col">Comments</th>
                       </thead>
                       <tbody id='dataRed3'></tbody>
                     </table>
@@ -189,7 +232,6 @@
                     	<th scope="col">Avg Teleop Amp</th>
                     	<th scope="col">Teleop Climb %</th>
                     	<th scope="col">Teleop Park %</th>
-						<th scope="col">Comments</th>
                       </thead>
                       <tbody id='dataBlue1'></tbody>
                     </table>
@@ -228,7 +270,6 @@
                     	<th scope="col">Avg Teleop Amp</th>
                     	<th scope="col">Teleop Climb %</th>
                     	<th scope="col">Teleop Park %</th>
-						<th scope="col">Comments</th>
                       </thead>
                       <tbody id='dataBlue2'></tbody>
                     </table>
@@ -267,18 +308,16 @@
                     	<th scope="col">Avg Teleop Amp</th>
                     	<th scope="col">Teleop Climb %</th>
                     	<th scope="col">Teleop Park %</th>
-						<th scope="col">Comments</th>
                       </thead>
                       <tbody id='dataBlue3'></tbody>
                     </table>
-                  </div>
-                </div>
-          	 </div>
-          </div>
-       </div> 
+             </div>
+         </div>
+      </div> 
 	</div>
 </body>
 <?php include("footer.php"); ?>
+
 <script>
 ar validBlueTeams = 0;
 var validRedTeams = 0
@@ -289,10 +328,10 @@ var avgRedPoints = 0;
 var avgBlueGamePieces = 0;
 var avgRedGamePieces = 0;
 
-var avgAutoBlueChargeStationPoints = 0;
-var avgTeleopBlueChargeStationPoints = 0;
-var avgAutoRedChargeStationPoints = 0;
-var avgTeleopRedChargeStationPoints = 0;
+var avgAutoBlueSpeakerPoints = 0;
+var avgTeleopBlueClimbPoints = 0;
+var avgAutoRedSpeakerPoints = 0;
+var avgTeleopRedClimbPoints = 0;
 
 
 function clearData(){
@@ -315,10 +354,10 @@ function clearMainSummary(){
   avgBlueGamePieces = 0;
   avgRedGamePieces = 0;
 
-  avgAutoBlueChargeStationPoints = 0;
-  avgTeleopBlueChargeStationPoints = 0;
-  avgAutoRedChargeStationPoints = 0;
-  avgTeleopRedChargeStationPoints = 0;
+  avgAutoBlueSpeakerPoints = 0;
+  avgTeleopBlueClimbnPoints = 0;
+  avgAutoRedSpeakerPoints = 0;
+  avgTeleopRedClimbPoints = 0;
     
   updateSummaryTable();
 }
@@ -327,16 +366,16 @@ function augmentTotalMatchSummary(data, alliance){
 
   var avgPieces = 0;
   var avgPoints = 0;
-  var avgAutoChargeStationPoints = 0;
-  var avgTeleopChargeStationPoints = 0;
+  var avgAutoSpeakerPoints = 0;
+  var avgTeleopClimbPoints = 0;
   var matchCount = 0;
 
   for (var i = 0; i != data.length; i++){
     matchCount++;
     avgPieces += getMatchGamePiece(data[i]);
     avgPoints += getMatchPoints(data[i]);
-    avgAutoChargeStationPoints += getAutoChargeStationPoints(data[i]);
-    avgTeleopChargeStationPoints += getTeleopChargeStationPoints(data[i]);
+    avgAutoSpeakerPoints += getAutoSpeakerPoints(data[i]);
+    avgTeleopClimbPoints += getTeleopClimbPoints(data[i]);
   }
 
   if (matchCount == 0){
@@ -345,22 +384,22 @@ function augmentTotalMatchSummary(data, alliance){
   
   avgPieces = roundInt(avgPieces/matchCount);
   avgPoints = roundInt(avgPoints/matchCount);
-  avgAutoChargeStationPoints = roundInt(avgAutoChargeStationPoints/matchCount);
-  avgTeleopChargeStationPoints = roundInt(avgTeleopChargeStationPoints/matchCount);
+  avgAutoSpeakerPoints = roundInt(avgAutoSpeakerPoints/matchCount);
+  avgTeleopClimbPoints = roundInt(avgTeleopClimbPoints/matchCount);
 
   if (alliance == 'Red'){
     validRedTeams++;
     avgRedPoints += avgPoints;
     avgRedGamePieces += avgPieces;
-    avgAutoRedChargeStationPoints += avgAutoChargeStationPoints;
-    avgTeleopRedChargeStationPoints += avgTeleopChargeStationPoints;
+    avgAutoRedSpeakerPoints += avgAutoSpeakerPoints;
+    avgTeleopRedClimbPoints += avgTeleopClimbPoints;
   }
   else {
     validBlueTeams++;
     avgBluePoints += avgPoints;
     avgBlueGamePieces += avgPieces;
-    avgAutoBlueChargeStationPoints += avgAutoChargeStationPoints;
-    avgTeleopBlueChargeStationPoints += avgTeleopChargeStationPoints;
+    avgAutoBlueSpeakerPoints += avgAutoSpeakerPoints;
+    avgTeleopBlueClimbPoints += avgTeleopClimbPoints;
   }
   updateSummaryTable();
 }
@@ -379,8 +418,8 @@ function updateSummaryTable(){
     `</tr>`,
     `<tr>`,
     `  <th scope='col'>Avg Charge Station Points</th>`,
-    `  <td scope='col' class="table-danger">${roundInt(Math.min(avgAutoRedChargeStationPoints, 12) + avgTeleopRedChargeStationPoints)}</td>`,
-    `  <td scope='col' class="table-primary">${roundInt(Math.min(avgAutoBlueChargeStationPoints, 12) + avgTeleopBlueChargeStationPoints)}</td>`,
+    `  <td scope='col' class="table-danger">${roundInt(Math.min(avgAutoRedSpeakerPoints, 12) + avgTeleopRedClimbPoints)}</td>`,
+    `  <td scope='col' class="table-primary">${roundInt(Math.min(avgAutoBlueSpeakerPoints, 12) + avgTeleopBlueClimbPoints)}</td>`,
     `</tr>`,
   ].join('');
   $('#summaryTable').html(row);
@@ -389,40 +428,40 @@ function updateSummaryTable(){
 function augmentTeamDataSummary(data, elementSuffix){
   var matchCount = 0;
   var avgAutoPiece = 0;
-  var avgAutoEngageOrDock = 0;
+  var avgAutoSpeakerOrAmp = 0;
   var avgTelopPiece = 0;
-  var avgTeleopCones = 0;
-  var avgTeleopCubes = 0;
-  var avgTeleopEngage = 0;
-  var avgTeleopDock = 0;
+  var avgTeleopSpeaker = 0;
+  var avgTeleopAmp = 0;
+  var avgTeleopClimb = 0;
+  var avgTeleopPark = 0;
   for (var i = 0; i != data.length; i++){
     var match = data[i];
     matchCount++;
     avgAutoPiece += getPiecesAuto(match);
-    avgAutoEngageOrDock += getDockAuto(match) || getEngageAuto(match) ? 1 : 0;
+    avgAutoSpeakerOrAmp += getSpeakerAuto(match) || getAmpAuto(match) ? 1 : 0;
     avgTelopPiece += getPiecesTeleop(match);
-    avgTeleopCones += getConesTeleop(match);
-    avgTeleopCubes += getCubesTeleop(match);
-    avgTeleopEngage += getEngageTeleop(match) ? 1 : 0;
-    avgTeleopDock += getDockTeleop(match) ? 1 : 0;
+    avgTeleopCones += getSpeakerTeleop(match);
+    avgTeleopAmp += getAmpTeleop(match);
+    avgTeleopClimb += getClimbTeleop(match) ? 1 : 0;
+    avgTeleopPark += getParkTeleop(match) ? 1 : 0;
   }
 
   if (matchCount > 0){
     avgAutoPiece = roundInt(avgAutoPiece / matchCount);
-    avgAutoEngageOrDock = roundInt(100 * avgAutoEngageOrDock / matchCount);
+    avgAutoSpeakerOrAmp = roundInt(100 * avgAutoSpeakerOrAmp / matchCount);
     avgTelopPiece = roundInt(avgTelopPiece / matchCount);
-    avgTeleopCones = roundInt(avgTeleopCones / matchCount);
-    avgTeleopCubes = roundInt(avgTeleopCubes / matchCount);
-    avgTeleopEngage = roundInt(100 * avgTeleopEngage / matchCount);
-    avgTeleopDock = roundInt(100 * avgTeleopDock / matchCount);
+    avgTeleopSpeaker = roundInt(avgTeleopSpeaker / matchCount);
+    avgTeleopAmp = roundInt(avgTeleopAmp / matchCount);
+    avgTeleopClimb = roundInt(100 * avgTeleopClimb / matchCount);
+    avgTeleopPark = roundInt(100 * avgTeleopPark / matchCount);
 
     var rows = [
       `<tr>`,
       `  <td scope='col'>${avgAutoPiece}</td>`,
-      `  <td scope='col'>${avgAutoEngageOrDock}%</td>`,
+      `  <td scope='col'>${avgAutoSpeakerOrAmp}%</td>`,
       `  <td scope='col'>${avgTelopPiece}</td>`,
-      `  <td scope='col'>${avgTeleopCones}</td>`,
-      `  <td scope='col'>${avgTeleopCubes}</td>`,
+      `  <td scope='col'>${avgTeleopSpeaker}</td>`,
+      `  <td scope='col'>${avgTeleopAmp}</td>`,
       `  <td scope='col'>${avgTeleopEngage}%</td>`,
       `  <td scope='col'>${avgTeleopDock}%</td>`,
       `</tr>`
@@ -530,6 +569,23 @@ function loadUserTeamList(){
   });
 }
 
+function saveRanking(){
+			$.get("writeAPI.php", {
+				match: currentMatch,
+				saveAllianceRank: JSON.stringify(getSortedTeams())
+			}).done(function(data) {
+				data = JSON.parse(data);
+				console.log(data);
+				if (data['success'] != true){
+					alert('Data did not submit!');
+				}
+				else {
+					alert("Data successfully submitted!");
+					clearData();
+				}
+			});
+		}
+
 $(document).ready(function() {
   loadUserTeamList();
   const url = new URLSearchParams(window.location.search);
@@ -543,6 +599,7 @@ $('#loadMatch').on('click', function(){
     var compLevel = $("#writeCompLevel").val();
     loadData(compLevel, matchNumber);
 });
+
 </script>
 
 
