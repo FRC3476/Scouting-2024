@@ -121,7 +121,7 @@
                       </select>
                       <div class="form-check">
                       <input class="form-check-input" type="checkbox" value="" id="autoMobility">
-                      <label class="form-check-label" for="autoMobility">
+                      <label class="form-check-label" for="climbSpotlighted">
                         Spotlighted?
                       </label>
                     </div>
@@ -161,7 +161,7 @@
                         <label for="miscComments">Comments</label>
                       </div>
                       <div class="col-md-3">
-                        <button id="submit" class="btn btn-primary" onClick="submitData()">Submit</button>
+                        <button id="submit" class="btn btn-primary">Submit</button>
                       </div>
                     </div>
                   </div>
@@ -202,13 +202,13 @@
 
   var teamList = new Set();
 
-  function loadTeamList() {
+  /*function loadTeamList() {
     $.get("tbaAPI.php", {
       "getTeamList": 1
     }, function(data) {
       teamList = new Set(JSON.parse(data));
     });
-  }
+  }*/
 
 
   // Auto Functions
@@ -377,12 +377,14 @@
       document.getElementById(subtractButtonId).innerHTML = "Subtract:";
       document.getElementById(innerElement).innerHTML = -1; 
       makeIncrementFalse();
+      console.log('Subtract mode');
     } else {
 
       addStyles(myElement, "background: rgb(86, 196, 130); border: solid rgb(86, 196, 130);");
       document.getElementById(subtractButtonId).innerHTML = "Add:";
       document.getElementById(innerElement).innerHTML = 1;
       makeIncrementTrue();
+      console.log('Add mode');
     }
   }
 
@@ -443,6 +445,7 @@
   function clearAlerts() {
     /* Clears all allerts in the placeholder. */
     $('#alertPlaceholder').empty();
+    console.log('in clearAlerts function, alertPlaceholder is made empty')
   }
 
   function getMatchFormData() {
@@ -452,16 +455,21 @@
     data['matchNumber'] = parseInt($('#matchNumber').val());
     data['teamNumber'] = parseInt($('#teamNumber').val());
     var mobile = $('#autoMobility').is(':checked');
+    var spotlight = $('#climbSpotlighted').is(':checked');
     //data['autoMobility'] needs to be an integer when not checked.
+    //same for data['climbSpotlighted'] I assume
     if (!mobile) mobile = 0;
+    if(!spotlight) spotlight = 0;
     data['autoMobility'] = mobile;
     data['autoAmpNote'] = aAmp; // Either form input or 0 if no form input
     data['autoSpeakerNote'] = aSpeaker; // Either form input or 0 if no form input
+    data['autoPath'] = '';
     data['teleopAmpNote'] = tAmp; // Either form input or 0 if no form input
     data['teleopSpeaker'] = tSpeaker; // Either form input or 0 if no form input
     data['teleopSpeakerAmplified'] = tAmpedSpeaker; // Either form input or 0 if no form input
     data['teleopTrap'] = tTrap; // Either form input or 0 if no form input
-    data['teleopStage'] = $('#teleopStage').val();
+    data['climb'] = $('#teleopStage').val();
+    data['climbSpotlighted'] = spotlight;
     data['cannedComments'] = getCannedComments();
     data['textComments'] = $('#miscComments').val();
     return data;
@@ -476,13 +484,15 @@
     data.push(originalJSON['autoMobility']);
     data.push(originalJSON['autoAmpNote']);
     data.push(originalJSON['autoSpeakerNote']);
+    data.push(originalJSON['autoPath']);
     data.push(originalJSON['teleopAmpNote']);
     data.push(originalJSON['teleopSpeaker']);
     data.push(originalJSON['teleopSpeakerAmplified']);
     data.push(originalJSON['teleopTrap']);
-    data.push(originalJSON['teleopStage']);
-    data.push(originalJSON['textComments']);
+    data.push(originalJSON['climb']);
+    data.push(originalJSON['climbSpotlighted']);
     data.push(originalJSON['cannedComments']);
+    data.push(originalJSON['textComments']);
     return data;
   }
 
@@ -519,7 +529,7 @@
     }
 
     //make sure the team being scouted is in the match
-    var formattedTeam = `frc${data['teamNumber']}`;
+    /*var formattedTeam = `frc${data['teamNumber']}`;
     var tba = httpRequest("./tbaAPI.php?getTeamsInMatch=" + data["matchNumber"]);
     tba = JSON.parse(tba);
     var teams = [];
@@ -530,7 +540,7 @@
       createErrorAlert(`Team ${data["teamNumber"]} is not in match ${data["matchNumber"]}`);
       // Allow submit even if invalid.
       // valid = false; 
-    }
+    }*/
 
     return valid;
   }
@@ -607,9 +617,12 @@
       True if successful, false if not.
     */
     clearAlerts();
+    console.log('Clear alerts function called in submitData')
     var data = getMatchFormData();
     console.log(data);
+    console.log(JSON.stringify(data));
     var validData = validateFormData(data);
+    console.log(validData);
     if (validData) {
       // Create POST request.
       $.post("writeAPI.php", {
@@ -617,17 +630,23 @@
         }, function(data) {
           data = JSON.parse(data);
           console.log(data);
+          console.log('after ' + JSON.stringify(data));
           const success = data["success"];
+          console.log(success);
           if (success) {
             createSuccessAlert('Form Submitted. Clearing form.');
             location.reload();
+            console.log('POST request made, success??');
           } else {
             createErrorAlert('Form submitted to server but failed to process. Please try again or contact admin.');
             createErrorAlert(JSON.stringify(data["error"]));
+            console.log('POST request made, server side issue');
           }
         })
+        
         .fail(function() {
           createErrorAlert('Form submitted but failure on server side. Please try again or contact admin.');
+          console.log('POST request made, failure??');
         });
 
     }
@@ -658,7 +677,7 @@
   })
 
   $(document).ready(function() {
-    loadTeamList();
+    //loadTeamList();
   });
 </script>
 <style>
