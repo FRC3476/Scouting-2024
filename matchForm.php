@@ -72,9 +72,9 @@
                   </div>
                   <div class="col-md-3">
                     <br>
-                    <button class="disable-dbl-tap-zoom-danger" type="button" onClick="makeIncrementFalse();subtractToggle('toggleAButton','negativeAIncrementButton', 'subtractNameA')" id="toggleAButton">
-                    <div id="subtractNameA">Subtract:</div>
-                      <div id="negativeAIncrementButton" class="enlargedtext">-1</div>                      
+                    <button class="disable-dbl-tap-zoom-green" type="button" onClick="makeIncrementFalse();subtractToggle('toggleAButton','negativeAIncrementButton', 'subtractNameA')" id="toggleAButton">
+                    <div id="subtractNameA">Add:</div>
+                      <div id="negativeAIncrementButton" class="enlargedtext">1</div>                      
                     </button>
                   </div>
                   
@@ -101,9 +101,9 @@
                   </div>
                   <div class="center">
                     <br>
-                    <button class="disable-dbl-tap-zoom-danger" type="button" onClick="makeTIncrementFalse();subtractToggle('toggleTButton','negativeTIncrementButton', 'subtractNameT')" id="toggleTButton">
-                    <div id="subtractNameT">Subtract:</div>
-                      <div id="negativeTIncrementButton" class="enlargedtext">-1</div>                      
+                    <button class="disable-dbl-tap-zoom-green" type="button" onClick="makeTIncrementFalse();subtractToggle('toggleTButton','negativeTIncrementButton', 'subtractNameT')" id="toggleTButton">
+                    <div id="subtractNameT">Add:</div>
+                      <div id="negativeTIncrementButton" class="enlargedtext">1</div>                      
                     </button>
                   </div>
                   <br>
@@ -225,6 +225,7 @@
         }
       } else {
         makeIncrementTrue();
+        subtractToggle('toggleAButton','negativeAIncrementButton', 'subtractNameA');
       }
     }
     document.getElementById("buttonAAmp").innerHTML = aAmp;
@@ -244,6 +245,7 @@
         }
       } else {
         makeIncrementTrue();
+        subtractToggle('toggleAButton','negativeAIncrementButton', 'subtractNameA');
       }
     }
     document.getElementById("buttonASpeaker").innerHTML = aSpeaker;
@@ -269,6 +271,7 @@
         }
       } else {
         makeTIncrementTrue();
+        subtractToggle('toggleTButton','negativeTIncrementButton', 'subtractNameT');
       }
     }
     document.getElementById("buttonTAmp").innerHTML = tAmp;
@@ -288,6 +291,7 @@
         }
       } else {
         makeTIncrementTrue();
+        subtractToggle('toggleTButton','negativeTIncrementButton', 'subtractNameT');
       }
     }
     document.getElementById("buttonTSpeaker").innerHTML = tSpeaker;
@@ -308,6 +312,7 @@
         }
       } else {
         makeTIncrementTrue();
+        subtractToggle('toggleTButton','negativeTIncrementButton', 'subtractNameT');
       }
     }
     document.getElementById("buttonTAmpedSpeaker").innerHTML = tAmpedSpeaker;
@@ -328,6 +333,7 @@
         }
       } else {
         makeTIncrementTrue();
+        subtractToggle('toggleTButton','negativeTIncrementButton', 'subtractNameT');
       }
     }
     document.getElementById("buttonTrap").innerHTML = tTrap;
@@ -366,15 +372,16 @@
   function subtractToggle(elementName, innerElement, subtractButtonId) {
     var count = document.getElementById(innerElement).innerHTML;
     var myElement = document.getElementById(elementName);
-    if (count == -1){
-      addStyles(myElement, "background: rgb(86, 196, 130); border: solid rgb(86, 196, 130);");
-      document.getElementById(subtractButtonId).innerHTML = "Add";
-      document.getElementById(innerElement).innerHTML = 1;
+    if (count == 1){ 
+      addStyles(myElement, "background: rgb(245, 108, 108); border: solid rgb(245, 108, 108);");
+      document.getElementById(subtractButtonId).innerHTML = "Subtract:";
+      document.getElementById(innerElement).innerHTML = -1; 
       makeIncrementFalse();
     } else {
-      addStyles(myElement, "background: rgb(245, 108, 108); border: solid rgb(245, 108, 108);");
-      document.getElementById(subtractButtonId).innerHTML = "Subtract";
-      document.getElementById(innerElement).innerHTML = -1; 
+
+      addStyles(myElement, "background: rgb(86, 196, 130); border: solid rgb(86, 196, 130);");
+      document.getElementById(subtractButtonId).innerHTML = "Add:";
+      document.getElementById(innerElement).innerHTML = 1;
       makeIncrementTrue();
     }
   }
@@ -744,6 +751,20 @@
     font-weight: bold;
     /*To get rid of weird 3D affect in some browsers*/
     border: solid rgb(245, 108, 108);
+    height: 50px;
+    width: 500px;
+  }
+
+  .disable-dbl-tap-zoom-green {
+    touch-action: manipulation;
+    background-color: rgb(86, 196, 130);
+    color: white;
+    border-radius: 2px;
+    font-family: Helvetica;
+    margin-left: 250px;
+    font-weight: bold;
+    /*To get rid of weird 3D affect in some browsers*/
+    border: solid rgb(86, 196, 130);
     height: 50px;
     width: 500px;
   }
