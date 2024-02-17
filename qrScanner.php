@@ -153,22 +153,15 @@ function uncompressDataList(dataList){
   out['matchNumber'] = dataList[1];
   out['teamNumber'] = dataList[2];
   out['autoMobility'] = dataList[3];
-  out['autoConeLevel1'] = dataList[4];
-  out['autoConeLevel2'] = dataList[5];
-  out['autoConeLevel3'] = dataList[6];
-  out['autoCubeLevel1'] = dataList[7];
-  out['autoCubeLevel2'] = dataList[8];
-  out['autoCubeLevel3'] = dataList[9];
-  out['autoChargeStation'] = dataList[10];
-  out['teleopConeLevel1'] = dataList[11];
-  out['teleopConeLevel2'] = dataList[12];
-  out['teleopConeLevel3'] = dataList[13];
-  out['teleopCubeLevel1'] = dataList[14];
-  out['teleopCubeLevel2'] = dataList[15];
-  out['teleopCubeLevel3'] = dataList[16];
-  out['teleopChargeStation'] = dataList[17];
-  out['cannedComments'] = dataList[18];
+  out['autoAmpNote'] = dataList[4];
+  out['autoSpeakerNote'] = dataList[5];
+  out['teleopAmpNote'] = dataList[6];
+  out['teleopSpeaker'] = dataList[7];
+  out['teleopSpeakerAmplified'] = dataList[8];
+  out['teleopTrap'] = dataList[9];
+  out['teleopStage'] = dataList[10];
   out['textComments'] = '';
+  out['cannedComments'] = dataList[12];
   return out;
 }
 
