@@ -128,14 +128,17 @@ function getMatchPointsAuto(row) {
 
 function getMatchPointsTeleop(row) {
 	var points = 0;
-	if (getDockTeleop(row)) {
-		points += 6;
+	points += getInStage(row) ? 1 : 0;
+	points += getClimb(row) ? 3 : 0;
+	points += getTrappedWhileClimbed(row) ? 8 : 0;
+	if((points != 0) && (getSpotlighted(row))){
+		points+=1;
 	}
-	if (getEngageTeleop(row)) {
-		points += 10;
+	else if((points != 0) && (getHarmony(row))){
+		points+=2;
 	}
-	if (getParkTeleop(row)){
-		points += 2;
+	else if ((points != 0) && (getHarmony(row) && (getSpotligted(row)))){
+		points+=3;
 	}
 	points += 2 * getSpeakerTeleop(row);
 	points += 5 * getSpeakerAmplifiedTeleop(row);
