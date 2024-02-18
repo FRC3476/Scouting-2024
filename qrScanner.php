@@ -155,14 +155,16 @@ function uncompressDataList(dataList){
   out['autoMobility'] = dataList[3];
   out['autoAmpNote'] = dataList[4];
   out['autoSpeakerNote'] = dataList[5];
-  out['teleopAmpNote'] = dataList[6];
-  out['teleopSpeaker'] = dataList[7];
-  out['teleopSpeakerAmplified'] = dataList[8];
-  out['teleopTrap'] = dataList[9];
-  out['teleopStage'] = dataList[10];
-  out['textComments'] = '';
-  out['cannedComments'] = dataList[12];
   out["autoPath"] = '';
+  out['teleopAmpNote'] = dataList[7];
+  out['teleopSpeaker'] = dataList[8];
+  out['teleopSpeakerAmplified'] = dataList[9];
+  out['teleopTrap'] = dataList[10];
+  out['climb'] = dataList[11];
+  out['climbSpotlighted'] = dataList[12];
+  out['climbHarmony'] = dataList[13];
+  out['textComments'] = '';
+  out['cannedComments'] = dataList[15];
   return out;
 }
 

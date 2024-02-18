@@ -120,11 +120,19 @@
                         <option value="TRAP">Trap While Climb</option>
                       </select>
                       <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="autoMobility">
-                      <label class="form-check-label" for="climbSpotlighted">
-                        Spotlighted?
-                      </label>
+                        <input class="form-check-input" type="checkbox" value="" id="climbSpotlighted">
+                        <label class="form-check-label" for="climbSpotlighted">
+                          Spotlighted?
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="climbHarmony">
+                        <label class="form-check-label" for="climbHarmony">
+                          Harmony?
+                        </label>
+                      </div>
                     </div>
+
                     <br>
                     <a>Comments</a>
                     <div class="col-md-12">
@@ -153,6 +161,7 @@
                         <span class="badge rounded-pill text-bg-primary cannedComments">Did not slide down chain</span>
                         <span class="badge rounded-pill text-bg-primary cannedComments">Climb fast</span>
                         <span class="badge rounded-pill text-bg-primary cannedComments">Bumpers Fell Off</span>
+                        <span class="badge rounded-pill text-bg-primary cannedComments">Coopertition</span>
                         <span class="badge rounded-pill text-bg-primary cannedComments">DNP</span>
                         <br><br>
                       </div>
@@ -456,10 +465,12 @@
     data['teamNumber'] = parseInt($('#teamNumber').val());
     var mobile = $('#autoMobility').is(':checked');
     var spotlight = $('#climbSpotlighted').is(':checked');
+    var harmony = $('#climbHarmony').is(':checked');
     //data['autoMobility'] needs to be an integer when not checked.
     //same for data['climbSpotlighted'] I assume
     if (!mobile) mobile = 0;
-    if(!spotlight) spotlight = 0;
+    if (!spotlight) spotlight = 0;
+    if (!harmony) harmony = 0;
     data['autoMobility'] = mobile;
     data['autoAmpNote'] = aAmp; // Either form input or 0 if no form input
     data['autoSpeakerNote'] = aSpeaker; // Either form input or 0 if no form input
@@ -470,6 +481,7 @@
     data['teleopTrap'] = tTrap; // Either form input or 0 if no form input
     data['climb'] = $('#teleopStage').val();
     data['climbSpotlighted'] = spotlight;
+    data['climbHarmony'] = harmony;
     data['cannedComments'] = getCannedComments();
     data['textComments'] = $('#miscComments').val();
     return data;
@@ -491,6 +503,7 @@
     data.push(originalJSON['teleopTrap']);
     data.push(originalJSON['climb']);
     data.push(originalJSON['climbSpotlighted']);
+    data.push(originalJSON['climbHarmony']);
     data.push(originalJSON['cannedComments']);
     data.push(originalJSON['textComments']);
     return data;
