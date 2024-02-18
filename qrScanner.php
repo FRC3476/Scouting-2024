@@ -163,8 +163,8 @@ function uncompressDataList(dataList){
   out['climb'] = dataList[11];
   out['climbSpotlighted'] = dataList[12];
   out['climbHarmony'] = dataList[13];
+  out['cannedComments'] = dataList[14];
   out['textComments'] = '';
-  out['cannedComments'] = dataList[15];
   return out;
 }
 
