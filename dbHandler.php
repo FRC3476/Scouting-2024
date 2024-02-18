@@ -29,6 +29,7 @@ class dbHandler
         'teleopTrap' => 'SMALLINT NOT NULL',
         'climb' => 'VARCHAR(100) NULL',
         'climbSpotlighted' => 'BOOLEAN NOT NULL',
+        'climbHarmony' => 'BOOLEAN NOT NULL',
         'cannedComments' => 'TEXT NULL',
         'textComments' => 'TEXT NULL'
       )
