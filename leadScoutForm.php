@@ -104,12 +104,12 @@
                 <table class='table text-bg-danger'>
                   <thead>
                     <th scope="col">Avg Auto Pieces</th>
-                    <th scope="col">Auto Engage OR Dock</th>
+                    <th scope="col">Auto Speaker</th>
                     <th scope="col">Avg Telop Pieces</th>
-                    <th scope="col">Avg Telop Cones</th>
-                    <th scope="col">Avg Telop Cubes</th>
-                    <th scope="col">Telop Engage %</th>
-                    <th scope="col">Telop Dock %</th>
+                    <th scope="col">Avg Telop Speaker</th>
+                    <th scope="col">Avg Telop Amp</th>
+                    <th scope="col">Telop Climb %</th>
+                    <th scope="col">Telop Harmony %</th>
                   </thead>
                   <tbody id='dataRed1'></tbody>
                 </table>
@@ -143,12 +143,12 @@
                 <table class='table text-bg-danger'>
                   <thead>
                     <th scope="col">Avg Auto Pieces</th>
-                    <th scope="col">Auto Engage OR Dock</th>
+                    <th scope="col">Auto Speaker</th>
                     <th scope="col">Avg Telop Pieces</th>
-                    <th scope="col">Avg Telop Cones</th>
-                    <th scope="col">Avg Telop Cubes</th>
-                    <th scope="col">Telop Engage %</th>
-                    <th scope="col">Telop Dock %</th>
+                    <th scope="col">Avg Telop Speaker</th>
+                    <th scope="col">Avg Telop Amp</th>
+                    <th scope="col">Telop Climb %</th>
+                    <th scope="col">Telop Harmony %</th>
                   </thead>
                   <tbody id='dataRed2'></tbody>
                 </table>
@@ -183,12 +183,12 @@
                 <table class='table text-bg-danger'>
                   <thead>
                     <th scope="col">Avg Auto Pieces</th>
-                    <th scope="col">Auto Engage OR Dock</th>
+                    <th scope="col">Auto Speaker</th>
                     <th scope="col">Avg Telop Pieces</th>
-                    <th scope="col">Avg Telop Cones</th>
-                    <th scope="col">Avg Telop Cubes</th>
-                    <th scope="col">Telop Engage %</th>
-                    <th scope="col">Telop Dock %</th>
+                    <th scope="col">Avg Telop Speaker</th>
+                    <th scope="col">Avg Telop Amp</th>
+                    <th scope="col">Telop Climb %</th>
+                    <th scope="col">Telop Harmony %</th>
                   </thead>
                   <tbody id='dataRed3'></tbody>
                 </table>
@@ -225,12 +225,12 @@
                 <table class='table text-bg-primary'>
                   <thead>
                     <th scope="col">Avg Auto Pieces</th>
-                    <th scope="col">Auto Engage OR Dock</th>
+                    <th scope="col">Auto Speaker</th>
                     <th scope="col">Avg Telop Pieces</th>
-                    <th scope="col">Avg Telop Cones</th>
-                    <th scope="col">Avg Telop Cubes</th>
-                    <th scope="col">Telop Engage %</th>
-                    <th scope="col">Telop Dock %</th>
+                    <th scope="col">Avg Telop Speaker</th>
+                    <th scope="col">Avg Telop Amp</th>
+                    <th scope="col">Telop Climb %</th>
+                    <th scope="col">Telop Harmony %</th>
                   </thead>
                   <tbody id='dataBlue1'></tbody>
                 </table>
@@ -264,12 +264,12 @@
                 <table class='table text-bg-primary'>
                   <thead>
                     <th scope="col">Avg Auto Pieces</th>
-                    <th scope="col">Auto Engage OR Dock</th>
+                    <th scope="col">Auto Speaker</th>
                     <th scope="col">Avg Telop Pieces</th>
-                    <th scope="col">Avg Telop Cones</th>
-                    <th scope="col">Avg Telop Cubes</th>
-                    <th scope="col">Telop Engage %</th>
-                    <th scope="col">Telop Dock %</th>
+                    <th scope="col">Avg Telop Speaker</th>
+                    <th scope="col">Avg Telop Amp</th>
+                    <th scope="col">Telop Climb %</th>
+                    <th scope="col">Telop Harmony %</th>
                   </thead>
                   <tbody id='dataBlue2'></tbody>
                 </table>
@@ -304,12 +304,12 @@
                 <table class='table text-bg-primary'>
                   <thead>
                     <th scope="col">Avg Auto Pieces</th>
-                    <th scope="col">Auto Engage OR Dock</th>
+                    <th scope="col">Auto Speaker</th>
                     <th scope="col">Avg Telop Pieces</th>
-                    <th scope="col">Avg Telop Cones</th>
-                    <th scope="col">Avg Telop Cubes</th>
-                    <th scope="col">Telop Engage %</th>
-                    <th scope="col">Telop Dock %</th>
+                    <th scope="col">Avg Telop Speaker</th>
+                    <th scope="col">Avg Telop Amp</th>
+                    <th scope="col">Telop Climb %</th>
+                    <th scope="col">Telop Harmony %</th>
                   </thead>
                   <tbody id='dataBlue3'></tbody>
                 </table>
@@ -365,42 +365,42 @@ function clearData(){
 function augmentTeamDataSummary(data, elementSuffix){
   var matchCount = 0;
   var avgAutoPiece = 0;
-  var avgAutoEngageOrDock = 0;
+  var avgAutoSpeaker = 0;
   var avgTelopPiece = 0;
-  var avgTeleopCones = 0;
-  var avgTeleopCubes = 0;
-  var avgTeleopEngage = 0;
-  var avgTeleopDock = 0;
+  var avgTeleopSpeaker = 0;
+  var avgTeleopAmp = 0;
+  var avgTeleopClimb = 0;
+  var avgTeleopHarmony = 0;
   for (var i = 0; i != data.length; i++){
     var match = data[i];
     matchCount++;
     avgAutoPiece += getPiecesAuto(match);
-    avgAutoEngageOrDock += getDockAuto(match) || getEngageAuto(match) ? 1 : 0;
+    avgAutoSpeaker += getSpeakerAuto(match);
     avgTelopPiece += getPiecesTeleop(match);
-    avgTeleopCones += getConesTeleop(match);
-    avgTeleopCubes += getCubesTeleop(match);
-    avgTeleopEngage += getEngageTeleop(match) ? 1 : 0;
-    avgTeleopDock += getDockTeleop(match) ? 1 : 0;
+    avgTeleopSpeaker += getSpeakerTeleop(match) + getSpeakerAmplifiedTeleop(match);
+    avgTeleopAmp += getAmpTeleop(match);
+    avgTeleopClimb += getClimbTeleop(match) ? 1 : 0;
+    avgTeleopHarmony += getHarmonyTeleop(match) ? 1 : 0;
   }
 
   if (matchCount > 0){
     avgAutoPiece = roundInt(avgAutoPiece / matchCount);
-    avgAutoEngageOrDock = roundInt(100 * avgAutoEngageOrDock / matchCount);
+    avgAutoSpeaker = roundInt(100 * avgAutoSpeaker / matchCount);
     avgTelopPiece = roundInt(avgTelopPiece / matchCount);
-    avgTeleopCones = roundInt(avgTeleopCones / matchCount);
-    avgTeleopCubes = roundInt(avgTeleopCubes / matchCount);
-    avgTeleopEngage = roundInt(100 * avgTeleopEngage / matchCount);
-    avgTeleopDock = roundInt(100 * avgTeleopDock / matchCount);
+    avgTeleopSpeaker = roundInt(avgTeleopSpeaker / matchCount);
+    avgTeleopAmp = roundInt(avgTeleopAmp / matchCount);
+    avgTeleopClimb = roundInt(100 * avgTeleopClimb / matchCount);
+    avgTeleopHarmony = roundInt(100 * avgTeleopHarmony / matchCount);
 
     var rows = [
       `<tr>`,
       `  <td scope='col'>${avgAutoPiece}</td>`,
-      `  <td scope='col'>${avgAutoEngageOrDock}%</td>`,
+      `  <td scope='col'>${avgAutoSpeaker}%</td>`,
       `  <td scope='col'>${avgTelopPiece}</td>`,
-      `  <td scope='col'>${avgTeleopCones}</td>`,
-      `  <td scope='col'>${avgTeleopCubes}</td>`,
-      `  <td scope='col'>${avgTeleopEngage}%</td>`,
-      `  <td scope='col'>${avgTeleopDock}%</td>`,
+      `  <td scope='col'>${avgTeleopSpeaker}</td>`,
+      `  <td scope='col'>${avgTeleopAmp}</td>`,
+      `  <td scope='col'>${avgTeleopClimb}%</td>`,
+      `  <td scope='col'>${avgTeleopHarmony}%</td>`,
       `</tr>`
     ].join('');
     $(`#data${elementSuffix}`).html(rows);
