@@ -83,7 +83,7 @@ function getDefaultDeviceID(id) {
 
 function validateQrList(dataList) {
   /* Do more validation. */
-  return dataList.length == 19;
+  return dataList.length == 16;
 }
 
 function qrListToKey(dataObj) {
@@ -152,7 +152,11 @@ function uncompressDataList(dataList){
   out['scout'] = dataList[0];
   out['matchNumber'] = dataList[1];
   out['teamNumber'] = dataList[2];
-  out['autoMobility'] = dataList[3];
+  if(dataList[3] == true){
+    out['autoMobility'] = 1;
+  }else{
+    out['autoMobility'] = 0;
+  }
   out['autoAmpNote'] = dataList[4];
   out['autoSpeakerNote'] = dataList[5];
   out["autoPath"] = '';
@@ -161,8 +165,19 @@ function uncompressDataList(dataList){
   out['teleopSpeakerAmplified'] = dataList[9];
   out['teleopTrap'] = dataList[10];
   out['climb'] = dataList[11];
-  out['climbSpotlighted'] = dataList[12];
-  out['climbHarmony'] = dataList[13];
+
+  if(dataList[12] == true){
+    out['climbSpotlighted'] = 1;
+  }else{
+    out['climbSpotlighted'] = 0;
+  }
+
+  if(dataList[13] == true){
+    out['climbHarmony'] = 1;
+  }else{
+    out['climbHarmony'] = 0;
+  }
+
   out['cannedComments'] = dataList[14];
   out['textComments'] = '';
   return out;
