@@ -382,10 +382,10 @@ function augmentTotalMatchSummary(data, alliance){
     return;
   }
   
-  avgPieces = roundInt(avgPieces/matchCount);
-  avgPoints = roundInt(avgPoints/matchCount);
-  avgAutoSpeakerPoints = roundInt(avgAutoSpeakerPoints/matchCount);
-  avgTeleopClimbPoints = roundInt(avgTeleopClimbPoints/matchCount);
+  avgPieces = (avgPieces/matchCount); //roundInt(avgPieces/matchCount);
+  avgPoints = (avgPoints/matchCount); //roundInt(avgPoints/matchCount);
+  avgAutoSpeakerPoints = (avgAutoSpeakerPoints/matchCount); //roundInt(avgAutoSpeakerPoints/matchCount);
+  avgTeleopClimbPoints = (avgTeleopClimbPoints/matchCount); //roundInt(avgTeleopClimbPoints/matchCount);
 
   if (alliance == 'Red'){
     validRedTeams++;
@@ -408,18 +408,18 @@ function updateSummaryTable(){
   var row = [
     `<tr>`,
     `  <th scope='col'>Avg Points</th>`,
-    `  <td scope='col' class="table-danger">${roundInt(avgRedPoints)}</td>`,
-    `  <td scope='col' class="table-primary">${roundInt(avgBluePoints)}</td>`,
+    `  <td scope='col' class="table-danger">${(avgRedPoints)}</td>`, //roundInt
+    `  <td scope='col' class="table-primary">${(avgBluePoints)}</td>`, //roundInt
     `</tr>`,
     `<tr>`,
     `  <th scope='col'>Avg Pieces</th>`,
-    `  <td scope='col' class="table-danger">${roundInt(avgRedGamePieces)}</td>`,
-    `  <td scope='col' class="table-primary">${roundInt(avgBlueGamePieces)}</td>`,
+    `  <td scope='col' class="table-danger">${(avgRedGamePieces)}</td>`, //roundInt
+    `  <td scope='col' class="table-primary">${(avgBlueGamePieces)}</td>`, //roundInt
     `</tr>`,
     `<tr>`,
     `  <th scope='col'>Avg Charge Station Points</th>`,
-    `  <td scope='col' class="table-danger">${roundInt(Math.min(avgAutoRedSpeakerPoints, 12) + avgTeleopRedClimbPoints)}</td>`,
-    `  <td scope='col' class="table-primary">${roundInt(Math.min(avgAutoBlueSpeakerPoints, 12) + avgTeleopBlueClimbPoints)}</td>`,
+    `  <td scope='col' class="table-danger">${(Math.min(avgAutoRedSpeakerPoints, 12) + avgTeleopRedClimbPoints)}</td>`, //roundInt
+    `  <td scope='col' class="table-primary">${(Math.min(avgAutoBlueSpeakerPoints, 12) + avgTeleopBlueClimbPoints)}</td>`, //roundInt
     `</tr>`,
   ].join('');
   $('#summaryTable').html(row);
@@ -447,13 +447,13 @@ function augmentTeamDataSummary(data, elementSuffix){
   }
 
   if (matchCount > 0){
-    avgAutoPiece = roundInt(avgAutoPiece / matchCount);
-    avgAutoSpeakerOrAmp = roundInt(100 * avgAutoSpeakerOrAmp / matchCount);
-    avgTelopPiece = roundInt(avgTelopPiece / matchCount);
-    avgTeleopSpeaker = roundInt(avgTeleopSpeaker / matchCount);
-    avgTeleopAmp = roundInt(avgTeleopAmp / matchCount);
-    avgTeleopClimb = roundInt(100 * avgTeleopClimb / matchCount);
-    avgTeleopPark = roundInt(100 * avgTeleopPark / matchCount);
+    avgAutoPiece = (avgAutoPiece / matchCount); //roundInt(avgAutoPiece / matchCount);
+    avgAutoSpeakerOrAmp = (100 * avgAutoSpeakerOrAmp / matchCount); //roundInt(100 * avgAutoSpeakerOrAmp / matchCount);
+    avgTelopPiece = (avgTelopPiece / matchCount); //roundInt(avgTelopPiece / matchCount);
+    avgTeleopSpeaker = (avgTeleopSpeaker / matchCount); //roundInt(avgTeleopSpeaker / matchCount);
+    avgTeleopAmp = (avgTeleopAmp / matchCount); //roundInt(avgTeleopAmp / matchCount);
+    avgTeleopClimb = (100 * avgTeleopClimb / matchCount); //roundInt(100 * avgTeleopClimb / matchCount);
+    avgTeleopPark = (100 * avgTeleopPark / matchCount); //roundInt(100 * avgTeleopPark / matchCount);
 
     var rows = [
       `<tr>`,
