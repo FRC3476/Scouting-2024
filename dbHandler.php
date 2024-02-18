@@ -35,7 +35,7 @@ class dbHandler
     ),
     'LSTable' => array(
       'keys' => array(
-        'matchNum' => 'VARCHAR(20) NOT NULL',
+        'matchNum' => 'VARCHAR(20) NOT NULL PRIMARY KEY',
         'team1' => 'SMALLINT NOT NULL',
         'team2' => 'SMALLINT NOT NULL',
         'team3' => 'SMALLINT NOT NULL',
