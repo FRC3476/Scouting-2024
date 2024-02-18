@@ -109,7 +109,7 @@
                     <th scope="col">Avg Telop Speaker</th>
                     <th scope="col">Avg Telop Amp</th>
                     <th scope="col">Telop Climb %</th>
-                    <th scope="col">Telop Harmony %</th>
+                    <th scope="col">Telop Harmony or Trap %</th>
                   </thead>
                   <tbody id='dataRed1'></tbody>
                 </table>
@@ -148,7 +148,7 @@
                     <th scope="col">Avg Telop Speaker</th>
                     <th scope="col">Avg Telop Amp</th>
                     <th scope="col">Telop Climb %</th>
-                    <th scope="col">Telop Harmony %</th>
+                    <th scope="col">Telop Harmony or Trap %</th>
                   </thead>
                   <tbody id='dataRed2'></tbody>
                 </table>
@@ -188,7 +188,7 @@
                     <th scope="col">Avg Telop Speaker</th>
                     <th scope="col">Avg Telop Amp</th>
                     <th scope="col">Telop Climb %</th>
-                    <th scope="col">Telop Harmony %</th>
+                    <th scope="col">Telop Harmony or Trap %</th>
                   </thead>
                   <tbody id='dataRed3'></tbody>
                 </table>
@@ -230,7 +230,7 @@
                     <th scope="col">Avg Telop Speaker</th>
                     <th scope="col">Avg Telop Amp</th>
                     <th scope="col">Telop Climb %</th>
-                    <th scope="col">Telop Harmony %</th>
+                    <th scope="col">Telop Harmony or Trap %</th>
                   </thead>
                   <tbody id='dataBlue1'></tbody>
                 </table>
@@ -269,7 +269,7 @@
                     <th scope="col">Avg Telop Speaker</th>
                     <th scope="col">Avg Telop Amp</th>
                     <th scope="col">Telop Climb %</th>
-                    <th scope="col">Telop Harmony %</th>
+                    <th scope="col">Telop Harmony or Trap %</th>
                   </thead>
                   <tbody id='dataBlue2'></tbody>
                 </table>
@@ -309,7 +309,7 @@
                     <th scope="col">Avg Telop Speaker</th>
                     <th scope="col">Avg Telop Amp</th>
                     <th scope="col">Telop Climb %</th>
-                    <th scope="col">Telop Harmony %</th>
+                    <th scope="col">Telop Harmony or Trap %</th>
                   </thead>
                   <tbody id='dataBlue3'></tbody>
                 </table>
@@ -327,7 +327,7 @@
 <script type="text/javascript" src="js/sortable.min.js"></script>
 
 <script type="text/javascript" src="js/charts.js"></script>
-<script type="text/javascript" src="js/matchDataProcessor.js?cache=6"></script>
+<script type="text/javascript" src="js/matchDataProcessor.js"></script>
 
 <script>
 
@@ -370,37 +370,37 @@ function augmentTeamDataSummary(data, elementSuffix){
   var avgTeleopSpeaker = 0;
   var avgTeleopAmp = 0;
   var avgTeleopClimb = 0;
-  var avgTeleopHarmony = 0;
+  var avgTeleopHarmonyOrTrap = 0;
   for (var i = 0; i != data.length; i++){
     var match = data[i];
     matchCount++;
-    avgAutoPiece += getPiecesAuto(match);
+    avgAutoPiece += getAutoPieces(match);
     avgAutoSpeaker += getSpeakerAuto(match);
-    avgTelopPiece += getPiecesTeleop(match);
+    avgTelopPiece += getTeleopPieces(match);
     avgTeleopSpeaker += getSpeakerTeleop(match) + getSpeakerAmplifiedTeleop(match);
     avgTeleopAmp += getAmpTeleop(match);
-    avgTeleopClimb += getClimbTeleop(match) ? 1 : 0;
-    avgTeleopHarmony += getHarmonyTeleop(match) ? 1 : 0;
+    avgTeleopClimb += getClimbed(match) + getSpotlighted(match) ? 1 : 0;
+    avgTeleopHarmonyOrTrap += getHarmony(match) ? 1 : 0;
   }
 
   if (matchCount > 0){
-    avgAutoPiece = roundInt(avgAutoPiece / matchCount);
-    avgAutoSpeaker = roundInt(100 * avgAutoSpeaker / matchCount);
-    avgTelopPiece = roundInt(avgTelopPiece / matchCount);
-    avgTeleopSpeaker = roundInt(avgTeleopSpeaker / matchCount);
-    avgTeleopAmp = roundInt(avgTeleopAmp / matchCount);
-    avgTeleopClimb = roundInt(100 * avgTeleopClimb / matchCount);
-    avgTeleopHarmony = roundInt(100 * avgTeleopHarmony / matchCount);
+    avgAutoPiece = (avgAutoPiece / matchCount);
+    avgAutoSpeaker = (avgAutoSpeaker / matchCount);
+    avgTelopPiece = (avgTelopPiece / matchCount);
+    avgTeleopSpeaker = (avgTeleopSpeaker / matchCount);
+    avgTeleopAmp = (avgTeleopAmp / matchCount);
+    avgTeleopClimb = (100 * avgTeleopClimb / matchCount);
+    avgTeleopHarmonyOrTrap = (100 * avgTeleopHarmonyOrTrap / matchCount);
 
     var rows = [
       `<tr>`,
       `  <td scope='col'>${avgAutoPiece}</td>`,
-      `  <td scope='col'>${avgAutoSpeaker}%</td>`,
+      `  <td scope='col'>${avgAutoSpeaker}</td>`,
       `  <td scope='col'>${avgTelopPiece}</td>`,
       `  <td scope='col'>${avgTeleopSpeaker}</td>`,
       `  <td scope='col'>${avgTeleopAmp}</td>`,
       `  <td scope='col'>${avgTeleopClimb}%</td>`,
-      `  <td scope='col'>${avgTeleopHarmony}%</td>`,
+      `  <td scope='col'>${avgTeleopHarmonyOrTrap}%</td>`,
       `</tr>`
     ].join('');
     $(`#data${elementSuffix}`).html(rows);
