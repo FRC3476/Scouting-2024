@@ -6,7 +6,7 @@ class tbaHandler {
   
   function __construct(){
     $this->db = new dbHandler();
-    $this->apiKey = $this->db->settings->get('tbakey');
+    $this->apiKey = $this->db->settings->get('tbaKey');
     $this->apiURL = "https://www.thebluealliance.com/api/v3";
   }
 
@@ -21,6 +21,7 @@ class tbaHandler {
     */
     $currTime = time();
     $dbResponse = $this->_readResponseFromDB($uri);
+    
 
     // Return DB response if fresh.
     if ($currTime < $dbResponse["expiryTime"]){
@@ -54,7 +55,8 @@ class tbaHandler {
         'response': JSON dict of TBA response.
     */
     $sql = 'requestURI="'.$uri.'"';
-    $dbData = $this->db->readSomeData('tbatable', $sql);
+    $dbData = $this->db->readSomeData('tbaTable', $sql);
+    
     $data = array("expiryTime" => 0, "response" => null);
     if (count($dbData) > 0){
       $data['expiryTime'] = intval($dbData[0]["expiryTime"]);
@@ -74,7 +76,7 @@ class tbaHandler {
     $data['requestURI'] = $uri;
     $data['expiryTime'] = $response['expiryTime'];
     $data['response'] = json_encode($response['response']);
-    $this->db->replaceRowInTable('tbatable', $data);
+    $this->db->replaceRowInTable('tbaTable', $data);
   }
 
   function _readURIFromTBA($uri){

@@ -22,7 +22,7 @@ if (isset($_POST['writeSingleMatchData'])) {
   try {
     $matchData = json_decode($_POST['writeSingleMatchData'], true);
     $matchData['matchKey'] = $matchData['matchNumber'] . '-' . $matchData['teamNumber'];
-    $db->writeRowToTable('datatable', $matchData);
+    $db->writeRowToTable('dataTable', $matchData);
   } catch (Exception $e) {
     error_log($e);
     $e = json_decode(json_encode($e));
@@ -41,7 +41,7 @@ if (isset($_POST['writeDataList'])){
   foreach($rawDataList as &$matchData){
     try {
       $matchData['matchKey'] = $matchData['matchNumber'] . '-' . $matchData['teamNumber'];
-      $db->writeRowToTable('datatable', $matchData);
+      $db->writeRowToTable('dataTable', $matchData);
     } catch (Exception $e) {
       error_log($e);
       $e = json_decode(json_encode($e));
@@ -56,14 +56,14 @@ if (isset($_POST['writePitScoutData'])) {
   $result = new stdClass();
   $result -> success = true;
   $db = new dbHandler();
-  //create pitScouttable if it doesn't exist
-  if (!$db->getTableExists("pitScouttable")) {
-    $db->createTable("pitScouttable");
+  //create pitTable if it doesn't exist
+  if (!$db->getTableExists("pitTable")) {
+    $db->createTable("pitTable");
   }
   $matchData = json_decode($_POST['writePitScoutData'], true);
   $success = true;
   try {
-    $db->writeRowToTable('pitScouttable', $matchData);
+    $db->writeRowToTable('pitTable', $matchData);
   } catch (Exception $e) {
     error_log($e);
     $e = json_decode(json_encode($e));
@@ -78,14 +78,14 @@ if (isset($_POST['writeStrikeScoutData'])) {
   $result = new stdClass();
   $result -> success = true;
   $db = new dbHandler();
-  //create strikeScouttable if it doesn't exist
-  if (!$db->getTableExists("strikeScouttable")) {
-    $db->createTable("strikeScouttable");
+  //create strikeTable if it doesn't exist
+  if (!$db->getTableExists("strikeTable")) {
+    $db->createTable("strikeTable");
   }
   $matchData = json_decode($_POST['writeStrikeScoutData'], true);
   $success = true;
   try {
-    $db->replaceRowInTable('strikeScouttable', $matchData);
+    $db->replaceRowInTable('strikeTable', $matchData);
   } catch (Exception $e) {
     error_log($e);
     $e = json_decode(json_encode($e));

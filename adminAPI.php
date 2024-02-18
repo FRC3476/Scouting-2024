@@ -6,18 +6,18 @@ require('dbHandler.php');
   Valid POST API Requests:
     getConfig - Responds with human readable JSON settings for the site and database.
       Response Format:
-        {'server' : '', 'db' : '', 'username' : '', 'eventcode' : '', 'tbakey' : '', 'datatable' : '',
+        {'server' : '', 'db' : '', 'username' : '', 'eventcode' : '', 'tbaKey' : '', 'datatable' : '',
         'tbatable' : '', 'datatableExists' : '', 'tbatableExists' : '', 'serverExists' : '', 'dbExists' : ''}
     writeConfig - Write status and respond with status.
       Argument Format:
         {'server' : '', 'db' : '', 'username' : '', 'password' : '',
-        'eventcode' : '', 'tbakey' : '', 'datatable' : '', 'tbatable' : ''}
+        'eventcode' : '', 'tbaKey' : '', 'datatable' : '', 'tbatable' : ''}
       Response Format:
-        {'server' : '', 'db' : '', 'username' : '', 'eventcode' : '', 'tbakey' : '', 'datatable' : '',
+        {'server' : '', 'db' : '', 'username' : '', 'eventcode' : '', 'tbaKey' : '', 'datatable' : '',
         'tbatable' : '', 'datatableExists' : '', 'tbatableExists' : '', 'serverExists' : '', 'dbExists' : ''}
     createDB - Tries to create DB and associated tables.
       Response Format:
-        {'server' : '', 'db' : '', 'username' : '', 'eventcode' : '', 'tbakey' : '', 'datatable' : '',
+        {'server' : '', 'db' : '', 'username' : '', 'eventcode' : '', 'tbaKey' : '', 'datatable' : '',
         'tbatable' : '', 'datatableExists' : '', 'tbatableExists' : '', 'serverExists' : '', 'dbExists' : ''}
 */
 

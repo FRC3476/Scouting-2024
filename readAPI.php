@@ -25,40 +25,40 @@ function getOrPost($key){
 
 if (getOrPost('readAllMatchData')){
   $db = new dbHandler();
-  $match_data = $db->readAllData('datatable');
+  $match_data = $db->readAllData('dataTable');
   echo(json_encode($match_data, JSON_NUMERIC_CHECK));
 }
 
 if (getOrPost('readAllTeamMatchData')){
   $db = new dbHandler();
   $sql = 'teamNumber = "'. getOrPost("readAllTeamMatchData") .'"';
-  $team_match_data = $db->readSomeData('datatable', $sql);
+  $team_match_data = $db->readSomeData('dataTable', $sql);
   echo(json_encode($team_match_data, JSON_NUMERIC_CHECK));
 }
 
 if (getOrPost('readAllTeamPitData')){
   $db = new dbHandler();
   $sql = 'pitTeamNumber = "' . getOrPost("readAllTeamPitData") .'"';
-  $team_pit_data = $db->readSomeData('pitScouttable', $sql);
+  $team_pit_data = $db->readSomeData('pitTable', $sql);
   echo(json_encode($team_pit_data, JSON_NUMERIC_CHECK));
 }
 
 if (getOrPost('readAllPitScoutData')){
   $db = new dbHandler();
-  $match_data = $db->readAllData('pitScouttable');
+  $match_data = $db->readAllData('pitTable');
   echo(json_encode($match_data, JSON_NUMERIC_CHECK));
 }
 
 if (getOrPost('readAllTeamStrikeData')){
   $db = new dbHandler();
   $sql = 'strikeTeamNumber = "' . getOrPost("readAllTeamStrikeData") .'"';
-  $team_strike_data = $db->readSomeData('strikeScouttable', $sql);
+  $team_strike_data = $db->readSomeData('strikeTable', $sql);
   echo(json_encode($team_strike_data, JSON_NUMERIC_CHECK));
 }
 
 if (getOrPost('readAllStrikeScoutData')){
   $db = new dbHandler();
-  $match_data = $db->readAllData('strikeScouttable');
+  $match_data = $db->readAllData('strikeTable');
   echo(json_encode($match_data, JSON_NUMERIC_CHECK));
 }
 

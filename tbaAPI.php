@@ -39,7 +39,7 @@ if (getOrPost('getEventCode')){
 }
 else if (getOrPost('getTeamList')){
   $tba = new tbaHandler();
-  echo (json_encode($tba->getSimpleTeamList(getEventCode($tba))));
+  echo(json_encode($tba->getSimpleTeamList(getEventCode($tba))));
 }
 else if (getOrPost('getMatchList')){
   $tba = new tbaHandler();
