@@ -738,7 +738,7 @@
     border-radius: 2px solid black;
     font-family: Helvetica;
     font-weight: bold;
-    padding: 10px
+    padding: 10px;
     /*To get rid of weird 3D affect in some browsers*/
     border: solid rgb(208, 115, 96);
     height: 100px;
