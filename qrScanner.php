@@ -162,6 +162,7 @@ function uncompressDataList(dataList){
   out['teleopStage'] = dataList[10];
   out['textComments'] = '';
   out['cannedComments'] = dataList[12];
+  out["autoPath"] = '';
   return out;
 }
 
