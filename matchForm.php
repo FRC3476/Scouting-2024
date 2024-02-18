@@ -179,10 +179,9 @@
                 <!--QR Code Scouting-->
                 <div class="tab-pane fade" id="qrcode-tab-pane" role="tabpanel" aria-labelledby="qrcode-tab" tabindex="0">
                   <br>
+                  <a>QR Code:</a>
+                  <br>
                   <div id="data-qr-code"></div>
-				          <div class="col-md-3">
-                    <button id="qrcode-tab" class="btn btn-primary">Submit</button>
-                  </div>
                 </div>
               </div>
             </div>
