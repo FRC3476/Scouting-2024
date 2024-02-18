@@ -41,8 +41,7 @@ class dbHandler
         'team3' => 'SMALLINT NOT NULL',
         'team4' => 'SMALLINT NOT NULL',
         'team5' => 'SMALLINT NOT NULL',
-        'team6' => 'SMALLINT NOT NULL',
-        'matchComments' => 'TEXT NOT NULL'
+        'team6' => 'SMALLINT NOT NULL'
       )
     ),
     'pitTable' => array(

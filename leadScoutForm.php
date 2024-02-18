@@ -319,7 +319,7 @@
 <?php include("footer.php"); ?>
 
 <script>
-ar validBlueTeams = 0;
+var validBlueTeams = 0;
 var validRedTeams = 0
 
 var avgBluePoints = 0;
