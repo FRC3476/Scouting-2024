@@ -202,13 +202,13 @@
 
   var teamList = new Set();
 
-  /*function loadTeamList() {
+  function loadTeamList() {
     $.get("tbaAPI.php", {
       "getTeamList": 1
     }, function(data) {
       teamList = new Set(JSON.parse(data));
     });
-  }*/
+  }
 
 
   // Auto Functions
@@ -529,7 +529,7 @@
     }
 
     //make sure the team being scouted is in the match
-    /*var formattedTeam = `frc${data['teamNumber']}`;
+    var formattedTeam = `frc${data['teamNumber']}`;
     var tba = httpRequest("./tbaAPI.php?getTeamsInMatch=" + data["matchNumber"]);
     tba = JSON.parse(tba);
     var teams = [];
@@ -537,10 +537,9 @@
     for (var i = 0; i < tba.blue.length; i++) teams.push(tba.blue[i]);
     var check = teams.indexOf(formattedTeam);
     if (data["matchNumber"] < 5000 && check == -1) {
-      createErrorAlert(`Team ${data["teamNumber"]} is not in match ${data["matchNumber"]}`);
-      // Allow submit even if invalid.
-      // valid = false; 
-    }*/
+      createErrorAlert(`Team ${data["teamNumber"]} is not in match ${data["matchNumber"]}`);     
+      valid = false; 
+    }
 
     return valid;
   }
@@ -677,7 +676,7 @@
   })
 
   $(document).ready(function() {
-    //loadTeamList();
+    loadTeamList();
   });
 </script>
 <style>
