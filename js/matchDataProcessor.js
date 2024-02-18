@@ -149,21 +149,20 @@ function getMatchPointsTeleop(row) {
 
 function getMatchPoints(row) {
 	var points = 0;
-	points = 0;
 	if (getMobilityAuto(row)) {
 		points += 2;
 	}
-	if (getInStage(row)) {
-		points += 1;
+	points += getInStage(row) ? 1 : 0;
+	points += getClimb(row) ? 3 : 0;
+	points += getTrappedWhileClimbed(row) ? 8 : 0;
+	if((points != 0) && (getSpotlighted(row))){
+		points+=1;
 	}
-	if (getClimbed(row)) {
-		points += 3;
+	else if((points != 0) && (getHarmony(row))){
+		points+=2;
 	}
-	if (getTrappedWhileClimbed(row)){
-		points += 2;
-	}
-	if (getTrappedWhileClimbed(row)){
-		points += 2;
+	else if ((points != 0) && (getHarmony(row) && (getSpotligted(row)))){
+		points+=3;
 	}
 	points += 2 * getSpeakerAuto(row);
 	points += 5 * getAmpAuto(row);
@@ -174,24 +173,58 @@ function getMatchPoints(row) {
 	return points;
 }
 
-function getWeightedScore(row) {
+function getWeightedScoreFirst(row) {
 	var weightedScore = 0;
-	if (getSpeakerAmplified(row)){
+	if (getMobilityAuto(row)){
+		weightedScore+= 2;
+	}
+	if (getSpeakerAuto(row)){
 		weightedScore+= 5;
 	}
-	
+	if (getAmpAuto(row)){
+		weightedScore+= 2;
+	}
 
-	weightedScore += 4 * getTopAuto(row);
-	weightedScore += 3 * getMiddleAuto(row);
-	weightedScore += 2 * getBottomAuto(row);
-	weightedScore += 2.5 * getTopTeleop(row);
-	weightedScore += 1.75 * getMiddleTeleop(row);
-	weightedScore += 1 * getBottomTeleop(row);
-	weightedScore += 3 * getEngageTeleop(row);
-	weightedScore += 2 * getDockTeleop(row);
-	weightedScore += 0.5 * getParkTeleop(row);
-	weightedScore += 4 * getEngageAuto(row);
-	weightedScore += 2 * getDockAuto(row);
-	weightedScore += 2 * getMobilityAuto(row);
-	return weightedScore;
+	if (getSpeakerTeleop(row)){
+		weightedScore+= 2;
+	}
+	if (getSpeakerAmplifiedTeleop(row)){
+		weightedScore+= 5;
+	}
+	if (getAmpTeleop(row)){
+		weightedScore+= 1;
+	}
+	if (getTrapTeleop(row)){
+		weightedScore+= 5;
+	}
+
+	if (getInStage(row)){
+		weightedScore+= 1;
+	}
+	if (getClimb(row)){
+		weightedScore+= 3;
+	}
+	if (getTrappedWhileClimbed(row)){
+		weightedScore+= 8;
+	}
+	if (getSpotlighted(row)){
+		weightedScore+= 1;
+	}
+	if (getHarmony(row)){
+		weightedScore+= 2;
+	}
+
+	weightedScore +=  5 * getSpeakerAuto(row);
+	weightedScore +=  4.75 * getTrapTeleop(row);
+	weightedScore +=  4.75 * getTrappedWhileClimbed(row);
+	weightedScore +=  4.5 * getSpeakerAmplifiedTeleop(row);
+	weightedScore +=  4.25 * getSpeakerTeleop(row);
+	weightedScore +=  3.75 * getClimb(row);
+	weightedScore +=  3.5 * getSpotlighted(row);
+	weightedScore +=  3 * getAmpTeleop(row);
+	weightedScore +=  2.25 * getAmpAuto(row);
+	weightedScore +=  1.25 * getHarmony(row);
+	weightedScore +=  1 * getInStage(row);
+	weightedScore +=  0.5 * getMobilityAuto(row);
+	return weightedScore/12;
 }
