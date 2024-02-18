@@ -149,6 +149,7 @@ function getMatchPointsTeleop(row) {
 
 function getMatchPoints(row) {
 	var points = 0;
+	points = 0;
 	if (getMobilityAuto(row)) {
 		points += 2;
 	}
