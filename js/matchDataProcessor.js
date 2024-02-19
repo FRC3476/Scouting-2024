@@ -164,44 +164,6 @@ function getMatchPoints(row) {
 
 function getWeightedScoreFirst(row) {
 	var weightedScore = 0;
-	if (getMobilityAuto(row)){
-		weightedScore+= 2;
-	}
-	if (getSpeakerAuto(row)){
-		weightedScore+= 5;
-	}
-	if (getAmpAuto(row)){
-		weightedScore+= 2;
-	}
-
-	if (getSpeakerTeleop(row)){
-		weightedScore+= 2;
-	}
-	if (getSpeakerAmplifiedTeleop(row)){
-		weightedScore+= 5;
-	}
-	if (getAmpTeleop(row)){
-		weightedScore+= 1;
-	}
-	if (getTrapTeleop(row)){
-		weightedScore+= 5;
-	}
-
-	if (getInStage(row)){
-		weightedScore+= 1;
-	}
-	if (getClimb(row)){
-		weightedScore+= 3;
-	}
-	if (getTrappedWhileClimbed(row)){
-		weightedScore+= 8;
-	}
-	if (getSpotlighted(row)){
-		weightedScore+= 1;
-	}
-	if (getHarmony(row)){
-		weightedScore+= 2;
-	}
 
 	weightedScore +=  5 * getSpeakerAuto(row);
 	weightedScore +=  4.75 * getTrapTeleop(row);
@@ -215,5 +177,5 @@ function getWeightedScoreFirst(row) {
 	weightedScore +=  1.25 * getHarmony(row);
 	weightedScore +=  1 * getInStage(row);
 	weightedScore +=  0.5 * getMobilityAuto(row);
-	return weightedScore/12;
+	return weightedScore/10;
 }

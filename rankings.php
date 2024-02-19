@@ -45,11 +45,11 @@ thead th
                 <th col='scope'>Max Teleop Pieces</th>
                 <th col='scope'>Max Teleop Speaker</th>
                 <th col='scope'>Max Teleop Amp</th>
-                <th col='scope'>Teleop Climb %</th>
-                <th col='scope'>Teleop Trap %</th>
-                <th col='scope'>Teleop Spotlighted %</th>
-                <th col='scope'>Teleop Harmony %</th>
-                <th col='scope'>Teleop Stage %</th>
+                <th col='scope'>Climb OnStage %</th>
+                <th col='scope'>Climb and Trap%</th>
+                <th col='scope'>Climb Spotlighted %</th>
+                <th col='scope'>Climb Harmony %</th>
+                <th col='scope'>Endgame Park %</th>
                 <th col='scope'>Organization Level</th>
                 <th col='scope'># Batteries</th>
                 <th col='scope'># Chargers</th>
@@ -115,8 +115,8 @@ thead th
         `<tr>`,
         `  <td style='z-index:2' class='table-secondary' scope='row' sorttable_customkey='${team}'><a href='./teamData.php?team=${team}'>${team}</a></td>`,
         `  <td scope='row'>${safeLookup(`frc${team}`, rankingLookUp)}</td>`,
-        `  <td scope='row'>${safeLookup('avgPoints', matchData)}</td>`,
         `  <td scope='row'>${safeLookup('weightedScore', matchData)}</td>`,
+        `  <td scope='row'>${safeLookup('avgPoints', matchData)}</td>`,
         `  <td scope='row'>${safeLookup('maxPoints', matchData)}</td>`,
         `  <td scope='row'>${safeLookup('avgAutoPieces', matchData)}</td>`,
         `  <td scope='row'>${safeLookup('maxAutoPieces', matchData)}</td>`,
@@ -124,11 +124,11 @@ thead th
         `  <td scope='row'>${safeLookup('maxTeleopPieces', matchData)}</td>`,
         `  <td scope='row'>${safeLookup('maxTeleopSpeaker', matchData)}</td>`,
         `  <td scope='row'>${safeLookup('maxTeleopAmp', matchData)}</td>`,
-        `  <td scope='row'>${safeLookup('avgTeleopClimb', matchData)}%</td>`,
-        `  <td scope='row'>${safeLookup('avgTeleopTrap', matchData)}%</td>`,
-        `  <td scope='row'>${safeLookup('avgTeleopSpotlighted', matchData)}%</td>`,
-        `  <td scope='row'>${safeLookup('avgTeleopHarmony', matchData)}%</td>`,
-        `  <td scope='row'>${safeLookup('avgTeleopStage', matchData)}%</td>`,
+        `  <td scope='row'>${safeLookup('avgClimbOnStage', matchData)}%</td>`,
+        `  <td scope='row'>${safeLookup('avgClimbTrap', matchData)}%</td>`,
+        `  <td scope='row'>${safeLookup('avgClimbSpotlighted', matchData)}%</td>`,
+        `  <td scope='row'>${safeLookup('avgClimbHarmony', matchData)}%</td>`,
+        `  <td scope='row'>${safeLookup('avgClimbPark', matchData)}%</td>`,
         `  <td scope='row'>${safeLookup('disorganized', pitData)}</td>`,
         `  <td scope='row'>${safeLookup('numBatteries', pitData)}</td>`,
         `  <td scope='row'>${safeLookup('chargedBatteries', pitData)}</td>`,
@@ -202,11 +202,11 @@ thead th
       var maxTeleopSpeaker = 0;
       var maxTeleopAmp = 0;
       var maxTeleopPieces = 0;
-      var avgTeleopClimb = 0;
-      var avgTeleopTrap = 0;
-      var avgTeleopSpotlighted = 0;
-      var avgTeleopHarmony = 0;
-      var avgTeleopStage = 0;
+      var avgClimbOnStage = 0;
+      var avgClimbTrap = 0;
+      var avgClimbSpotlighted = 0;
+      var avgClimbHarmony = 0;
+      var avgClimbPark = 0;
       for (var i = 0; i != teamToDataList[team].length; i++) {
         var match = teamToDataList[team][i];
         matchCount++;
@@ -219,16 +219,16 @@ thead th
         maxTeleopSpeaker = Math.max(maxTeleopSpeaker, getSpeakerTeleop(match));
         maxTeleopAmp = Math.max(maxTeleopAmp, getAmpTeleop(match));
         maxTeleopPieces = Math.max(maxTeleopPieces, getTeleopPieces(match));
-        avgTeleopClimb += getClimb(match) ? 1 : 0;
-        avgTeleopTrap += getTrappedWhileClimbed(match) ? 1 : 0;
-        avgTeleopSpotlighted += getSpotlighted(match) ? 1 : 0;
-        avgTeleopHarmony += getHarmony(match) ? 1 : 0;
-        avgTeleopStage += getInStage(match) ? 1 : 0;
+        avgClimbOnStage += getClimb(match) ? 1 : 0;
+        avgClimbTrap += getTrappedWhileClimbed(match) ? 1 : 0;
+        avgClimbSpotlighted += getSpotlighted(match) ? 1 : 0;
+        avgClimbHarmony += getHarmony(match) ? 1 : 0;
+        avgClimbPark += getInStage(match) ? 1 : 0;
       }
 
       // Add to matchDataLookUp.
       var lookup = {};
-      lookup['weighedScore'] = (weightedScore / matchCount);
+      lookup['weightedScore'] = (weightedScore / matchCount);
       lookup['avgPoints'] = (totalPoints / matchCount);
       lookup['maxPoints'] = (maxPoints);
       lookup['avgAutoPieces'] = (totalAutoPieces / matchCount);
@@ -237,11 +237,11 @@ thead th
       lookup['maxTeleopPieces'] = maxTeleopPieces;
       lookup['maxTeleopSpeaker'] = (maxTeleopSpeaker);
       lookup['maxTeleopAmp'] = (maxTeleopAmp);
-      lookup['avgTeleopClimb'] = ((avgTeleopClimb / matchCount) * 100);
-      lookup['avgTeleopTrap'] = ((avgTeleopTrap / matchCount) * 100);
-      lookup['avgTeleopSpotlighted'] = ((avgTeleopSpotlighted / matchCount) * 100);
-      lookup['avgTeleopHarmony'] = ((avgTeleopHarmony / matchCount) * 100);
-      lookup['avgTeleopStage'] = ((avgTeleopStage / matchCount) * 100);
+      lookup['avgClimbOnStage'] = ((avgClimbOnStage / matchCount) * 100);
+      lookup['avgClimbTrap'] = ((avgClimbTrap / matchCount) * 100);
+      lookup['avgClimbSpotlighted'] = ((avgClimbSpotlighted / matchCount) * 100);
+      lookup['avgClimbHarmony'] = ((avgClimbHarmony / matchCount) * 100);
+      lookup['avgClimbPark'] = ((avgClimbPark / matchCount) * 100);
       lookup['problematicMatchCount'] = getProblematicCannedCommentMatchCount(teamToDataList[team]);
 
       matchDataLookUp[team] = lookup;
