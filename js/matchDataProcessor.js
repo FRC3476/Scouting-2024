@@ -53,7 +53,7 @@ function getNotInStage(row) {
 function getInStage(row) {
     return row['climb'] == 'IN STAGE';
 }
-function getClimbed(row) {
+function getClimb(row) {
     return row['climb'] == 'CLIMBED';
 }
 function getTrappedWhileClimbed(row) {
@@ -82,25 +82,31 @@ function getTeleopClimbPoints(row){
     return points;
 }
 //Auto Piece Functions
-function getSpeakerAuto(row) {
-	return row['autoSpeakerNote'];
-}
+
 function getAmpAuto(row){
 	return row['autoAmpNote'];
 }
+function getSpeakerAuto(row) {
+	return row['autoSpeakerNote'];
+}
+
 //Teleop Piece Functions
+function getAmpTeleop(row){
+	return row['teleopAmpNote'];
+}
 function getSpeakerTeleop(row){
 	return row['teleopSpeaker'];
 }
 function getSpeakerAmplifiedTeleop(row){
 	return row['teleopSpeakerAmplified'];
 }
-function getAmpTeleop(row){
-	return row['teleopAmpNote'];
+function getTotalSpeakerTeleop(row){
+	return row['teleopSpeakerAmplified'] + row['teleopSpeaker'];
 }
 function getTrapTeleop(row){
 	return row['teleopTrap'];
 }
+
 //Piece Functions
 function getAutoPieces(row){
 	return (row['autoSpeakerNote'] + 
