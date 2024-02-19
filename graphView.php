@@ -155,23 +155,30 @@
       teamToData[team] = {};
       teamToData[team]['Avg Amp Notes Auto'] = calculateMatchAverage(matches, getAmpAuto);
       teamToData[team]['Avg Speaker Notes Auto'] = calculateMatchAverage(matches, getSpeakerAuto);
+      teamToData[team]['Avg Auto Pieces'] = calculateMatchAverage(matches, getAutoPieces);
       teamToData[team]['Avg Amp Notes Teleop'] = calculateMatchAverage(matches, getAmpTeleop);
-      teamToData[team]['Avg Total Speaker Notes Teleop'] = calculateMatchAverage(matches, getTotalSpeakerTeleop);
       teamToData[team]['Avg UnAmplified Sepaker Notes Teleop'] = calculateMatchAverage(matches, getSpeakerTeleop);
       teamToData[team]['Avg Amplified Sepaker Notes Teleop'] = calculateMatchAverage(matches, getSpeakerAmplifiedTeleop);
+      teamToData[team]['Avg Total Speaker Notes Teleop'] = calculateMatchAverage(matches, getTotalSpeakerTeleop);
+      teamToData[team]['Avg Teleop Pieces'] = calculateMatchAverage(matches, getTeleopPieces);
       teamToData[team]['Avg Trap'] = calculateMatchAverage(matches, getAllTrap);
       teamToData[team]['Avg Total Notes'] = calculateMatchAverage(matches, getNotes);
       teamToData[team]['Avg Climb Points'] = calculateMatchAverage(matches, getTeleopClimbPoints);
+      teamToData[team]['Avg Weighted Score'] = calculateMatchAverage(matches, getWeightedScoreFirst);
 
-      teamToData[team]['Max Amp Notes Auto'] = calculateMatchMax(matches, getAmpAuto);
-      teamToData[team]['Max Speaker Notes Auto'] = calculateMatchMax(matches, getSpeakerAuto);
-      teamToData[team]['Max Amp Notes Teleop'] = calculateMatchMax(matches, getAmpTeleop);
-      teamToData[team]['Max Total Sepaker Notes Teleop'] = calculateMatchMax(matches, getTotalSpeakerTeleop);
-      teamToData[team]['Max UnAmplified Sepaker Notes Teleop'] = calculateMatchMax(matches, getSpeakerTeleop);
-      teamToData[team]['Max Amplified Sepaker Notes Teleop'] = calculateMatchMax(matches, getSpeakerAmplifiedTeleop);
-      teamToData[team]['Max Trap'] = calculateMatchMax(matches, getAllTrap);
-      teamToData[team]['Max Total Notes'] = calculateMatchMax(matches, getNotes);
-      teamToData[team]['Max Climb Points'] = calculateMatchMax(matches, getTeleopClimbPoints);
+
+      teamToData[team]['Max Amp Notes Auto'] = calculateMatchMax(matches, getAmpAuto)
+      teamToData[team]['Max Speaker Notes Auto'] = calculateMatchMax(matches, getSpeakerAuto)
+      teamToData[team]['Max Auto Pieces'] = calculateMatchMax(matches, getAutoPieces);   
+      teamToData[team]['Max Amp Notes Teleop'] = calculateMatchMax(matches, getAmpTeleop)
+      teamToData[team]['Max UnAmplified Sepaker Notes Teleop'] = calculateMatchMax(matches, getSpeakerAmplifiedTeleop)
+      teamToData[team]['Max Amplified Sepaker Notes Teleop'] = calculateMatchMax(matches, getTotalSpeakerTeleop)
+      teamToData[team]['Max Total Sepaker Notes Teleop'] = calculateMatchMax(matches, getSpeakerTeleop)
+      teamToData[team]['Max Teleop Pieces'] = calculateMatchMax(matches, getTeleopPieces);            
+      teamToData[team]['Max Trap'] = calculateMatchMax(matches, getAllTrap)
+      teamToData[team]['Max Total Notes'] = calculateMatchMax(matches, getNotes)
+      teamToData[team]['Max Climb Points'] = calculateMatchMax(matches, getTeleopClimbPoints)
+      teamToData[team]['Max Weighted Score'] = calculateMatchMax(matches, getWeightedScoreFirst);
     }
     return teamToData;
   }
