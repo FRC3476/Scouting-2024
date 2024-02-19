@@ -156,7 +156,7 @@
       teamToData[team]['Avg Amp Notes Auto'] = calculateMatchAverage(matches, getAmpAuto);
       teamToData[team]['Avg Speaker Notes Auto'] = calculateMatchAverage(matches, getSpeakerAuto);
       teamToData[team]['Avg Amp Notes Teleop'] = calculateMatchAverage(matches, getAmpTeleop);
-      teamToData[team]['Avg Total Sepaker Notes Teleop'] = calculateMatchAverage(matches, getTotalSpeakerTeleop);
+      teamToData[team]['Avg Total Speaker Notes Teleop'] = calculateMatchAverage(matches, getTotalSpeakerTeleop);
       teamToData[team]['Avg UnAmplified Sepaker Notes Teleop'] = calculateMatchAverage(matches, getSpeakerTeleop);
       teamToData[team]['Avg Amplified Sepaker Notes Teleop'] = calculateMatchAverage(matches, getSpeakerAmplifiedTeleop);
       teamToData[team]['Avg Trap'] = calculateMatchAverage(matches, getAllTrap);
