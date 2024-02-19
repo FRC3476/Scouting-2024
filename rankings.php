@@ -41,15 +41,15 @@ thead th
                 <th col='scope'>Max Points</th>
                 <th col='scope'>Avg Auto Pieces</th>
                 <th col='scope'>Max Auto Pieces</th>
-                <th col='scope'>Auto Dock %</th>
-                <th col='scope'>Auto Engage %</th>
                 <th col='scope'>Avg Teleop Pieces</th>
                 <th col='scope'>Max Teleop Pieces</th>
-                <th col='scope'>Max Teleop Cones</th>
-                <th col='scope'>Max Teleop Cubes</th>
-                <th col='scope'>Teleop Park %</th>
-                <th col='scope'>Teleop Dock %</th>
-                <th col='scope'>Teleop Engage %</th>
+                <th col='scope'>Max Teleop Speaker</th>
+                <th col='scope'>Max Teleop Amp</th>
+                <th col='scope'>Teleop Climb %</th>
+                <th col='scope'>Teleop Trap %</th>
+                <th col='scope'>Teleop Spotlighted %</th>
+                <th col='scope'>Teleop Harmony %</th>
+                <th col='scope'>Teleop Stage %</th>
                 <th col='scope'>Organization Level</th>
                 <th col='scope'># Batteries</th>
                 <th col='scope'># Chargers</th>
@@ -74,7 +74,7 @@ thead th
 </body>
 
 <?php include("footer.php"); ?>
-<script type="text/javascript" src="js/matchDataProcessor.js?cache=6"></script>
+<script type="text/javascript" src="js/matchDataProcessor.js"></script>
 
 <script>
   var matchDataLookUp = {};
@@ -120,15 +120,15 @@ thead th
         `  <td scope='row'>${safeLookup('maxPoints', matchData)}</td>`,
         `  <td scope='row'>${safeLookup('avgAutoPieces', matchData)}</td>`,
         `  <td scope='row'>${safeLookup('maxAutoPieces', matchData)}</td>`,
-        `  <td scope='row'>${safeLookup('avgAutoDock', matchData)}%</td>`,
-        `  <td scope='row'>${safeLookup('avgAutoEngage', matchData)}%</td>`,
         `  <td scope='row'>${safeLookup('avgTeleopPieces', matchData)}</td>`,
         `  <td scope='row'>${safeLookup('maxTeleopPieces', matchData)}</td>`,
-        `  <td scope='row'>${safeLookup('maxTeleopCones', matchData)}</td>`,
-        `  <td scope='row'>${safeLookup('maxTeleopCubes', matchData)}</td>`,
-        `  <td scope='row'>${safeLookup('avgTeleopPark', matchData)}%</td>`,
-        `  <td scope='row'>${safeLookup('avgTeleopDock', matchData)}%</td>`,
-        `  <td scope='row'>${safeLookup('avgTeleopEngage', matchData)}%</td>`,
+        `  <td scope='row'>${safeLookup('maxTeleopSpeaker', matchData)}</td>`,
+        `  <td scope='row'>${safeLookup('maxTeleopAmp', matchData)}</td>`,
+        `  <td scope='row'>${safeLookup('avgTeleopClimb', matchData)}%</td>`,
+        `  <td scope='row'>${safeLookup('avgTeleopTrap', matchData)}%</td>`,
+        `  <td scope='row'>${safeLookup('avgTeleopSpotlighted', matchData)}%</td>`,
+        `  <td scope='row'>${safeLookup('avgTeleopHarmony', matchData)}%</td>`,
+        `  <td scope='row'>${safeLookup('avgTeleopStage', matchData)}%</td>`,
         `  <td scope='row'>${safeLookup('disorganized', pitData)}</td>`,
         `  <td scope='row'>${safeLookup('numBatteries', pitData)}</td>`,
         `  <td scope='row'>${safeLookup('chargedBatteries', pitData)}</td>`,
@@ -198,50 +198,50 @@ thead th
       var maxPoints = 0;
       var totalAutoPieces = 0;
       var maxAutoPieces = 0;
-      var totalAutoDock = 0;
-      var totalAutoEngage = 0;
       var totalTeleopPiece = 0;
-      var maxTeleopCones = 0;
-      var maxTeleopCubes = 0;
+      var maxTeleopSpeaker = 0;
+      var maxTeleopAmp = 0;
       var maxTeleopPieces = 0;
-      var avgTeleopPark = 0;
-      var avgTeleopDock = 0;
-      var avgTeleopEngage = 0;
+      var avgTeleopClimb = 0;
+      var avgTeleopTrap = 0;
+      var avgTeleopSpotlighted = 0;
+      var avgTeleopHarmony = 0;
+      var avgTeleopStage = 0;
       for (var i = 0; i != teamToDataList[team].length; i++) {
         var match = teamToDataList[team][i];
         matchCount++;
-        weightedScore += getWeightedScore(match);
+        weightedScore += getWeightedScoreFirst(match);
         totalPoints += getMatchPoints(match);
         maxPoints = Math.max(maxPoints, getMatchPoints(match));
-        totalAutoPieces += getPiecesAuto(match);
-        maxAutoPieces = Math.max(maxAutoPieces, getPiecesAuto(match));
-        totalAutoDock += getDockAuto(match) ? 1 : 0;
-        totalAutoEngage += getEngageAuto(match) ? 1 : 0;
-        totalTeleopPiece += getPiecesTeleop(match);
-        maxTeleopCones = Math.max(maxTeleopCones, getConesTeleop(match));
-        maxTeleopCubes = Math.max(maxTeleopCubes, getCubesTeleop(match));
-        maxTeleopPieces = Math.max(maxTeleopPieces, getPiecesTeleop(match));
-        avgTeleopPark += getParkTeleop(match) ? 1 : 0;
-        avgTeleopDock += getDockTeleop(match) ? 1 : 0;
-        avgTeleopEngage += getEngageTeleop(match) ? 1 : 0;
+        totalAutoPieces += getAutoPieces(match);
+        maxAutoPieces = Math.max(maxAutoPieces, getAutoPieces(match));
+        totalTeleopPiece += getTeleopPieces(match);
+        maxTeleopSpeaker = Math.max(maxTeleopSpeaker, getSpeakerTeleop(match));
+        maxTeleopAmp = Math.max(maxTeleopAmp, getAmpTeleop(match));
+        maxTeleopPieces = Math.max(maxTeleopPieces, getTeleopPieces(match));
+        avgTeleopClimb += getClimb(match) ? 1 : 0;
+        avgTeleopTrap += getTrappedWhileClimbed(match) ? 1 : 0;
+        avgTeleopSpotlighted += getSpotlighted(match) ? 1 : 0;
+        avgTeleopHarmony += getHarmony(match) ? 1 : 0;
+        avgTeleopStage += getInStage(match) ? 1 : 0;
       }
 
       // Add to matchDataLookUp.
       var lookup = {};
-      lookup['weighedScore'] = roundInt(weightedScore / matchCount);
-      lookup['avgPoints'] = roundInt(totalPoints / matchCount);
-      lookup['maxPoints'] = roundInt(maxPoints);
-      lookup['avgAutoPieces'] = roundInt(totalAutoPieces / matchCount);
-      lookup['maxAutoPieces'] = roundInt(maxAutoPieces);
-      lookup['avgAutoDock'] = roundInt((totalAutoDock / matchCount) * 100);
-      lookup['avgAutoEngage'] = roundInt((totalAutoEngage / matchCount) * 100);
-      lookup['avgTeleopPieces'] = roundInt(totalTeleopPiece / matchCount);
+      lookup['weighedScore'] = (weightedScore / matchCount);
+      lookup['avgPoints'] = (totalPoints / matchCount);
+      lookup['maxPoints'] = (maxPoints);
+      lookup['avgAutoPieces'] = (totalAutoPieces / matchCount);
+      lookup['maxAutoPieces'] = (maxAutoPieces);
+      lookup['avgTeleopPieces'] = (totalTeleopPiece / matchCount);
       lookup['maxTeleopPieces'] = maxTeleopPieces;
-      lookup['maxTeleopCones'] = roundInt(maxTeleopCones);
-      lookup['maxTeleopCubes'] = roundInt(maxTeleopCubes);
-      lookup['avgTeleopPark'] = roundInt((avgTeleopPark / matchCount) * 100);
-      lookup['avgTeleopDock'] = roundInt((avgTeleopDock / matchCount) * 100);
-      lookup['avgTeleopEngage'] = roundInt((avgTeleopEngage / matchCount) * 100);
+      lookup['maxTeleopSpeaker'] = (maxTeleopSpeaker);
+      lookup['maxTeleopAmp'] = (maxTeleopAmp);
+      lookup['avgTeleopClimb'] = ((avgTeleopClimb / matchCount) * 100);
+      lookup['avgTeleopTrap'] = ((avgTeleopTrap / matchCount) * 100);
+      lookup['avgTeleopSpotlighted'] = ((avgTeleopSpotlighted / matchCount) * 100);
+      lookup['avgTeleopHarmony'] = ((avgTeleopHarmony / matchCount) * 100);
+      lookup['avgTeleopStage'] = ((avgTeleopStage / matchCount) * 100);
       lookup['problematicMatchCount'] = getProblematicCannedCommentMatchCount(teamToDataList[team]);
 
       matchDataLookUp[team] = lookup;

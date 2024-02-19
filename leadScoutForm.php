@@ -379,7 +379,7 @@ function augmentTeamDataSummary(data, elementSuffix){
     avgTelopPiece += getTeleopPieces(match);
     avgTeleopSpeaker += getSpeakerTeleop(match) + getSpeakerAmplifiedTeleop(match);
     avgTeleopAmp += getAmpTeleop(match);
-    avgTeleopClimb += getClimbed(match) + getSpotlighted(match) ? 1 : 0;
+    avgTeleopClimb += getClimb(match) + getSpotlighted(match) ? 1 : 0;
     avgTeleopHarmonyOrTrap += getHarmony(match) ? 1 : 0;
   }
 
