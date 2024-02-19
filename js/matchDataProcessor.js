@@ -112,7 +112,7 @@ function getTrapTeleop(row){
 	return row['teleopTrap'];
 }
 function getAllTrap(row){
-	var climb = getTrappedWhileClimbed(row)  ? 1 : 0;
+	var climb = getTrappedWhileClimbed(row) ? 1 : 0;
 	return climb + getTrapTeleop(row);
 }
 
@@ -128,7 +128,7 @@ function getTeleopPieces(row){
 		row['teleopTrap']);
 }
 function getNotes(row){
-	return getAutoPieces(row) + getTeleopPieces(row);
+	return getAutoPieces(row) + getTeleopPieces(row) + (getTrappedWhileClimbed(row) ? 1 : 0);
 }
 //Get Point Functions
 function getMatchPointsAuto(row) {
@@ -143,18 +143,9 @@ function getMatchPointsAuto(row) {
 
 function getMatchPointsTeleop(row) {
 	var points = 0;
-	points += getInStage(row) ? 1 : 0;
-	points += getClimb(row) ? 3 : 0;
-	points += getTrappedWhileClimbed(row) ? 8 : 0;
-	if((points != 0) && (getSpotlighted(row))){
-		points+=1;
-	}
-	else if((points != 0) && (getHarmony(row))){
-		points+=2;
-	}
-	else if ((points != 0) && (getHarmony(row) && (getSpotligted(row)))){
-		points+=3;
-	}
+	
+	points = getTeleopClimbPoints(row);
+
 	points += 2 * getSpeakerTeleop(row);
 	points += 5 * getSpeakerAmplifiedTeleop(row);
 	points += 1 * getAmpTeleop(row);
@@ -164,27 +155,10 @@ function getMatchPointsTeleop(row) {
 
 function getMatchPoints(row) {
 	var points = 0;
-	if (getMobilityAuto(row)) {
-		points += 2;
-	}
-	points += getInStage(row) ? 1 : 0;
-	points += getClimb(row) ? 3 : 0;
-	points += getTrappedWhileClimbed(row) ? 8 : 0;
-	if((points != 0) && (getSpotlighted(row))){
-		points+=1;
-	}
-	else if((points != 0) && (getHarmony(row))){
-		points+=2;
-	}
-	else if ((points != 0) && (getHarmony(row) && (getSpotligted(row)))){
-		points+=3;
-	}
-	points += 2 * getSpeakerAuto(row);
-	points += 5 * getAmpAuto(row);
-	points += 2 * getSpeakerTeleop(row);
-	points += 5 * getSpeakerAmplifiedTeleop(row);
-	points += 1 * getAmpTeleop(row);
-	points += 5 * getTrapTeleop(row);
+
+	points += getMatchPointsTeleop(row);
+	points += getMatchPointsAuto(row);
+
 	return points;
 }
 
