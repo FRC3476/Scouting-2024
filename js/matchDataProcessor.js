@@ -67,16 +67,21 @@ function getHarmony(row) {
 }
 function getTeleopClimbPoints(row){
     var points = 0;
-    points += getInStage(row) ? 1 : 0;
+	if (getInStage(row)){
+		return 1;
+	}
 	points += getClimb(row) ? 3 : 0;
 	points += getTrappedWhileClimbed(row) ? 8 : 0;
-	if((points != 0) && (getSpotlighted(row))){
-		points+=1;
+
+	if (points == 0){
+		return 0;
 	}
-	if((points != 0) && (getHarmony(row))){
-		points+=1;
-	}
-	if ((points != 0) && (getHarmony(row) && (getSpotlighted(row)))){
+
+	if((getHarmony(row)) && (getSpotlighted(row))){
+		points+=3;
+	}else if((getHarmony(row))){
+		points+=2;
+	}else if ((getSpotlighted(row))){
 		points+=1;
 	}
     return points;
