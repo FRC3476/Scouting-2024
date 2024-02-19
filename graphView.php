@@ -45,7 +45,7 @@
 
 <?php include("footer.php"); ?>
 <script type="text/javascript" src="js/charts.js"></script>
-<script type="text/javascript" src="js/matchDataProcessor.js?cache=6"></script>
+<script type="text/javascript" src="js/matchDataProcessor.js?"></script>
 
 <script>
  var teamData = null;
@@ -153,25 +153,25 @@
     for (const team in teamMatchDataLookup){
       var matches = teamMatchDataLookup[team];
       teamToData[team] = {};
-      teamToData[team]['Avg Teleop Pieces'] = calculateMatchAverage(matches, getPiecesTeleop);
-      teamToData[team]['Avg Teleop Points'] = calculateMatchAverage(matches, getMatchPointsTeleop);
-      teamToData[team]['Avg Pieces'] = calculateMatchAverage(matches, getMatchGamePiece);
-      teamToData[team]['Avg Points'] = calculateMatchAverage(matches, getMatchPoints);
-      teamToData[team]['Avg Auto Pieces'] = calculateMatchAverage(matches, getPiecesAuto);
-      teamToData[team]['Avg Auto Points'] = calculateMatchAverage(matches, getMatchPointsAuto);
-      teamToData[team]['Avg Auto + Endgame Points'] = calculateMatchAverage(matches, getMatchAutoPlusEndgamePoints);
-      teamToData[team]['Avg Cones'] = calculateMatchAverage(matches, getCones);
-      teamToData[team]['Avg Cubes'] = calculateMatchAverage(matches, getCubes);
+      teamToData[team]['Avg Amp Notes Auto'] = calculateMatchAverage(matches, getAmpAuto);
+      teamToData[team]['Avg Speaker Notes Auto'] = calculateMatchAverage(matches, getSpeakerAuto);
+      teamToData[team]['Avg Amp Notes Teleop'] = calculateMatchAverage(matches, getAmpTeleop);
+      teamToData[team]['Avg Total Sepaker Notes Teleop'] = calculateMatchAverage(matches, getTotalSpeakerTeleop);
+      teamToData[team]['Avg UnAmplified Sepaker Notes Teleop'] = calculateMatchAverage(matches, getSpeakerTeleop);
+      teamToData[team]['Avg Amplified Sepaker Notes Teleop'] = calculateMatchAverage(matches, getSpeakerAmplifiedTeleop);
+      teamToData[team]['Avg Trap'] = calculateMatchAverage(matches, getAllTrap);
+      teamToData[team]['Avg Total Notes'] = calculateMatchAverage(matches, getNotes);
+      teamToData[team]['Avg Climb Points'] = calculateMatchAverage(matches, getTeleopClimbPoints);
 
-      teamToData[team]['Max Teleop Pieces'] = calculateMatchMax(matches, getPiecesTeleop);
-      teamToData[team]['Max Teleop Points'] = calculateMatchMax(matches, getMatchPointsTeleop);
-      teamToData[team]['Max Pieces'] = calculateMatchMax(matches, getMatchGamePiece);
-      teamToData[team]['Max Points'] = calculateMatchMax(matches, getMatchPoints);
-      teamToData[team]['Max Auto Pieces'] = calculateMatchMax(matches, getPiecesAuto);
-      teamToData[team]['Max Auto Points'] = calculateMatchMax(matches, getMatchPointsAuto);
-      teamToData[team]['Max Auto + Endgame Points'] = calculateMatchMax(matches, getMatchAutoPlusEndgamePoints);
-      teamToData[team]['Max Cones'] = calculateMatchMax(matches, getCones);
-      teamToData[team]['Max Cubes'] = calculateMatchMax(matches, getCubes);
+      teamToData[team]['Max Amp Notes Auto'] = calculateMatchMax(matches, getAmpAuto);
+      teamToData[team]['Max Speaker Notes Auto'] = calculateMatchMax(matches, getSpeakerAuto);
+      teamToData[team]['Max Amp Notes Teleop'] = calculateMatchMax(matches, getAmpTeleop);
+      teamToData[team]['Max Total Sepaker Notes Teleop'] = calculateMatchMax(matches, getTotalSpeakerTeleop);
+      teamToData[team]['Max UnAmplified Sepaker Notes Teleop'] = calculateMatchMax(matches, getSpeakerTeleop);
+      teamToData[team]['Max Amplified Sepaker Notes Teleop'] = calculateMatchMax(matches, getSpeakerAmplifiedTeleop);
+      teamToData[team]['Max Trap'] = calculateMatchMax(matches, getAllTrap);
+      teamToData[team]['Max Total Notes'] = calculateMatchMax(matches, getNotes);
+      teamToData[team]['Max Climb Points'] = calculateMatchMax(matches, getTeleopClimbPoints);
     }
     return teamToData;
   }

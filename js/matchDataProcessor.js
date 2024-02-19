@@ -48,16 +48,16 @@ function getMobilityAuto(row) {
     return row['autoMobility'] === 1;
 }
 function getNotInStage(row) {
-    return row['climb'] == 'NOT IN STAGE';
+    return row['climb'] == 'NONE';
 }
 function getInStage(row) {
-    return row['climb'] == 'IN STAGE';
+    return row['climb'] == 'PARKED';
 }
 function getClimb(row) {
-    return row['climb'] == 'CLIMBED';
+    return row['climb'] == 'ONSTAGE';
 }
 function getTrappedWhileClimbed(row) {
-    return row['climb'] == 'TRAPPED WHILE CLIMBED';
+    return row['climb'] == 'TRAP';
 }
 function getSpotlighted(row) {
     return row['climbSpotlighted'] === 1;
@@ -73,11 +73,11 @@ function getTeleopClimbPoints(row){
 	if((points != 0) && (getSpotlighted(row))){
 		points+=1;
 	}
-	else if((points != 0) && (getHarmony(row))){
-		points+=2;
+	if((points != 0) && (getHarmony(row))){
+		points+=1;
 	}
-	else if ((points != 0) && (getHarmony(row) && (getSpotligted(row)))){
-		points+=3;
+	if ((points != 0) && (getHarmony(row) && (getSpotlighted(row)))){
+		points+=1;
 	}
     return points;
 }
