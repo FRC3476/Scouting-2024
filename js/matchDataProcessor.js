@@ -106,6 +106,10 @@ function getTotalSpeakerTeleop(row){
 function getTrapTeleop(row){
 	return row['teleopTrap'];
 }
+function getAllTrap(row){
+	var climb = getTrappedWhileClimbed(row)  ? 1 : 0;
+	return climb + getTrapTeleop(row);
+}
 
 //Piece Functions
 function getAutoPieces(row){
