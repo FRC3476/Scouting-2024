@@ -681,7 +681,7 @@
 
     loadTeamPictures(teamNumber);
     loadPitData(teamNumber);
-	loadStrikeData(teamNumber);
+	  loadStrikeData(teamNumber);
     loadTeamData(teamNumber);
   }
 
