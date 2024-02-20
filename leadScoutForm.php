@@ -347,15 +347,17 @@ var avgTeleopRedChargeStationPoints = 0;
 
 var icon_svg = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-move" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M7.646.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 1.707V5.5a.5.5 0 0 1-1 0V1.707L6.354 2.854a.5.5 0 1 1-.708-.708l2-2zM8 10a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 14.293V10.5A.5.5 0 0 1 8 10zM.146 8.354a.5.5 0 0 1 0-.708l2-2a.5.5 0 1 1 .708.708L1.707 7.5H5.5a.5.5 0 0 1 0 1H1.707l1.147 1.146a.5.5 0 0 1-.708.708l-2-2zM10 8a.5.5 0 0 1 .5-.5h3.793l-1.147-1.146a.5.5 0 0 1 .708-.708l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L14.293 8.5H10.5A.5.5 0 0 1 10 8z"/></svg>';
 var currentMatch = 0;
+var compLevel = "";
 
 
 function clearData(){
-  $('dataRed1').html('')
-  $('dataRed2').html('')
-  $('dataRed3').html('')
-  $('dataBlue1').html('')
-  $('dataBlue2').html('')
-  $('dataBlue3').html('')
+  console.log("clearing");
+  $('#dataRed1').html('')
+  $('#dataRed2').html('')
+  $('#dataRed3').html('')
+  $('#dataBlue1').html('')
+  $('#dataBlue2').html('')
+  $('#dataBlue3').html('')
 	$('#rawAllianceRows').html('');
 	$('#sortedAllianceRank').html('');
 	$('#matchBanner').html('Match:');
@@ -515,17 +517,21 @@ function addRawRow(color, team){
 			$('#rawAllianceRows').append(rows);
 		}
 
-function loadMatch(number){
+function loadMatch(number, level){
 			currentMatch = number;
+      compLevel = level;
 			clearData();
 
 			$.get("tbaAPI.php", {
-				getTeamsInMatch: number
+        'getMatchData': 1,
+        'number' : number,
+        'level' : level
 			}).done(function(data) {
-				$('#matchBanner').html(`Match: ${number}`);
+				$('#matchBanner').html(`Match: ${level}${number}`);
 				data = JSON.parse(data);
-				var redTeams = stripTeamTags(data['red']);
-				var blueTeams = stripTeamTags(data['blue']);
+        
+        var redTeams = stripTeamTags(data['alliances']['red']['team_keys']);
+        var blueTeams = stripTeamTags(data['alliances']['blue']['team_keys']);
 
 				for (let i = 0; i != redTeams.length; i++){addRawRow('Red', redTeams[i]);}
 				for (let i = 0; i != blueTeams.length; i++){addRawRow('Blue', blueTeams[i]);}
@@ -540,9 +546,22 @@ function getSortedTeams() {
 			return teamList;
 		}
 
+function checkExists(level, match){
+  $.get('readAPI.php', {
+      'readAllLSData': true
+    }).done(function(data) {
+      data = JSON.parse(data);
+      const matchExists = data.some(obj => obj.matchNum == (level + "" + match));
+      if(matchExists == true){
+        console.log("Match Already Scouted");
+        alert("Match Has Already Been Scouted");
+      }
+    });
+}
+
 function saveRanking(){
 			$.get("writeAPI.php", {
-				match: currentMatch,
+				match: compLevel + "" + currentMatch,
 				saveAllianceRank: JSON.stringify(getSortedTeams())
 			}).done(function(data) {
 				data = JSON.parse(data);
@@ -592,7 +611,8 @@ $('#loadMatch').on('click', function(){
     var matchNumber = $("#writeMatchNumber").val();
     var compLevel = $("#writeCompLevel").val();
     loadData(compLevel, matchNumber);
-    loadMatch($('#writeMatchNumber').val());
+    loadMatch($('#writeMatchNumber').val(), $("#writeCompLevel").val());
+    checkExists(compLevel, matchNumber);
 });
 
 $('#submitData').on('click', function(){
