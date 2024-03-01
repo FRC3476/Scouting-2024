@@ -354,9 +354,9 @@ function augmentTotalMatchSummary(data, alliance){
     return;
   }
   
-  avgPieces = Math.round(avgPieces/matchCount);
-  avgPoints = Math.round(avgPoints/matchCount);
-  teleopClimbPoints = Math.round(teleopClimbPoints/matchCount);
+  avgPieces = (avgPieces/matchCount);
+  avgPoints = (avgPoints/matchCount);
+  teleopClimbPoints = (teleopClimbPoints/matchCount);
 
   if (alliance == 'Red'){
     validRedTeams++;
@@ -377,18 +377,18 @@ function updateSummaryTable(){
   var row = [
     `<tr>`,
     `  <th scope='col'>Avg Points</th>`,
-    `  <td scope='col' class="table-danger">${Math.round(avgRedPoints)}</td>`,
-    `  <td scope='col' class="table-primary">${Math.round(avgBluePoints)}</td>`,
+    `  <td scope='col' class="table-danger">${(avgRedPoints).toFixed(2)}</td>`,
+    `  <td scope='col' class="table-primary">${(avgBluePoints).toFixed(2)}</td>`,
     `</tr>`,
     `<tr>`,
     `  <th scope='col'>Avg Pieces</th>`,
-    `  <td scope='col' class="table-danger">${Math.round(avgRedGamePieces)}</td>`,
-    `  <td scope='col' class="table-primary">${Math.round(avgBlueGamePieces)}</td>`,
+    `  <td scope='col' class="table-danger">${(avgRedGamePieces).toFixed(2)}</td>`,
+    `  <td scope='col' class="table-primary">${(avgBlueGamePieces).toFixed(2)}</td>`,
     `</tr>`,
     `<tr>`,
     `  <th scope='col'>Avg Climb Points</th>`,
-    `  <td scope='col' class="table-danger">${Math.round(Math.min(avgAutoRedChargeStationPoints, 12) + avgTeleopRedChargeStationPoints)}</td>`,
-    `  <td scope='col' class="table-primary">${Math.round(Math.min(avgAutoBlueChargeStationPoints, 12) + avgTeleopBlueChargeStationPoints)}</td>`,
+    `  <td scope='col' class="table-danger">${(Math.min(avgAutoRedChargeStationPoints, 12) + avgTeleopRedChargeStationPoints).toFixed(2)}</td>`,
+    `  <td scope='col' class="table-primary">${(Math.min(avgAutoBlueChargeStationPoints, 12) + avgTeleopBlueChargeStationPoints).toFixed(2)}</td>`,
     `</tr>`,
   ].join('');
   $('#summaryTable').html(row);
@@ -420,13 +420,13 @@ function augmentTeamDataSummary(data, elementSuffix){
   }
 
   if (matchCount > 0){
-    avgAutoPiece = Math.round(avgAutoPiece / matchCount);
-    avgAutoSpeaker = Math.round(avgAutoSpeaker / matchCount);
-    avgTelopPiece = Math.round(avgTelopPiece / matchCount);
-    avgTeleopSpeaker = Math.round(avgTeleopSpeaker / matchCount);
-    avgTeleopAmp = Math.round(avgTeleopAmp / matchCount);
-    climb = Math.round(100 * climb / matchCount);
-    climb_trap = Math.round(100 * climb_trap / matchCount);
+    avgAutoPiece = (avgAutoPiece / matchCount).toFixed(2);
+    avgAutoSpeaker = (avgAutoSpeaker / matchCount).toFixed(2);
+    avgTelopPiece = (avgTelopPiece / matchCount).toFixed(2);
+    avgTeleopSpeaker = (avgTeleopSpeaker / matchCount).toFixed(2);
+    avgTeleopAmp = (avgTeleopAmp / matchCount).toFixed(2);
+    climb = (100 * climb / matchCount);
+    climb_trap = (100 * climb_trap / matchCount);
 
     var rows = [
       `<tr>`,
