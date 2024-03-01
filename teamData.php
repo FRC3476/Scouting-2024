@@ -113,6 +113,14 @@
                             <tbody id='teleopSummaryData'></tbody>
                           </table>
                             
+                          <h5>Endgame Table</h5>
+                          <table class='table table-striped'>
+                            <thead>
+                              <th scope="col"></th>
+                              <th scope="col">Percentages</th>
+                            </thead>
+                            <tbody id='endgameSummaryData'></tbody>
+                          </table>
                         </div>
                     </div>
                 </div>
@@ -160,6 +168,15 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-lg-6 col-sm-12 col-xs-12 gx-3">
+                    <div class="card mb-3 mt-3">
+                        <div class="card-header">Endgame Chart</div>
+                        <div class="card-body">
+                          <canvas id="endgameChart"></canvas>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -172,6 +189,7 @@
 <script>
   var dataChart = null;
   var pieceChart = null;
+  var endgameChart = null;
 
   function clearData(){
     $('#teamHeading').html('');
@@ -180,11 +198,15 @@
     $('#autoSummaryData').html('');
     $('#teleopSummaryData').html('');
     $('#totalSummary').html('');
+    $('#endgameSummaryData').html('');
     if(dataChart != null){
       dataChart.destroy();
     }
     if(pieceChart != null){
       pieceChart.destroy();
+    }
+    if(endgameChart != null){
+      endgameChart.destroy();
     }
     $('#cannedComments').html('');
     $('#writtenComments').html('');
@@ -192,140 +214,144 @@
   }
 
   function createSummaryData(data){
+    var tTrap = 0;
+    var tTrapMax = 0;
+    var matchCount = 0;
     var pointsAuto = 0;
     var pointsTeleop = 0;
-	  var pointsTotal = 0;
-	  var piecesTotal = 0;
+    var pointsTotal = 0;
+    var piecesTotal = 0;
+    var pointsMaxAuto = 0;
+    var pointsMaxTeleop = 0;
     var pointsMax = 0;
     var piecesMax = 0;
-
-    var matchCount = 0;
+    var aMobility = 0;
     var aTotal = 0;
-    var aNotes = 0;
     var aSpeaker = 0;
     var aAmp = 0;
-    var aMobility = 0;
     var aTotalMax = 0;
-    var aNotesMax = 0;
     var aSpeakerMax = 0;
     var aAmpMax = 0;
-
     var tTotal = 0;
-    var tNotes = 0;
-    var tSpeaker = 0;
-    var tSpeakerAmplified = 0;
     var tAmp = 0;
-    var tTrap = 0;
-    var tNotInStage = 0;
-    var tInStage = 0;
-    var tClimb = 0;
-    var tTrappedWhileClimbed = 0;
-    var tHarmony = 0;
-    var tSpotlighed = 0;
-    var tNotesMax = 0;
-    var tSpeakerMax = 0;
-    var tSpeakerAmplifiedMax = 0;
+    var tSpeaker = 0;
+    var tAmplifiedSpeaker = 0;
+    var tTotalMax = 0;
     var tAmpMax = 0;
-    var tTrapMax = 0;
+    var tSpeakerMax = 0;
+    var tAmplifiedSpeakerMax = 0;
+    var climbNotInStage = 0;
+    var climbInStage = 0;
+    var climb = 0;
+    var climbTrap = 0;
+    var climbPoints = 0;
+    var climbPointsMax = 0;
+
+    var Harmony = 0;
+    var Spotlighed = 0;
 
     // Process summary data.
     for (var i = 0; i != data.length; i++){
       var row = data[i];
       matchCount++;
+      console.log(row);
+      console.log(data.length);
       
-      pointsAuto += getMatchPointsAuto(row);
-      pointsTeleop += getMatchPointsTeleop(row);
-	    pointsTotal += getMatchPoints(row);
-	    piecesTotal += getNotes(row);
-      pointsMaxAuto = Math.max(pointsMax, getMatchPointsAuto(row));
-      piecesMaxAuto = Math.max(piecesMax, getAutoPieces(row));
-      pointsMaxTeleop = Math.max(pointsMax, getMatchPointsTeleop(row));
-      piecesMaxTeleop = Math.max(piecesMax, getTeleopPieces(row));
-      pointsMax = Math.max(pointsMax, getMatchPoints(row));
-      piecesMax = Math.max(piecesMax, getNotes(row));
+      pointsAuto += getMatchPointsAuto(row);      //Points in Auto
+      pointsTeleop += getMatchPointsTeleop(row);  //Points in Teleop
+	    pointsTotal += getMatchPoints(row);         //Points in Auto + Teleop
+	    piecesTotal += getNotes(row);               //Total Pieces Overall
 
-      aMobility += getMobilityAuto(row) ? 1 : 0;
-      aTotal += getAutoPieces(row);
+      pointsMaxAuto = Math.max(pointsMaxAuto, getMatchPointsAuto(row));   //Max Points Auto
+      pointsMaxTeleop = Math.max(pointsMaxTeleop, getMatchPointsTeleop(row));   //Max Points Teleop
+      pointsMax = Math.max(pointsMax, getMatchPoints(row));   //Max Points
+      piecesMax = Math.max(piecesMax, getNotes(row));         //Max Pieces
+
+
+      aMobility += getMobilityAuto(row) ? 1 : 0;  //# Auto Mobility
+      aTotal += getAutoPieces(row);     //# Auto Pieces
       aSpeaker += getSpeakerAuto(row);
       aAmp += getAmpAuto(row);
+      aTotalMax = Math.max(aTotalMax, getAutoPieces(row));
       aSpeakerMax = Math.max(aSpeakerMax, getSpeakerAuto(row));
       aAmpMax = Math.max(aAmpMax, getAmpAuto(row));
 
-      tTotal += getPiecesTeleop(row);
-      tSpeaker += getConesTeleop(row);
+      tTotal += getTeleopPieces(row);
+      tAmp += getAmpTeleop(row);
+      tSpeaker += getSpeakerTeleop(row);
+      tAmplifiedSpeaker += getSpeakerAmplifiedTeleop(row);
+      tTrap += getTrapTeleop(row);
+      tTotalMax = Math.max(tTotalMax, getTeleopPieces(row));
+      tAmpMax = Math.max(tAmpMax, getAmpTeleop(row));
+      tSpeakerMax = Math.max(tSpeakerMax, getSpeakerTeleop(row));
+      tAmplifiedSpeakerMax = Math.max(tAmplifiedSpeakerMax, getSpeakerAmplifiedTeleop(row));
+      tTrapMax = Math.max(tTrapMax, getTrapTeleop(row));
+
 
       climbNotInStage += getNotInStage(row) ? 1 : 0;
       climbInStage += getInStage(row) ? 1 : 0;
       climb += getClimb(row) ? 1: 0;
       climbTrap += getTrappedWhileClimbed(row) ? 1 : 0;
       climbPoints += getTeleopClimbPoints(row);
-      climbPointsMax = Math.max(climbPoints, getTeleopClimbPoints(row));
+      climbPointsMax = Math.max(climbPointsMax, getTeleopClimbPoints(row));
+      Harmony += getHarmony(row) ? 1 : 0;;
+      Spotlighed += getSpotlighted(row) ? 1 : 0;;
     }
 
     // Only add data if over 0.
     if (matchCount > 0){
       // Calculate avg.
-      pointsAuto = roundInt(pointsAuto / matchCount);
-      pointsTeleop = roundInt(pointsTeleop / matchCount);
-	    pointsTotal = roundInt(pointsTotal / matchCount);
-	    piecesTotal = roundInt(piecesTotal / matchCount);
-      aTotal = roundInt(aTotal / matchCount);
-      aCones /= matchCount;
-      aCubes /= matchCount;
-      aTop /= matchCount;
-      aMiddle /= matchCount;
-      aBottom /= matchCount;
-      aDock = 100 * roundInt(aDock/matchCount);
-      aEngage = 100 * roundInt(aEngage/matchCount);
-      aMobility = 100 * roundInt(aMobility/matchCount);
+      pointsAuto = (pointsAuto / matchCount).toFixed(2);
+      pointsTeleop = (pointsTeleop / matchCount).toFixed(2);
+      pointsTotal = (pointsTotal / matchCount).toFixed(2);
+      piecesTotal = (piecesTotal / matchCount).toFixed(2);
+      aMobility = (aMobility / matchCount).toFixed(2);
+      aTotal = (aTotal / matchCount).toFixed(2);
+      aSpeaker = (aSpeaker / matchCount).toFixed(2);
+      aAmp = (aAmp / matchCount).toFixed(2);
+      tTotal = (tTotal / matchCount).toFixed(2);
+      tSpeaker = (tSpeaker / matchCount).toFixed(2);
+      tAmplifiedSpeaker = (tAmplifiedSpeaker / matchCount).toFixed(2);
+      tAmp = (tAmp / matchCount).toFixed(2);
+      tTrap = (tTrap / matchCount).toFixed(2);
 
-      tTotal = roundInt(tTotal / matchCount);
-      tCones /= matchCount;
-      tCubes /= matchCount;
-      tTop /= matchCount;
-      tMiddle /= matchCount;
-      tBottom /= matchCount;
-      tDock = 100 * roundInt(tDock/matchCount);
-      tEngage = 100 * roundInt(tEngage/matchCount);
-
-      aCones = roundInt(aCones);
-      aCubes = roundInt(aCubes);
-      aTop = roundInt(aTop);
-      aMiddle = roundInt(aMiddle);
-      aBottom = roundInt(aBottom);
-
-      tCones = roundInt(tCones);
-      tCubes = roundInt(tCubes);
-      tTop = roundInt(tTop);
-      tMiddle = roundInt(tMiddle);
-      tBottom = roundInt(tBottom);
+      climbNotInStage = (climbNotInStage / matchCount).toFixed(2);
+      climbInStage = (climbInStage / matchCount).toFixed(2);
+      climb = (climb / matchCount).toFixed(2);
+      climbTrap = (climbTrap / matchCount).toFixed(2);
+      climbPoints = (climbPoints / matchCount).toFixed(2);
+      climbPointsMax = (climbPointsMax / matchCount).toFixed(2);
+      Harmony = (Harmony / matchCount).toFixed(2);
+      Spotlighed = (Spotlighed / matchCount).toFixed(2);
 
       // Auto summary.
       var autoSummaryRows = [
         ` <tr><th scope='row'>Total Pieces</th><td scope='row'>${aTotal}</td><td scope='row'>${aTotalMax}</td></tr>`,
-        ` <tr><th scope='row'>Cones</th><td scope='row'>${aCones}</td><td scope='row'>${aConesMax}</td></tr>`,
-        ` <tr><th scope='row'>Cubes</th><td scope='row'>${aCubes}</td><td scope='row'>${aCubesMax}</td></tr>`,
-        ` <tr><th scope='row'>Top</th><td scope='row'>${aTop}</td><td scope='row'>${aTopMax}</td></tr>`,
-        ` <tr><th scope='row'>Middle</th><td scope='row'>${aMiddle}</td><td scope='row'>${aMiddleMax}</td></tr>`,
-        ` <tr><th scope='row'>Bottom</th><td scope='row'>${aBottom}</td><td scope='row'>${aBottomMax}</td></tr>`,
-        ` <tr><th scope='row'>Engage</th><td scope='row'>${aEngage}%</td><td scope='row'>N/A</td></tr>`,
-        ` <tr><th scope='row'>Dock</th><td scope='row'>${aDock}%</td><td scope='row'>N/A</td></tr>`,
-        ` <tr><th scope='row'>Mobility</th><td scope='row'>${aMobility}%</td><td scope='row'>N/A</td></tr>`,
+        ` <tr><th scope='row'>Amp</th><td scope='row'>${aAmp}</td><td scope='row'>${aAmpMax}</td></tr>`,
+        ` <tr><th scope='row'>Speaker</th><td scope='row'>${aSpeaker}</td><td scope='row'>${aSpeakerMax}</td></tr>`,
+        ` <tr><th scope='row'>Mobility</th><td scope='row'>${100*aMobility}%</td><td scope='row'>N/A</td></tr>`
       ].join('');
       $('#autoSummaryData').append(autoSummaryRows);
 
       // Teleop summary.
       var teleopSummaryRows = [
         ` <tr><th scope='row'>Total Pieces</th><td scope='row'>${tTotal}</td><td scope='row'>${tTotalMax}</td></tr>`,
-        ` <tr><th scope='row'>Cones</th><td scope='row'>${tCones}</td><td scope='row'>${tConesMax}</td></tr>`,
-        ` <tr><th scope='row'>Cubes</th><td scope='row'>${tCubes}</td><td scope='row'>${tCubesMax}</td></tr>`,
-        ` <tr><th scope='row'>Top</th><td scope='row'>${tTop}</td><td scope='row'>${tTopMax}</td></tr>`,
-        ` <tr><th scope='row'>Middle</th><td scope='row'>${tMiddle}</td><td scope='row'>${tMiddleMax}</td></tr>`,
-        ` <tr><th scope='row'>Bottom</th><td scope='row'>${tBottom}</td><td scope='row'>${tBottomMax}</td></tr>`,
-        ` <tr><th scope='row'>Engage</th><td scope='row'>${tEngage}%</td><td scope='row'>N/A</td></tr>`,
-        ` <tr><th scope='row'>Dock</th><td scope='row'>${tDock}%</td><td scope='row'>N/A</td></tr>`,
+        ` <tr><th scope='row'>Amp</th><td scope='row'>${tAmp}</td><td scope='row'>${tAmpMax}</td></tr>`,
+        ` <tr><th scope='row'>Speaker</th><td scope='row'>${tSpeaker}</td><td scope='row'>${tSpeakerMax}</td></tr>`,
+        ` <tr><th scope='row'>Amplified Speaker</th><td scope='row'>${tAmplifiedSpeaker}</td><td scope='row'>${tAmplifiedSpeakerMax}</td></tr>`,
+        ` <tr><th scope='row'>Teleop Trap</th><td scope='row'>${tTrap}</td><td scope='row'>${tTrapMax}</td></tr>`
       ].join('');
       $('#teleopSummaryData').append(teleopSummaryRows);
+
+      // Endgame summary.
+      var endgameSummaryRows = [
+        ` <tr><th scope='row'>Park</th><td scope='row'>${100*climbInStage}%</td></tr>`,
+        ` <tr><th scope='row'>Climb</th><td scope='row'>${100*climb}%</td></tr>`,
+        ` <tr><th scope='row'>Climb and Trap</th><td scope='row'>${100*climbTrap}%</td></tr>`,
+        ` <tr><th scope='row'>Harmony</th><td scope='row'>${100*Harmony}%</td></tr>`,
+        ` <tr><th scope='row'>Spotlighed</th><td scope='row'>${100*Spotlighed}%</td</tr>`
+      ].join('');
+      $('#endgameSummaryData').append(endgameSummaryRows);
 
       var totalSummaryRows = [
         ` <tr><th scope='row'>Average Points</th><td scope='row'>${pointsAuto}</td><td scope='row'>${pointsTeleop}</td><td scope='row'>${pointsTotal}</td></tr>`,
@@ -337,36 +363,16 @@
 
   function createDataChart(data){
     var matchList = [];
-    var highCones = [];
-    var midCones = []
-    var lowCones = [];
-    var highCubes = [];
-    var midCubes = []
-    var lowCubes = [];
-    var dock = [];
-    var engage = [];
+    var amp = [];
+    var speaker = []
     var totalPieces = [];
+
     for (var i = 0; i != data.length; i++){
       var row = data[i];
       matchList.push(row['matchNumber']);
-
-      var hConesAuto = getTopConesAuto(row);
-      var mConesAuto = getMiddleConesAuto(row);
-      var lConesAuto = getBottomConesAuto(row);
-
-      var hCubesAuto = getTopCubesAuto(row);
-      var mCubesAuto = getMiddleCubesAuto(row);
-      var lCubesAuto = getBottomCubesAuto(row);
-
-      highCones.push(hConesAuto);
-      midCones.push(mConesAuto);
-      lowCones.push(lConesAuto);
-      highCubes.push(hCubesAuto);
-      midCubes.push(mCubesAuto);
-      lowCubes.push(lCubesAuto);
-      dock.push(getDockAuto(row));
-      engage.push(getEngageAuto(row));
-      totalPieces.push(getPiecesAuto(row));
+      amp.push(getAmpAuto(row));
+      speaker.push(getSpeakerAuto(row));
+      totalPieces.push(getAutoPieces(row));
     }
 
     var ctx = document.getElementById('dataChart');
@@ -375,59 +381,21 @@
       data: {
         datasets: [{
           type: 'bar',
-          label: 'Low Cubes',
-          data: lowCubes,
+          label: 'Amp',
+          data: amp,
           stack: 'Stack 0',
-          backgroundColor: 'rgba(70, 40, 230, 0.5)'
+          backgroundColor: 'rgba(0, 128, 128, 0.5)'
         }, {
           type: 'bar',
-          label: 'Mid Cubes',
-          data: midCubes,
-          stack: 'Stack 0',
-          backgroundColor: 'rgba(160, 40, 230, 0.5)'
-        }, {
-          type: 'bar',
-          label: 'High Cubes',
-          data: highCubes,
-          stack: 'Stack 0',
-          backgroundColor: 'rgba(230, 40, 230, 0.5)'
-        }, {
-          type: 'bar',
-          label: 'Low Cones',
-          data: lowCones,
+          label: 'Speaker',
+          data: speaker,
           stack: 'Stack 1',
-          backgroundColor: 'rgba(237, 70, 40, 0.5)'
-        }, {
-          type: 'bar',
-          label: 'Mid Cones',
-          data: midCones,
-          stack: 'Stack 1',
-          backgroundColor: 'rgba(237, 160, 40, 0.5)'
-        }, {
-          type: 'bar',
-          label: 'High Cones',
-          data: highCones,
-          stack: 'Stack 1',
-          backgroundColor: 'rgba(237, 230, 40, 0.5)'
+          backgroundColor: 'rgba(255, 155, 50, 0.8)'
         }, {
           type: 'line',
           label: 'Total Pieces',
           data: totalPieces,
           borderColor: 'rgb(0, 0, 0)'
-        }, {
-          type: 'bar',
-          label: 'Dock',
-          data: dock,
-          fill: false,
-          stack: 'Stack 2',
-          backgroundColor: 'rgb(40, 237, 230)'
-        }, {
-          type: 'bar',
-          label: 'Engage',
-          data: engage,
-          fill: false,
-          stack: 'Stack 2',
-          backgroundColor: 'rgb(40, 237, 125)'
         }
 
         ],
@@ -439,32 +407,20 @@
 
   function createPieceChart(data){
     var matchList = [];
-    var highCones = [];
-    var midCones = []
-    var lowCones = [];
-    var highCubes = [];
-    var midCubes = []
-    var lowCubes = [];
+    var amp = [];
+    var speaker = []
+    var ampSpeaker = [];
+    var telTrap = [];
     var totalPieces = [];
     for (var i = 0; i != data.length; i++){
       var row = data[i];
       matchList.push(row['matchNumber']);
 
-      var hCones = getTopConesTeleop(row);
-      var mCones = getMiddleConesTeleop(row);
-      var lCones = getBottomConesTeleop(row);
-
-      var hCubes = getTopCubesTeleop(row);
-      var mCubes = getMiddleCubesTeleop(row);
-      var lCubes = getBottomCubesTeleop(row);
-
-      highCones.push(hCones);
-      midCones.push(mCones);
-      lowCones.push(lCones);
-      highCubes.push(hCubes);
-      midCubes.push(mCubes);
-      lowCubes.push(lCubes);
-      totalPieces.push(getPiecesTeleop(row));
+      amp.push(getAmpTeleop(row));
+      speaker.push(getSpeakerTeleop(row));
+      ampSpeaker.push(getSpeakerAmplifiedTeleop(row));
+      telTrap.push(getTrapTeleop(row));
+      totalPieces.push(getTeleopPieces(row));
     }
 
     var ctx = document.getElementById('pieceChart');
@@ -473,40 +429,28 @@
       data: {
         datasets: [{
           type: 'bar',
-          label: 'Low Cubes',
-          data: lowCubes,
+          label: 'Amp',
+          data: amp,
           stack: 'Stack 0',
-          backgroundColor: 'rgba(70, 40, 230, 0.5)'
+          backgroundColor: 'rgba(0, 128, 128, 0.5)'
         }, {
           type: 'bar',
-          label: 'Mid Cubes',
-          data: midCubes,
-          stack: 'Stack 0',
-          backgroundColor: 'rgba(160, 40, 230, 0.5)'
-        }, {
-          type: 'bar',
-          label: 'High Cubes',
-          data: highCubes,
-          stack: 'Stack 0',
-          backgroundColor: 'rgba(230, 40, 230, 0.5)'
-        }, {
-          type: 'bar',
-          label: 'Low Cones',
-          data: lowCones,
+          label: 'Speaker',
+          data: speaker,
           stack: 'Stack 1',
-          backgroundColor: 'rgba(237, 70, 40, 0.5)'
+          backgroundColor: 'rgba(255, 155, 50, 0.8)'
         }, {
           type: 'bar',
-          label: 'Mid Cones',
-          data: midCones,
+          label: 'Amplified Speaker',
+          data: ampSpeaker,
           stack: 'Stack 1',
-          backgroundColor: 'rgba(237, 160, 40, 0.5)'
+          backgroundColor: 'rgba(251, 192, 147, 0.95)'
         }, {
           type: 'bar',
-          label: 'High Cones',
-          data: highCones,
-          stack: 'Stack 1',
-          backgroundColor: 'rgba(237, 230, 40, 0.5)'
+          label: 'Teleop Trap',
+          data: telTrap,
+          stack: 'Stack 2',
+          backgroundColor: 'rgba(155, 125, 255, 0.8)'
         }, {
           type: 'line',
           label: 'Total Pieces',
@@ -518,8 +462,71 @@
         labels: matchList
       }
     });
+  }
 
+  function createEndgameChart(data){
+    var matchList = [];
+    var park = [];
+    var climb = []
+    var climb_trap = [];
+    var harmony = [];
+    var spotlight = [];
+    for (var i = 0; i != data.length; i++){
+      var row = data[i];
+      matchList.push(row['matchNumber']);
 
+      park.push(getInStage(row));
+      if(getTrappedWhileClimbed(row)){
+        climb.push(getTrappedWhileClimbed(row));
+        climb_trap.push(getTrappedWhileClimbed(row));
+      }else{
+        climb.push(getClimb(row));
+        climb_trap.push(getTrappedWhileClimbed(row));
+      }
+      harmony.push(getHarmony(row));
+      spotlight.push(getSpotlighted(row));
+    }
+
+    var ctx = document.getElementById('endgameChart');
+
+    endgameChart = new Chart(ctx, {
+      data: {
+        datasets: [{
+          type: 'bar',
+          label: 'Park',
+          data: park,
+          stack: 'Stack 1',
+          backgroundColor: 'rgba(0, 215, 243, 0.8)'
+        }, {
+          type: 'bar',
+          label: 'Climb',
+          data: climb,
+          stack: 'Stack 1',
+          backgroundColor: 'rgba(41, 230, 243, 0.8)'
+        }, {
+          type: 'bar',
+          label: 'Climb and Trap',
+          data: climb_trap,
+          stack: 'Stack 1',
+          backgroundColor: 'rgba(136, 243, 241, 0.8)'
+        }, {
+          type: 'bar',
+          label: 'Harmony',
+          data: harmony,
+          stack: 'Stack 2',
+          backgroundColor: 'rgba(104, 243, 146, 0.8)'
+        }, {
+          type: 'bar',
+          label: 'Spotlight',
+          data: spotlight,
+          stack: 'Stack 2',
+          backgroundColor: 'rgba(243, 160, 225, 0.8)'
+        },
+
+        ],
+        labels: matchList
+      }
+    });
   }
 
 //Dont need changing
@@ -585,7 +592,8 @@
       createSummaryData(matchData);
       createDataChart(matchData);
       createPieceChart(matchData);
-      createWrittenComments(matchData)
+      createEndgameChart(matchData);
+      createWrittenComments(matchData);
       createCannedComments(matchData);
     });
   }
@@ -664,7 +672,7 @@
 
     loadTeamPictures(teamNumber);
     loadPitData(teamNumber);
-	loadStrikeData(teamNumber);
+	  loadStrikeData(teamNumber);
     loadTeamData(teamNumber);
   }
 

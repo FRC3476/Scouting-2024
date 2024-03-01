@@ -71,7 +71,7 @@ function getTeleopClimbPoints(row){
 		return 1;
 	}
 	points += getClimb(row) ? 3 : 0;
-	points += getTrappedWhileClimbed(row) ? 8 : 0;
+	points += getTrappedWhileClimbed(row) ? 5 : 0;
 
 	if (points == 0){
 		return 0;

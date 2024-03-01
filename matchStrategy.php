@@ -71,8 +71,8 @@
                     <th scope="col">Avg Telop Pieces</th>
                     <th scope="col">Avg Telop Speaker</th>
                     <th scope="col">Avg Telop Amp</th>
-                    <th scope="col">Telop Climb %</th>
-                    <th scope="col">Telop Harmony or Trap %</th>
+                    <th scope="col">Climb %</th>
+                    <th scope="col">Climb and Trap %</th>
                   </thead>
                   <tbody id='dataRed1'></tbody>
                 </table>
@@ -110,8 +110,8 @@
                     <th scope="col">Avg Telop Pieces</th>
                     <th scope="col">Avg Telop Speaker</th>
                     <th scope="col">Avg Telop Amp</th>
-                    <th scope="col">Telop Climb %</th>
-                    <th scope="col">Telop Harmony or Trap %</th>
+                    <th scope="col">Climb %</th>
+                    <th scope="col">Climb and Trap %</th>
                   </thead>
                   <tbody id='dataRed2'></tbody>
                 </table>
@@ -150,9 +150,8 @@
                     <th scope="col">Avg Telop Pieces</th>
                     <th scope="col">Avg Telop Speaker</th>
                     <th scope="col">Avg Telop Amp</th>
-                    <th scope="col">Telop Climb %</th>
-                    <th scope="col">Telop Harmony or Trap %</th>
-                    console.log("hi");
+                    <th scope="col">Climb %</th>
+                    <th scope="col">Climb and Trap %</th>
                   </thead>
                   <tbody id='dataRed3'></tbody>
                 </table>
@@ -192,8 +191,8 @@
                     <th scope="col">Avg Telop Pieces</th>
                     <th scope="col">Avg Telop Speaker</th>
                     <th scope="col">Avg Telop Amp</th>
-                    <th scope="col">Telop Climb %</th>
-                    <th scope="col">Telop Harmony or Trap %</th>
+                    <th scope="col">Climb %</th>
+                    <th scope="col">Climb and Trap %</th>
                   </thead>
                   <tbody id='dataBlue1'></tbody>
                 </table>
@@ -231,8 +230,8 @@
                     <th scope="col">Avg Telop Pieces</th>
                     <th scope="col">Avg Telop Speaker</th>
                     <th scope="col">Avg Telop Amp</th>
-                    <th scope="col">Telop Climb %</th>
-                    <th scope="col">Telop Harmony or Trap %</th>
+                    <th scope="col">Climb %</th>
+                    <th scope="col">Climb and Trap %</th>
                   </thead>
                   <tbody id='dataBlue2'></tbody>
                 </table>
@@ -271,8 +270,8 @@
                     <th scope="col">Avg Telop Pieces</th>
                     <th scope="col">Avg Telop Speaker</th>
                     <th scope="col">Avg Telop Amp</th>
-                    <th scope="col">Telop Climb %</th>
-                    <th scope="col">Telop Harmony or Trap %</th>
+                    <th scope="col">Climb %</th>
+                    <th scope="col">Climb and Trap %</th>
                   </thead>
                   <tbody id='dataBlue3'></tbody>
                 </table>
@@ -340,40 +339,36 @@ function augmentTotalMatchSummary(data, alliance){
 
   var avgPieces = 0;
   var avgPoints = 0;
-  var avgAutoChargeStationPoints = 0;
+  var teleopClimbPoints = 0;
   var avgTeleopChargeStationPoints = 0;
   var matchCount = 0;
 
   for (var i = 0; i != data.length; i++){
     matchCount++;
-    avgPieces += getMatchGamePiece(data[i]);
+    avgPieces += getNotes(data[i]);
     avgPoints += getMatchPoints(data[i]);
-    avgAutoChargeStationPoints += getAutoChargeStationPoints(data[i]);
-    avgTeleopChargeStationPoints += getTeleopChargeStationPoints(data[i]);
+    teleopClimbPoints += getTeleopClimbPoints(data[i]);
   }
 
   if (matchCount == 0){
     return;
   }
   
-  avgPieces = roundInt(avgPieces/matchCount);
-  avgPoints = roundInt(avgPoints/matchCount);
-  avgAutoChargeStationPoints = roundInt(avgAutoChargeStationPoints/matchCount);
-  avgTeleopChargeStationPoints = roundInt(avgTeleopChargeStationPoints/matchCount);
+  avgPieces = Math.round(avgPieces/matchCount);
+  avgPoints = Math.round(avgPoints/matchCount);
+  teleopClimbPoints = Math.round(teleopClimbPoints/matchCount);
 
   if (alliance == 'Red'){
     validRedTeams++;
     avgRedPoints += avgPoints;
     avgRedGamePieces += avgPieces;
-    avgAutoRedChargeStationPoints += avgAutoChargeStationPoints;
-    avgTeleopRedChargeStationPoints += avgTeleopChargeStationPoints;
+    avgAutoRedChargeStationPoints += teleopClimbPoints;
   }
   else {
     validBlueTeams++;
     avgBluePoints += avgPoints;
     avgBlueGamePieces += avgPieces;
-    avgAutoBlueChargeStationPoints += avgAutoChargeStationPoints;
-    avgTeleopBlueChargeStationPoints += avgTeleopChargeStationPoints;
+    avgAutoBlueChargeStationPoints += teleopClimbPoints;
   }
   updateSummaryTable();
 }
@@ -382,18 +377,18 @@ function updateSummaryTable(){
   var row = [
     `<tr>`,
     `  <th scope='col'>Avg Points</th>`,
-    `  <td scope='col' class="table-danger">${roundInt(avgRedPoints)}</td>`,
-    `  <td scope='col' class="table-primary">${roundInt(avgBluePoints)}</td>`,
+    `  <td scope='col' class="table-danger">${Math.round(avgRedPoints)}</td>`,
+    `  <td scope='col' class="table-primary">${Math.round(avgBluePoints)}</td>`,
     `</tr>`,
     `<tr>`,
     `  <th scope='col'>Avg Pieces</th>`,
-    `  <td scope='col' class="table-danger">${roundInt(avgRedGamePieces)}</td>`,
-    `  <td scope='col' class="table-primary">${roundInt(avgBlueGamePieces)}</td>`,
+    `  <td scope='col' class="table-danger">${Math.round(avgRedGamePieces)}</td>`,
+    `  <td scope='col' class="table-primary">${Math.round(avgBlueGamePieces)}</td>`,
     `</tr>`,
     `<tr>`,
-    `  <th scope='col'>Avg Charge Station Points</th>`,
-    `  <td scope='col' class="table-danger">${roundInt(Math.min(avgAutoRedChargeStationPoints, 12) + avgTeleopRedChargeStationPoints)}</td>`,
-    `  <td scope='col' class="table-primary">${roundInt(Math.min(avgAutoBlueChargeStationPoints, 12) + avgTeleopBlueChargeStationPoints)}</td>`,
+    `  <th scope='col'>Avg Climb Points</th>`,
+    `  <td scope='col' class="table-danger">${Math.round(Math.min(avgAutoRedChargeStationPoints, 12) + avgTeleopRedChargeStationPoints)}</td>`,
+    `  <td scope='col' class="table-primary">${Math.round(Math.min(avgAutoBlueChargeStationPoints, 12) + avgTeleopBlueChargeStationPoints)}</td>`,
     `</tr>`,
   ].join('');
   $('#summaryTable').html(row);
@@ -402,42 +397,46 @@ function updateSummaryTable(){
 function augmentTeamDataSummary(data, elementSuffix){
   var matchCount = 0;
   var avgAutoPiece = 0;
-  var avgAutoEngageOrDock = 0;
+  var avgAutoSpeaker = 0;
+
   var avgTelopPiece = 0;
-  var avgTeleopCones = 0;
-  var avgTeleopCubes = 0;
-  var avgTeleopEngage = 0;
-  var avgTeleopDock = 0;
+  var avgTeleopSpeaker = 0;
+  var avgTeleopAmp = 0;
+
+  var climb = 0;
+  var climb_trap = 0;
   for (var i = 0; i != data.length; i++){
     var match = data[i];
     matchCount++;
-    avgAutoPiece += getPiecesAuto(match);
-    avgAutoEngageOrDock += getDockAuto(match) || getEngageAuto(match) ? 1 : 0;
-    avgTelopPiece += getPiecesTeleop(match);
-    avgTeleopCones += getConesTeleop(match);
-    avgTeleopCubes += getCubesTeleop(match);
-    avgTeleopEngage += getEngageTeleop(match) ? 1 : 0;
-    avgTeleopDock += getDockTeleop(match) ? 1 : 0;
+    avgAutoPiece += getAutoPieces(match);
+    avgAutoSpeaker += getSpeakerAuto(match);
+
+    avgTelopPiece += getTeleopPieces(match);
+    avgTeleopSpeaker += getTotalSpeakerTeleop(match);
+    avgTeleopAmp += getAmpTeleop(match);
+
+    climb += getClimb(match) ? 1 : 0;
+    climb_trap += getTrappedWhileClimbed(match) ? 1 : 0;
   }
 
   if (matchCount > 0){
-    avgAutoPiece = roundInt(avgAutoPiece / matchCount);
-    avgAutoEngageOrDock = roundInt(100 * avgAutoEngageOrDock / matchCount);
-    avgTelopPiece = roundInt(avgTelopPiece / matchCount);
-    avgTeleopCones = roundInt(avgTeleopCones / matchCount);
-    avgTeleopCubes = roundInt(avgTeleopCubes / matchCount);
-    avgTeleopEngage = roundInt(100 * avgTeleopEngage / matchCount);
-    avgTeleopDock = roundInt(100 * avgTeleopDock / matchCount);
+    avgAutoPiece = Math.round(avgAutoPiece / matchCount);
+    avgAutoSpeaker = Math.round(avgAutoSpeaker / matchCount);
+    avgTelopPiece = Math.round(avgTelopPiece / matchCount);
+    avgTeleopSpeaker = Math.round(avgTeleopSpeaker / matchCount);
+    avgTeleopAmp = Math.round(avgTeleopAmp / matchCount);
+    climb = Math.round(100 * climb / matchCount);
+    climb_trap = Math.round(100 * climb_trap / matchCount);
 
     var rows = [
       `<tr>`,
       `  <td scope='col'>${avgAutoPiece}</td>`,
-      `  <td scope='col'>${avgAutoEngageOrDock}%</td>`,
+      `  <td scope='col'>${avgAutoSpeaker}</td>`,
       `  <td scope='col'>${avgTelopPiece}</td>`,
-      `  <td scope='col'>${avgTeleopCones}</td>`,
-      `  <td scope='col'>${avgTeleopCubes}</td>`,
-      `  <td scope='col'>${avgTeleopEngage}%</td>`,
-      `  <td scope='col'>${avgTeleopDock}%</td>`,
+      `  <td scope='col'>${avgTeleopSpeaker}</td>`,
+      `  <td scope='col'>${avgTeleopAmp}</td>`,
+      `  <td scope='col'>${climb}%</td>`,
+      `  <td scope='col'>${climb_trap}%</td>`,
       `</tr>`
     ].join('');
     $(`#data${elementSuffix}`).html(rows);
