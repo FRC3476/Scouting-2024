@@ -67,12 +67,12 @@
                 <table class='table text-bg-danger'>
                   <thead>
                     <th scope="col">Avg Auto Pieces</th>
-                    <th scope="col">Auto Engage OR Dock</th>
+                    <th scope="col">Auto Speaker</th>
                     <th scope="col">Avg Telop Pieces</th>
-                    <th scope="col">Avg Telop Cones</th>
-                    <th scope="col">Avg Telop Cubes</th>
-                    <th scope="col">Telop Engage %</th>
-                    <th scope="col">Telop Dock %</th>
+                    <th scope="col">Avg Telop Speaker</th>
+                    <th scope="col">Avg Telop Amp</th>
+                    <th scope="col">Telop Climb %</th>
+                    <th scope="col">Telop Harmony or Trap %</th>
                   </thead>
                   <tbody id='dataRed1'></tbody>
                 </table>
@@ -106,12 +106,12 @@
                 <table class='table text-bg-danger'>
                   <thead>
                     <th scope="col">Avg Auto Pieces</th>
-                    <th scope="col">Auto Engage OR Dock</th>
+                    <th scope="col">Auto Speaker</th>
                     <th scope="col">Avg Telop Pieces</th>
-                    <th scope="col">Avg Telop Cones</th>
-                    <th scope="col">Avg Telop Cubes</th>
-                    <th scope="col">Telop Engage %</th>
-                    <th scope="col">Telop Dock %</th>
+                    <th scope="col">Avg Telop Speaker</th>
+                    <th scope="col">Avg Telop Amp</th>
+                    <th scope="col">Telop Climb %</th>
+                    <th scope="col">Telop Harmony or Trap %</th>
                   </thead>
                   <tbody id='dataRed2'></tbody>
                 </table>
@@ -146,12 +146,13 @@
                 <table class='table text-bg-danger'>
                   <thead>
                     <th scope="col">Avg Auto Pieces</th>
-                    <th scope="col">Auto Engage OR Dock</th>
+                    <th scope="col">Auto Speaker</th>
                     <th scope="col">Avg Telop Pieces</th>
-                    <th scope="col">Avg Telop Cones</th>
-                    <th scope="col">Avg Telop Cubes</th>
-                    <th scope="col">Telop Engage %</th>
-                    <th scope="col">Telop Dock %</th>
+                    <th scope="col">Avg Telop Speaker</th>
+                    <th scope="col">Avg Telop Amp</th>
+                    <th scope="col">Telop Climb %</th>
+                    <th scope="col">Telop Harmony or Trap %</th>
+                    console.log("hi");
                   </thead>
                   <tbody id='dataRed3'></tbody>
                 </table>
@@ -183,17 +184,16 @@
                   </div>
                 </div>
               </div>
-
               <div class='overflow-auto'>
                 <table class='table text-bg-primary'>
                   <thead>
                     <th scope="col">Avg Auto Pieces</th>
-                    <th scope="col">Auto Engage OR Dock</th>
+                    <th scope="col">Auto Speaker</th>
                     <th scope="col">Avg Telop Pieces</th>
-                    <th scope="col">Avg Telop Cones</th>
-                    <th scope="col">Avg Telop Cubes</th>
-                    <th scope="col">Telop Engage %</th>
-                    <th scope="col">Telop Dock %</th>
+                    <th scope="col">Avg Telop Speaker</th>
+                    <th scope="col">Avg Telop Amp</th>
+                    <th scope="col">Telop Climb %</th>
+                    <th scope="col">Telop Harmony or Trap %</th>
                   </thead>
                   <tbody id='dataBlue1'></tbody>
                 </table>
@@ -227,12 +227,12 @@
                 <table class='table text-bg-primary'>
                   <thead>
                     <th scope="col">Avg Auto Pieces</th>
-                    <th scope="col">Auto Engage OR Dock</th>
+                    <th scope="col">Auto Speaker</th>
                     <th scope="col">Avg Telop Pieces</th>
-                    <th scope="col">Avg Telop Cones</th>
-                    <th scope="col">Avg Telop Cubes</th>
-                    <th scope="col">Telop Engage %</th>
-                    <th scope="col">Telop Dock %</th>
+                    <th scope="col">Avg Telop Speaker</th>
+                    <th scope="col">Avg Telop Amp</th>
+                    <th scope="col">Telop Climb %</th>
+                    <th scope="col">Telop Harmony or Trap %</th>
                   </thead>
                   <tbody id='dataBlue2'></tbody>
                 </table>
@@ -266,13 +266,13 @@
               <div class='overflow-auto'>
                 <table class='table text-bg-primary'>
                   <thead>
-                    <th scope="col">Avg Auto Pieces</th>
-                    <th scope="col">Auto Engage OR Dock</th>
+                  <th scope="col">Avg Auto Pieces</th>
+                    <th scope="col">Auto Speaker</th>
                     <th scope="col">Avg Telop Pieces</th>
-                    <th scope="col">Avg Telop Cones</th>
-                    <th scope="col">Avg Telop Cubes</th>
-                    <th scope="col">Telop Engage %</th>
-                    <th scope="col">Telop Dock %</th>
+                    <th scope="col">Avg Telop Speaker</th>
+                    <th scope="col">Avg Telop Amp</th>
+                    <th scope="col">Telop Climb %</th>
+                    <th scope="col">Telop Harmony or Trap %</th>
                   </thead>
                   <tbody id='dataBlue3'></tbody>
                 </table>
