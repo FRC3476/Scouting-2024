@@ -18,9 +18,7 @@
                 <!-- Number + Pictures -->
                 <div class="col-lg-6 col-sm-12 col-xs-12 gx-3">
                     <div class="card mb-3 mt-3">
-                        <div class="card-header">
-                          <h2 id='teamHeading'></h2>
-                        </div>
+                        <div class="card-header"><h2 id='teamHeading'></h2></div>
                         <div class="card-body">
 
                           <div id="robotPicsCarousel" class="carousel slide" data-interval="false">
@@ -36,7 +34,6 @@
                               <span class="visually-hidden">Next</span>
                             </button>
                           </div>
-                            
                         </div>
                     </div>
 
@@ -91,7 +88,7 @@
                               <th scope="col"></th>
                               <th scope="col">Auto</th>
                               <th scope="col">Teleop</th>
-							  <th scope="col">Total</th>
+							                <th scope="col">Total</th>
                             </thead>
                             <tbody id='totalSummary'></tbody>
                           </table>
@@ -204,35 +201,32 @@
 
     var matchCount = 0;
     var aTotal = 0;
-    var aCones = 0;
-    var aCubes = 0;
-    var aTop = 0;
-    var aMiddle = 0;
-    var aBottom = 0;
-    var aEngage = 0;
-    var aDock = 0;
+    var aNotes = 0;
+    var aSpeaker = 0;
+    var aAmp = 0;
     var aMobility = 0;
     var aTotalMax = 0;
-    var aConesMax = 0;
-    var aCubesMax = 0;
-    var aTopMax = 0;
-    var aMiddleMax = 0;
-    var aBottomMax = 0;
+    var aNotesMax = 0;
+    var aSpeakerMax = 0;
+    var aAmpMax = 0;
 
     var tTotal = 0;
-    var tCones = 0;
-    var tCubes = 0;
-    var tTop = 0;
-    var tMiddle = 0;
-    var tBottom = 0;
-    var tEngage = 0;
-    var tDock = 0;
-    var tTotalMax = 0;
-    var tConesMax = 0;
-    var tCubesMax = 0;
-    var tTopMax = 0;
-    var tMiddleMax = 0;
-    var tBottomMax = 0;
+    var tNotes = 0;
+    var tSpeaker = 0;
+    var tSpeakerAmplified = 0;
+    var tAmp = 0;
+    var tTrap = 0;
+    var tNotInStage = 0;
+    var tInStage = 0;
+    var tClimb = 0;
+    var tTrappedWhileClimbed = 0;
+    var tHarmony = 0;
+    var tSpotlighed = 0;
+    var tNotesMax = 0;
+    var tSpeakerMax = 0;
+    var tSpeakerAmplifiedMax = 0;
+    var tAmpMax = 0;
+    var tTrapMax = 0;
 
     // Process summary data.
     for (var i = 0; i != data.length; i++){
@@ -242,41 +236,30 @@
       pointsAuto += getMatchPointsAuto(row);
       pointsTeleop += getMatchPointsTeleop(row);
 	    pointsTotal += getMatchPoints(row);
-	    piecesTotal += getMatchGamePiece(row);
-      pointsMax = Math.max(pointsMax, getMatchPointsAuto(row));
-      piecesMax = Math.max(piecesMax, getMatchGamePiece(row));
+	    piecesTotal += getNotes(row);
+      pointsMaxAuto = Math.max(pointsMax, getMatchPointsAuto(row));
+      piecesMaxAuto = Math.max(piecesMax, getAutoPieces(row));
+      pointsMaxTeleop = Math.max(pointsMax, getMatchPointsTeleop(row));
+      piecesMaxTeleop = Math.max(piecesMax, getTeleopPieces(row));
+      pointsMax = Math.max(pointsMax, getMatchPoints(row));
+      piecesMax = Math.max(piecesMax, getNotes(row));
 
-      aTotal += getPiecesAuto(row);
-      aCones += getConesAuto(row);
-      aCubes += getCubesAuto(row)
-      aTop += getTopAuto(row);
-      aMiddle += getMiddleAuto(row);
-      aBottom += getBottomAuto(row);
-      aEngage += getEngageAuto(row) ? 1 : 0;
-      aDock += getDockAuto(row) ? 1 : 0;
       aMobility += getMobilityAuto(row) ? 1 : 0;
-      aTotalMax = Math.max(aTotalMax, getPiecesAuto(row));
-      aConesMax = Math.max(aConesMax, getConesAuto(row));
-      aCubesMax = Math.max(aCubesMax, getCubesAuto(row));
-      aTopMax = Math.max(aTopMax, getTopAuto(row));
-      aMiddleMax = Math.max(aMiddleMax, getMiddleAuto(row));
-      aBottomMax = Math.max(aBottomMax, getBottomAuto(row));
+      aTotal += getAutoPieces(row);
+      aSpeaker += getSpeakerAuto(row);
+      aAmp += getAmpAuto(row);
+      aSpeakerMax = Math.max(aSpeakerMax, getSpeakerAuto(row));
+      aAmpMax = Math.max(aAmpMax, getAmpAuto(row));
 
       tTotal += getPiecesTeleop(row);
-      tCones += getConesTeleop(row);
-      tCubes += getCubesTeleop(row)
-      tTop += getTopTeleop(row);
-      tMiddle += getMiddleTeleop(row);
-      tBottom += getBottomTeleop(row);
-      tEngage += getEngageTeleop(row) ? 1 : 0;
-      tDock += getDockTeleop(row) ? 1 : 0;
-      tTotalMax = Math.max(tTotalMax, getPiecesTeleop(row));
-      tConesMax = Math.max(tConesMax, getConesTeleop(row));
-      tCubesMax = Math.max(tCubesMax, getCubesTeleop(row));
-      tTopMax = Math.max(tTopMax, getTopTeleop(row));
-      tMiddleMax = Math.max(tMiddleMax, getMiddleTeleop(row));
-      tBottomMax = Math.max(tBottomMax, getBottomTeleop(row));
-      
+      tSpeaker += getConesTeleop(row);
+
+      climbNotInStage += getNotInStage(row) ? 1 : 0;
+      climbInStage += getInStage(row) ? 1 : 0;
+      climb += getClimb(row) ? 1: 0;
+      climbTrap += getTrappedWhileClimbed(row) ? 1 : 0;
+      climbPoints += getTeleopClimbPoints(row);
+      climbPointsMax = Math.max(climbPoints, getTeleopClimbPoints(row));
     }
 
     // Only add data if over 0.
@@ -539,7 +522,7 @@
 
   }
 
-
+//Dont need changing
 
 
   function createCannedBadge(comment, matchList){
@@ -681,7 +664,7 @@
 
     loadTeamPictures(teamNumber);
     loadPitData(teamNumber);
-	  loadStrikeData(teamNumber);
+	loadStrikeData(teamNumber);
     loadTeamData(teamNumber);
   }
 
