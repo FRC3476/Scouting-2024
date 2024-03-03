@@ -24,11 +24,11 @@
                             <div id="robotPics1" class="carousel-inner">
 
                             </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#robotPicsCarousel" data-bs-slide="prev">
+                            <button class="carousel-control-prev" type="button" data-bs-target="#robotPicsCarousel1" data-bs-slide="prev">
                               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                               <span class="visually-hidden">Previous</span>
                             </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#robotPicsCarousel" data-bs-slide="next">
+                            <button class="carousel-control-next" type="button" data-bs-target="#robotPicsCarousel1" data-bs-slide="next">
                               <span class="carousel-control-next-icon" aria-hidden="true"></span>
                               <span class="visually-hidden">Next</span>
                             </button>
@@ -53,7 +53,6 @@
                             </thead>
                             <tbody id='pitData1'></tbody>
                           </table>
-
                         </div>
                     </div>
 					
@@ -180,14 +179,14 @@
         </div>
     </div>
 </body>
-
+<!-- Team 2 HTML -->
 <body class="bg-body">
     <div class="container row-offcanvas row-offcanvas-left">
-        <div class="well column col-lg-12 col-sm-12 col-xs-12" id="content2">
+        <div class="well column col-lg-12 col-sm-12 col-xs-12" id="content">
             <br>
             <div class="input-group mb-3">
-                <input id="inputTeamNumber2" type="text" class="form-control" placeholder="Enter Team Number">
-                <button id="readAllTeamMatchData2" type="button" class="btn btn-primary">Load Team Data</button>
+                <input id="inputTeamNumber" type="text" class="form-control" placeholder="Enter Team Number">
+                <button id="readAllTeamMatchData" type="button" class="btn btn-primary">Load Team Data</button>
             </div>
   
             <div class="row">
@@ -195,11 +194,11 @@
                 <!-- Number + Pictures -->
                 <div class="col-lg-6 col-sm-12 col-xs-12 gx-3">
                     <div class="card mb-3 mt-3">
-                        <div class="card-header"><h2 id='teamHeading2'></h2></div>
+                        <div class="card-header"><h2 id='teamHeading'></h2></div>
                         <div class="card-body">
 
-                          <div id="robotPicsCarousel2" class="carousel slide" data-interval="false">
-                            <div id="robotPics2" class="carousel-inner">
+                          <div id="robotPicsCarousel" class="carousel slide" data-interval="false">
+                            <div id="robotPics" class="carousel-inner">
 
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#robotPicsCarousel" data-bs-slide="prev">
@@ -229,7 +228,7 @@
                               <th scope="col">Perimeter</th>
                               <th scope="col">Comments</th>
                             </thead>
-                            <tbody id='pitData2'></tbody>
+                            <tbody id='pitData'></tbody>
                           </table>
 
                         </div>
@@ -247,7 +246,7 @@
                               <th scope="col">Electrical Robustness</th>
                               <th scope="col">Comments</th>
                             </thead>
-                            <tbody id='strikeData2'></tbody>
+                            <tbody id='strikeData'></tbody>
                           </table>
 
                         </div>
@@ -267,7 +266,7 @@
                               <th scope="col">Teleop</th>
 							                <th scope="col">Total</th>
                             </thead>
-                            <tbody id='totalSummary2'></tbody>
+                            <tbody id='totalSummary'></tbody>
                           </table>
 
                           <h5>Auto Table</h5>
@@ -277,7 +276,7 @@
                               <th scope="col">Average</th>
                               <th scope="col">Max</th>
                             </thead>
-                            <tbody id='autoSummaryData2'></tbody>
+                            <tbody id='autoSummaryData'></tbody>
                           </table>
 
                           <h5>Teleop Table</h5>
@@ -287,7 +286,7 @@
                               <th scope="col">Average</th>
                               <th scope="col">Max</th>
                             </thead>
-                            <tbody id='teleopSummaryData2'></tbody>
+                            <tbody id='teleopSummaryData'></tbody>
                           </table>
                             
                           <h5>Endgame Table</h5>
@@ -296,7 +295,7 @@
                               <th scope="col"></th>
                               <th scope="col">Percentages</th>
                             </thead>
-                            <tbody id='endgameSummaryData2'></tbody>
+                            <tbody id='endgameSummaryData'></tbody>
                           </table>
                         </div>
                     </div>
@@ -309,7 +308,7 @@
                         <div class="card-header">Comments</div>
                         <div class="card-body overflow-auto">
 
-                          <div id='cannedComments2' class='container'>
+                          <div id='cannedComments' class='container'>
                           </div>
                         </div>
                     </div>
@@ -321,7 +320,7 @@
                         <div class="card-header">Written Comments</div>
                         <div class="card-body overflow-auto">
 
-                          <div id='writtenComments2' class='container'>
+                          <div id='writtenComments' class='container'>
                           </div>
                         </div>
                     </div>
@@ -332,7 +331,7 @@
                     <div class="card mb-3 mt-3">
                         <div class="card-header">Auto Piece Chart</div>
                         <div class="card-body">
-                          <canvas id="dataChart2"></canvas>
+                          <canvas id="dataChart"></canvas>
                         </div>
                     </div>
                 </div>
@@ -341,7 +340,7 @@
                     <div class="card mb-3 mt-3">
                         <div class="card-header">Teleop Piece Chart</div>
                         <div class="card-body">
-                          <canvas id="pieceChart2"></canvas>
+                          <canvas id="pieceChart"></canvas>
                         </div>
                     </div>
                 </div>
@@ -350,7 +349,7 @@
                     <div class="card mb-3 mt-3">
                         <div class="card-header">Endgame Chart</div>
                         <div class="card-body">
-                          <canvas id="endgameChart2"></canvas>
+                          <canvas id="endgameChart"></canvas>
                         </div>
                     </div>
                 </div>
@@ -358,6 +357,7 @@
         </div>
     </div>
 </body>
+<!-- Team 2 HTML Ends-->
 
 <?php include("footer.php"); ?>
 <script type="text/javascript" src="js/charts.js"></script>
@@ -391,7 +391,7 @@
 
   }
 
-  function createSummaryData(data){
+  function createSummaryData1(data){
     var tTrap1 = 0;
     var tTrapMax1 = 0;
     var matchCount1 = 0;
@@ -642,7 +642,7 @@
     });
   }
 
-  function createEndgameChart(data){
+  function createEndgameChart1(data){
     var matchList1 = [];
     var park1 = [];
     var climb1 = []
@@ -710,11 +710,11 @@
 //Dont need changing
 
 
-  function createCannedBadge(comment1, matchList1){
+  function createCannedBadge1(comment1, matchList1){
     var matches1 = matchList1.join(', ');
     var count1 = matchList1.length;
     var rows = [
-      `<button style="margin-right:10px; margin-bottom:10px;" type="button" class="btn btn-primary position-relative" data-bs-container="#cannedComments1" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="${matches}">`,
+      `<button style="margin-right:10px; margin-bottom:10px;" type="button" class="btn btn-primary position-relative" data-bs-container="#cannedComments1" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="${matches1}">`,
       `  ${comment1}`,
       `  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">`,
       `    ${count1}`,
@@ -725,65 +725,65 @@
     $('#cannedComments1').append(rows);
   }
 
-  function createCannedComments(data) {
-    var commentLookup = getCannedCommentsDictionary(data);
+  function createCannedComments1(data) {
+    var commentLookup1 = getCannedCommentsDictionary(data);
 
-    for(let comment in commentLookup){
-      createCannedBadge(comment, commentLookup[comment]);
+    for(let comment1 in commentLookup1){
+      createCannedBadge(comment1, commentLookup1[comment1]);
     }
 
-    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    const tooltipTriggerList1 = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList1].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
   }
 
-  function createWrittenComments(data) {
-    var writtenComments = []
-    writtenComments = getWrittenComments(data);
+  function createWrittenComments1(data) {
+    var writtenComments1 = []
+    writtenComments1 = getWrittenComments(data);
 
-    for(var i = 0; i != writtenComments.length; i+=2){
+    for(var i = 0; i != writtenComments1.length; i+=2){
       var row = [
         `<button style="margin-right:10px; margin-bottom:10px;" type="button" class="btn btn-primary position-relative">`,
-        `${writtenComments[i+1]}` + `${writtenComments[i]}`,
+        `${writtenComments1[i+1]}` + `${writtenComments1[i]}`,
         `</button>`
       
       ].join('');
-      $('#writtenComments').append(row);
+      $('#writtenComments1').append(row);
     }
 
   }
 
-  var ba = 0;
+  var ba1 = 0;
 
-  function sortMatchData(data){
+  function sortMatchData1(data){
     return data.sort(function(a , b){
       return a['matchNumber'] - b['matchNumber'];
     });
   }
 
-  function loadTeamData(teamNumber){
+  function loadTeamData1(teamNumber){
     $.get('readAPI.php', {
-      'readAllTeamMatchData': teamNumber
+      'readAllTeamMatchData1': teamNumber
     }).done(function(data) {
       matchData = JSON.parse(data);
-      matchData = sortMatchData(matchData);
-      createSummaryData(matchData);
-      createDataChart(matchData);
-      createPieceChart(matchData);
-      createEndgameChart(matchData);
-      createWrittenComments(matchData);
-      createCannedComments(matchData);
+      matchData = sortMatchData1(matchData);
+      createSummaryData1(matchData);
+      createDataChart1(matchData);
+      createPieceChart1(matchData);
+      createEndgameChart1(matchData);
+      createWrittenComments1(matchData);
+      createCannedComments1(matchData);
     });
   }
 
-  function loadPitData(teamNumber){
+  function loadPitData1(teamNumber){
     $.get('readAPI.php', {
       'readAllTeamPitData': teamNumber
     }).done(function(data) {
       var pit = JSON.parse(data);
       if (pit.length > 0){
         pit = pit[0];
-        $('#teamHeading').html(`Team ${teamNumber}`);
+        $('#teamHeading1').html(`Team ${teamNumber}`);
         var row = [
           `<tr>`,
           ` <td scope='row'>${pit['disorganized']}</td>`,
@@ -795,19 +795,19 @@
           ` <td scope='row'>${pit['pitComments']}</td>`,
           `</tr>`
         ].join('');
-        $('#pitData').append(row);
+        $('#pitData1').append(row);
       }
     });
   }
   
-  function loadStrikeData(teamNumber){
+  function loadStrikeData1(teamNumber){
     $.get('readAPI.php', {
       'readAllTeamStrikeData': teamNumber
     }).done(function(data) {
       var strike = JSON.parse(data);
       if (strike.length > 0){
         strike = strike[0];
-        $('#teamHeading').html(`Team ${teamNumber}`);
+        $('#teamHeading1').html(`Team ${teamNumber}`);
         var row = [
           `<tr>`,
           ` <td scope='row'>${strike['vibes']}</td>`,
@@ -817,12 +817,12 @@
           ` <td scope='row'>${strike['strikeComments']}</td>`,
           `</tr>`
         ].join('');
-        $('#strikeData').append(row);
+        $('#strikeData1').append(row);
       }
     });
   }
 
-  function loadTeamPictures(teamNumber){
+  function loadTeamPictures1(teamNumber){
     $.get('readAPI.php', {
       'getTeamPictureFilenames': teamNumber
     }).done(function(data) {
@@ -837,34 +837,35 @@
           ` <img src='${images[i]}' class='d-block w-100'>`,
           `</div>`
         ].join('');
-        $('#robotPics').append(element);
+        $('#robotPics1').append(element);
       }
     });
   }
 
-  function loadTeam(teamNumber){
+  function loadTeam1(teamNumber){
     clearData();
 
     // Set Team Number
-    $('#teamHeading').html('Team ' + teamNumber);
+    $('#teamHeading1').html('Team ' + teamNumber);
 
-    loadTeamPictures(teamNumber);
-    loadPitData(teamNumber);
-	  loadStrikeData(teamNumber);
-    loadTeamData(teamNumber);
+    loadTeamPictures1(teamNumber);
+    loadPitData1(teamNumber);
+	  loadStrikeData1(teamNumber);
+    loadTeamData1(teamNumber);
   }
 
   $(document).ready(function () {
     const url = new URLSearchParams(window.location.search);
     if (url.has('team')){
-      loadTeam(url.get('team'));
+      loadTeam1(url.get('team'));
     }
   });
 
-  $('#readAllTeamMatchData').on('click', function(){
-    loadTeam($('#inputTeamNumber').val());
+  $('#readAllTeamMatchData1').on('click', function(){
+    loadTeam1($('#inputTeamNumber1').val());
   });
 </script>
+
 
 
 <!--Team 2 Script-->

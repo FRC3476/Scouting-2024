@@ -3,7 +3,7 @@
 
 <style>
 body {
-  background-image: url('remy.png');
+  background-image: url('woody.png');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
@@ -19,7 +19,10 @@ body {
           <div class="card">
             <div class="card-body">
 
-              <h1>2024 Scouting System</h1>              
+              <h1>2024 Scouting System</h1>
+              
+              Please reach out to Head Scout for any urgent support!
+            
             </div>
           </div>
         </div>
