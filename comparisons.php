@@ -1,4 +1,4 @@
-<title>Cosffsmparison</title>
+<title>Comparison</title>
 <html lang="en">
 
 <?php include('navbar.php');?>
