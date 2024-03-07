@@ -488,7 +488,6 @@
     }
 
     var ctx = document.getElementById('endgameChart');
-
     endgameChart = new Chart(ctx, {
       data: {
         datasets: [{
@@ -496,13 +495,13 @@
           label: 'Park',
           data: park,
           stack: 'Stack 1',
-          backgroundColor: 'rgba(0, 215, 243, 0.8)'
+          backgroundColor: 'rgba(0, 235, 243, 1)'
         }, {
           type: 'bar',
           label: 'Climb',
           data: climb,
           stack: 'Stack 1',
-          backgroundColor: 'rgba(41, 230, 243, 0.8)'
+          backgroundColor: 'rgba(41, 230, 243, 0.7)'
         }, {
           type: 'bar',
           label: 'Climb and Trap',
