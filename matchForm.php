@@ -535,7 +535,7 @@
       createErrorAlert('Team number not valid.');
       valid = false;
     }
-    if ((teamList.size > 0) && !teamList.has(data['teamNumber'])) {
+    if ((teamList.size > 0) && !teamList.has(data['teamNumber']) && data["matchNumber"] < 5000) {
       createErrorAlert('Team number not in TBA team list!');
       valid = false;
     }
@@ -576,7 +576,7 @@
       createErrorAlert('Team number not valid.');
       valid = false;
     }
-    if ((teamList.size > 0) && !teamList.has(data['teamNumber'])) {
+    if ((teamList.size > 0) && !teamList.has(data['teamNumber']) && data["matchNumber"] < 5000) {
       createErrorAlert('Team number not in TBA team list!');
       valid = false;
     }
