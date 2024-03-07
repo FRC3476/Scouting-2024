@@ -42,6 +42,8 @@ thead th
                 <th col='scope'>Avg Auto Pieces</th>
                 <th col='scope'>Max Auto Pieces</th>
                 <th col='scope'>Avg Teleop Pieces</th>
+                <th col='scope'>Avg Teleop Speaker</th>
+                <th col='scope'>Avg Teleop Amp</th>
                 <th col='scope'>Max Teleop Pieces</th>
                 <th col='scope'>Max Teleop Speaker</th>
                 <th col='scope'>Max Teleop Amp</th>
@@ -121,6 +123,8 @@ thead th
         `  <td scope='row'>${safeLookup('avgAutoPieces', matchData)}</td>`,
         `  <td scope='row'>${safeLookup('maxAutoPieces', matchData)}</td>`,
         `  <td scope='row'>${safeLookup('avgTeleopPieces', matchData)}</td>`,
+        `  <td scope='row'>${safeLookup('avgTeleopSpeaker', matchData)}</td>`,
+        `  <td scope='row'>${safeLookup('avgTeleopAmp', matchData)}</td>`,
         `  <td scope='row'>${safeLookup('maxTeleopPieces', matchData)}</td>`,
         `  <td scope='row'>${safeLookup('maxTeleopSpeaker', matchData)}</td>`,
         `  <td scope='row'>${safeLookup('maxTeleopAmp', matchData)}</td>`,
@@ -207,6 +211,9 @@ thead th
       var avgClimbSpotlighted = 0;
       var avgClimbHarmony = 0;
       var avgClimbPark = 0;
+      var avgTeleopSpeaker = 0
+      var avgTeleopAmp = 0
+
       for (var i = 0; i != teamToDataList[team].length; i++) {
         var match = teamToDataList[team][i];
         matchCount++;
@@ -216,6 +223,8 @@ thead th
         totalAutoPieces += getAutoPieces(match);
         maxAutoPieces = Math.max(maxAutoPieces, getAutoPieces(match));
         totalTeleopPiece += getTeleopPieces(match);
+        avgTeleopSpeaker += getSpeakerTeleop(match);
+        avgTeleopAmp += getAmpTeleop(match);
         maxTeleopSpeaker = Math.max(maxTeleopSpeaker, getSpeakerTeleop(match));
         maxTeleopAmp = Math.max(maxTeleopAmp, getAmpTeleop(match));
         maxTeleopPieces = Math.max(maxTeleopPieces, getTeleopPieces(match));
@@ -228,6 +237,8 @@ thead th
 
       // Add to matchDataLookUp.
       var lookup = {};
+      lookup['avgTeleopSpeaker'] = (avgTeleopSpeaker / matchCount);
+      lookup['avgTeleopAmp'] = (avgTeleopAmp / matchCount);
       lookup['weightedScore'] = (weightedScore / matchCount);
       lookup['avgPoints'] = (totalPoints / matchCount);
       lookup['maxPoints'] = (maxPoints);
