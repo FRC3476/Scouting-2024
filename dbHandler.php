@@ -25,8 +25,6 @@ class dbHandler
         'autoPath' => 'LONGTEXT NOT NULL',
         'teleopAmpNote' => 'SMALLINT NOT NULL',
         'teleopSpeaker' => 'SMALLINT NOT NULL',
-        'teleopSpeakerAmplified' => 'SMALLINT NOT NULL',
-        'teleopTrap' => 'SMALLINT NOT NULL',
         'climb' => 'VARCHAR(100) NULL',
         'climbSpotlighted' => 'BOOLEAN NOT NULL',
         'climbHarmony' => 'BOOLEAN NOT NULL',

@@ -88,12 +88,10 @@
                   <h2 style="text-align: center"> Scoring Location </h2>
                     <div class="col-md-5">
                       <button class="border border-dark disable-dbl-tap-zoom-coral-rose" type="button" onClick="updateTAmp()" id="bigFont">Amp <div id="buttonTAmp" class="enlargedtext"></div></button>
-                      <button class="border border-dark disable-dbl-tap-zoom-ok-coral" type="button" onClick="updateTrap()" id="bigFont">Trap <div id="buttonTrap" class="enlargedtext"></div></button>
                       <br>
                     </div>
                     <div class="col-md-5">
                       <button class="border border-dark disable-dbl-tap-zoom-sunkist-coral" type="button" onClick="updateTSpeaker()" id="bigFont">Speaker <div id="buttonTSpeaker" class="enlargedtext"></div></button>
-                      <button class="border border-dark disable-dbl-tap-zoom-sunkist-coral" type="button" onClick="updateTAmpedSpeaker()" id="bigFont">Amplified Speaker <div id="buttonTAmpedSpeaker" class="enlargedtext"></div></button>
                       <br>
                     </div>
                     <br>
@@ -201,8 +199,6 @@
   aSpeaker = 0;
   tAmp = 0;
   tSpeaker = 0;
-  tAmpedSpeaker = 0;
-  tTrap = 0;
   isIncrement = true;
   makeIncrementTrue();
 
@@ -307,46 +303,8 @@
   }
   
 
-  function updateTAmpedSpeaker() {
-    if (isIncrement == true) {
-      tAmpedSpeaker++;
-    } else {
-      if (tAmpedSpeaker != 0) {
-        tAmpedSpeaker--;
-        //checks to make sure it isn't zero yet for the toggle
-        if (tAmpedSpeaker == 0){
-          makeTIncrementTrue();
-          subtractToggle('toggleTButton','negativeTIncrementButton', 'subtractNameT');
-        }
-      } else {
-        makeTIncrementTrue();
-        subtractToggle('toggleTButton','negativeTIncrementButton', 'subtractNameT');
-      }
-    }
-    document.getElementById("buttonTAmpedSpeaker").innerHTML = tAmpedSpeaker;
-    console.log(tAmpedSpeaker);
-  }
 
-  function updateTrap() {
-    if (isIncrement == true && tTrap == 3) {
-      console.log('should not update');
-    } else if (isIncrement == true) {
-      tTrap++;
-    } else {
-      if (tTrap != 0) {
-        tTrap--;
-        if (tTrap == 0){
-          makeTIncrementTrue();
-          subtractToggle('toggleTButton','negativeTIncrementButton', 'subtractNameT');
-        }
-      } else {
-        makeTIncrementTrue();
-        subtractToggle('toggleTButton','negativeTIncrementButton', 'subtractNameT');
-      }
-    }
-    document.getElementById("buttonTrap").innerHTML = tTrap;
-    console.log(tTrap);
-  }
+
 
   
   // Increment Functions
@@ -476,8 +434,6 @@
     data['autoPath'] = '';
     data['teleopAmpNote'] = tAmp; // Either form input or 0 if no form input
     data['teleopSpeaker'] = tSpeaker; // Either form input or 0 if no form input
-    data['teleopSpeakerAmplified'] = tAmpedSpeaker; // Either form input or 0 if no form input
-    data['teleopTrap'] = tTrap; // Either form input or 0 if no form input
     data['climb'] = $('#teleopStage').val();
     data['climbSpotlighted'] = spotlight;
     data['climbHarmony'] = harmony;
@@ -498,8 +454,6 @@
     data.push(originalJSON['autoPath']);
     data.push(originalJSON['teleopAmpNote']);
     data.push(originalJSON['teleopSpeaker']);
-    data.push(originalJSON['teleopSpeakerAmplified']);
-    data.push(originalJSON['teleopTrap']);
     data.push(originalJSON['climb']);
     data.push(originalJSON['climbSpotlighted']);
     data.push(originalJSON['climbHarmony']);
@@ -592,7 +546,6 @@
     $('#buttonASpeaker').val('0');
     $('#buttonTSpeaker').val('0');
     $('#buttonTAmp').val('0');
-    $('#buttonTrap').val('0');
     $('#teleopStage').val('NONE');
     $('#cannedComents').val('');
     $('#miscComments').val('');
