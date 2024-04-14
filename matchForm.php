@@ -92,6 +92,7 @@
                     </div>
                     <div class="col-md-5">
                       <button class="border border-dark disable-dbl-tap-zoom-sunkist-coral" type="button" onClick="updateTSpeaker()" id="bigFont">Speaker <div id="buttonTSpeaker" class="enlargedtext"></div></button>
+                      <button class="border border-dark disable-dbl-tap-zoom-sunkist-coral" type="button" onClick="updateShuttledNotes()" id="bigFont">Shuttled Notes <div id="buttonShuttledNotes" class="enlargedtext"></div></button>
                       <br>
                     </div>
                     <br>
@@ -199,6 +200,7 @@
   aSpeaker = 0;
   tAmp = 0;
   tSpeaker = 0;
+  tShuttled = 0;
   isIncrement = true;
   makeIncrementTrue();
 
@@ -303,8 +305,25 @@
   }
   
 
-
-
+  function updateShuttledNotes() {
+    if (isIncrement == true) {
+      tShuttled++;
+    } else {
+      if (tShuttled != 0) {
+        tShuttled--;
+        //checks to make sure it isn't zero yet for the toggle
+        if (tShuttled == 0){
+          makeTIncrementTrue();
+          subtractToggle('toggleTButton','negativeTIncrementButton', 'subtractNameT');
+        }
+      } else {
+        makeTIncrementTrue();
+        subtractToggle('toggleTButton','negativeTIncrementButton', 'subtractNameT');
+      }
+    }
+    document.getElementById("buttonShuttledNotes").innerHTML = tShuttled;
+    console.log(tShuttled);
+  }
 
   
   // Increment Functions
@@ -434,6 +453,7 @@
     data['autoPath'] = '';
     data['teleopAmpNote'] = tAmp; // Either form input or 0 if no form input
     data['teleopSpeaker'] = tSpeaker; // Either form input or 0 if no form input
+    data['teleopShuttled'] = tShuttled; // Either form input or 0 if no form input
     data['climb'] = $('#teleopStage').val();
     data['climbSpotlighted'] = spotlight;
     data['climbHarmony'] = harmony;
@@ -454,6 +474,7 @@
     data.push(originalJSON['autoPath']);
     data.push(originalJSON['teleopAmpNote']);
     data.push(originalJSON['teleopSpeaker']);
+    data.push(originalJSON['teleopShuttled']);
     data.push(originalJSON['climb']);
     data.push(originalJSON['climbSpotlighted']);
     data.push(originalJSON['climbHarmony']);
@@ -489,7 +510,7 @@
       createErrorAlert('Team number not valid.');
       valid = false;
     }
-    if ((teamList.size > 0) && !teamList.has(data['teamNumber']) && data["matchNumber"] < 5000) {
+    if ((teamList.size > 0) && !teamList.has(data['teamNumber'])) {
       createErrorAlert('Team number not in TBA team list!');
       valid = false;
     }
@@ -530,7 +551,7 @@
       createErrorAlert('Team number not valid.');
       valid = false;
     }
-    if ((teamList.size > 0) && !teamList.has(data['teamNumber']) && data["matchNumber"] < 5000) {
+    if ((teamList.size > 0) && !teamList.has(data['teamNumber'])) {
       createErrorAlert('Team number not in TBA team list!');
       valid = false;
     }
@@ -546,6 +567,7 @@
     $('#buttonASpeaker').val('0');
     $('#buttonTSpeaker').val('0');
     $('#buttonTAmp').val('0');
+    $('#buttonShuttledNotes').val('0');
     $('#teleopStage').val('NONE');
     $('#cannedComents').val('');
     $('#miscComments').val('');

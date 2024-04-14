@@ -1,8 +1,6 @@
 <title>Match Strategy</title>
 <html lang="en">
-
 <?php include('navbar.php'); ?>
-
 <body class="bg-body">
   <div class="container row-offcanvas row-offcanvas-left">
     <div class="well column col-lg-12 col-sm-12 col-xs-12" id="content">
@@ -12,9 +10,7 @@
         <div class="col-md-6 col-sm-12 col-xs-12 gx-3">
           <div class="card">
             <div class="card-body">
-
                 <div id='ourMatches'></div>
-
                 <div class="input-group mb-3">
                   <select class="form-select" id="writeCompLevel" aria-label="Comp Level Select">
                     <option value="qm">QM</option>
@@ -24,10 +20,8 @@
                   <input id="writeMatchNumber" type="text" class="form-control" placeholder="Match Number" aria-label="writeMatchNumber">
                   <button id="loadMatch" type="button" class="btn btn-primary">Load Match</button>
                 </div>
-
                 <h3 id='matchBanner'>Match:</h3>
                 <h4 id='timeBanner'>Time:</h4>
-
                 <table class='table'>
                   <thead>
                     <th scope="col"></th>
@@ -58,11 +52,9 @@
                 </h2>
                 <div id="picRed1Accordian" class="accordion-collapse collapse" aria-labelledby="headingRed1">
                   <div id='picRed1' class="accordion-body">
-
                   </div>
                 </div>
               </div>
-
               <div class='overflow-auto'>
                 <table class='table text-bg-danger'>
                   <thead>
@@ -97,11 +89,9 @@
                 </h2>
                 <div id="picRed2Accordian" class="accordion-collapse collapse" aria-labelledby="headingRed2">
                   <div id='picRed2' class="accordion-body">
-
                   </div>
                 </div>
               </div>
-
               <div class='overflow-auto'>
                 <table class='table text-bg-danger'>
                   <thead>
@@ -119,7 +109,6 @@
             </div>
           </div>
         </div>
-
         
         <div class="col-lg-4 col-sm-12 col-xs-12 gx-3">
           <div class="card text-bg-danger">
@@ -137,11 +126,9 @@
                 </h2>
                 <div id="picRed3Accordian" class="accordion-collapse collapse" aria-labelledby="headingRed3">
                   <div id='picRed3' class="accordion-body">
-
                   </div>
                 </div>
               </div>
-
               <div class='overflow-auto'>
                 <table class='table text-bg-danger'>
                   <thead>
@@ -159,10 +146,8 @@
             </div>
           </div>
         </div>
-
       </div>
       <div class="row pt-3 pb-3 mb-3 justify-content-md-center gap-0 row-gap-3">
-
       <div class="col-lg-4 col-sm-12 col-xs-12 gx-3">
           <div class="card text-bg-primary">
             <div class="card-body">
@@ -217,11 +202,9 @@
                 </h2>
                 <div id="picBlue2Accordian" class="accordion-collapse collapse" aria-labelledby="headingBlue2">
                   <div id='picBlue2' class="accordion-body">
-
                   </div>
                 </div>
               </div>
-
               <div class='overflow-auto'>
                 <table class='table text-bg-primary'>
                   <thead>
@@ -239,7 +222,6 @@
             </div>
           </div>
         </div>
-
         
         <div class="col-lg-4 col-sm-12 col-xs-12 gx-3">
           <div class="card text-bg-primary">
@@ -257,11 +239,9 @@
                 </h2>
                 <div id="picBlue3Accordian" class="accordion-collapse collapse" aria-labelledby="headingBlue3">
                   <div id='picBlue3' class="accordion-body">
-
                   </div>
                 </div>
               </div>
-
               <div class='overflow-auto'>
                 <table class='table text-bg-primary'>
                   <thead>
@@ -279,34 +259,24 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
 </body>
-
 <?php include("footer.php"); ?>
-
 <script type="text/javascript" src="js/charts.js"></script>
 <script type="text/javascript" src="js/matchDataProcessor.js?cache=6"></script>
-
 <script>
-
 var validBlueTeams = 0;
 var validRedTeams = 0
-
 var avgBluePoints = 0;
 var avgRedPoints = 0;
-
 var avgBlueGamePieces = 0;
 var avgRedGamePieces = 0;
-
 var avgAutoBlueChargeStationPoints = 0;
 var avgTeleopBlueChargeStationPoints = 0;
 var avgAutoRedChargeStationPoints = 0;
 var avgTeleopRedChargeStationPoints = 0;
-
-
 function clearData(){
   $('dataRed1').html('')
   $('dataRed2').html('')
@@ -316,17 +286,13 @@ function clearData(){
   $('dataBlue3').html('')
   clearMainSummary();
 }
-
 function clearMainSummary(){
   validBlueTeams = 0;
   validRedTeams = 0;
-
   avgBluePoints = 0;
   avgRedPoints = 0;
-
   avgBlueGamePieces = 0;
   avgRedGamePieces = 0;
-
   avgAutoBlueChargeStationPoints = 0;
   avgTeleopBlueChargeStationPoints = 0;
   avgAutoRedChargeStationPoints = 0;
@@ -334,26 +300,22 @@ function clearMainSummary(){
     
   updateSummaryTable();
 }
-
 function augmentTotalMatchSummary(data, alliance){
-
   var avgPieces = 0;
   var avgPoints = 0;
   var teleopClimbPoints = 0;
   var avgTeleopChargeStationPoints = 0;
   var matchCount = 0;
-
   for (var i = 0; i != data.length; i++){
     matchCount++;
     avgPieces += getNotes(data[i]);
     avgPoints += getMatchPoints(data[i]);
     teleopClimbPoints += getTeleopClimbPoints(data[i]);
   }
-
   if (matchCount == 0){
     return;
   }
-  
+
   avgPieces = (avgPieces/matchCount);
   avgPoints = (avgPoints/matchCount);
   teleopClimbPoints = (teleopClimbPoints/matchCount);
@@ -372,7 +334,6 @@ function augmentTotalMatchSummary(data, alliance){
   }
   updateSummaryTable();
 }
-
 function updateSummaryTable(){
   var row = [
     `<tr>`,
@@ -393,16 +354,13 @@ function updateSummaryTable(){
   ].join('');
   $('#summaryTable').html(row);
 }
-
 function augmentTeamDataSummary(data, elementSuffix){
   var matchCount = 0;
   var avgAutoPiece = 0;
   var avgAutoSpeaker = 0;
-
   var avgTelopPiece = 0;
   var avgTeleopSpeaker = 0;
   var avgTeleopAmp = 0;
-
   var climb = 0;
   var climb_trap = 0;
   for (var i = 0; i != data.length; i++){
@@ -410,11 +368,9 @@ function augmentTeamDataSummary(data, elementSuffix){
     matchCount++;
     avgAutoPiece += getAutoPieces(match);
     avgAutoSpeaker += getSpeakerAuto(match);
-
     avgTelopPiece += getTeleopPieces(match);
     avgTeleopSpeaker += getTotalSpeakerTeleop(match);
     avgTeleopAmp += getAmpTeleop(match);
-
     climb += getClimb(match) ? 1 : 0;
     climb_trap += getTrappedWhileClimbed(match) ? 1 : 0;
   }
@@ -442,11 +398,9 @@ function augmentTeamDataSummary(data, elementSuffix){
     $(`#data${elementSuffix}`).html(rows);
   }
 }
-
 function createTeamDataSummary(alliance, index, teamNumber){
   var elementSuffix = `${alliance}${index}`;
   $(`#teamHeading${elementSuffix}`).html(teamNumber);
-
   // Load pics.
   $(`#pic${elementSuffix}`).html('');   
   $.get('readAPI.php', {
@@ -457,7 +411,6 @@ function createTeamDataSummary(alliance, index, teamNumber){
         $(`#pic${elementSuffix}`).html(`<img src='${pics[0]}' class='d-block w-100'>`);
     }
   });
-
   $.get('readAPI.php', {
    'readAllTeamMatchData': teamNumber
   }).done(function(data) { 
@@ -465,10 +418,7 @@ function createTeamDataSummary(alliance, index, teamNumber){
     augmentTeamDataSummary(data, elementSuffix);
     augmentTotalMatchSummary(data, alliance);
   });
-
-
 }
-
 function createDataSummaries(matchInfo){
   var redTeams = matchInfo['alliances']['red']['team_keys'];
   var blueTeams = matchInfo['alliances']['blue']['team_keys'];
@@ -479,11 +429,9 @@ function createDataSummaries(matchInfo){
     createTeamDataSummary('Blue', i+1, strTeamToIntTeam(blueTeams[i]));
   }
 }
-
 function strTeamToIntTeam(team) {
   return parseInt(team.replace(/^(frc)/, ''));
 }
-
 function getTimeStringFromNumber(timeNumber){
   var date = new Date(timeNumber * 1000);
   var hours = date.getHours();
@@ -495,7 +443,6 @@ function getTimeStringFromNumber(timeNumber){
   var minutes = "0" + date.getMinutes();
   return hours + ":" + minutes.substr(-2) + " " + suff;
 }
-
 function updateTime(matchData){
   if (matchData['predicted_time'] != null){
     $('#timeBanner').html(`Predicted Time: ${getTimeStringFromNumber(matchData['predicted_time'])}`);
@@ -507,15 +454,11 @@ function updateTime(matchData){
     $('#timeBanner').html(`Time: Unknown`);
   } 
 }
-
-
 function loadData(compLevel, matchNumber){
   console.log(compLevel);
   console.log(matchNumber);
   clearData();
-
   $('#matchBanner').html(`Match: ${compLevel}${matchNumber}`);
-
   $.get('tbaAPI.php', {
    'getMatchData': 1,
    'number' : matchNumber,
@@ -526,7 +469,6 @@ function loadData(compLevel, matchNumber){
     createDataSummaries(match);
   });
 }
-
 function loadUserTeamList(){
   $.get('tbaAPI.php', {
    'getUserMatches': 1
@@ -541,7 +483,6 @@ function loadUserTeamList(){
    $('#ourMatches').html(rows.join(''));
   });
 }
-
 $(document).ready(function() {
   loadUserTeamList();
   const url = new URLSearchParams(window.location.search);
@@ -549,13 +490,10 @@ $(document).ready(function() {
     loadData(url.get('level'), url.get('match'));
   }
 });
-
 $('#loadMatch').on('click', function(){
     var matchNumber = $("#writeMatchNumber").val();
     var compLevel = $("#writeCompLevel").val();
     loadData(compLevel, matchNumber);
 });
-
 </script>
-
 </html>

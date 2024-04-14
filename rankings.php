@@ -1,4 +1,4 @@
-<title>rhhankings</title>
+<title>Rankings</title>
 <html lang="en">
 
 <style>
@@ -39,31 +39,20 @@ thead th
                 <th col='scope'>Weighted Score</th>
                 <th col='scope'>Avg Points</th>
                 <th col='scope'>Max Points</th>
+                <th col='scope'>Shuttled Notes</th>
+                <th col='scope'>Max Shuttled Notes</th>
                 <th col='scope'>Avg Auto Pieces</th>
                 <th col='scope'>Max Auto Pieces</th>
                 <th col='scope'>Avg Teleop Pieces</th>
-                <th col='scope'>Avg Teleop Speaker</th>
-                <th col='scope'>Avg Teleop Amp</th>
                 <th col='scope'>Max Teleop Pieces</th>
+                <th col='scope'>Avg Teleop Speaker</th>
                 <th col='scope'>Max Teleop Speaker</th>
+                <th col='scope'>Avg Teleop Amp</th>
                 <th col='scope'>Max Teleop Amp</th>
                 <th col='scope'>Climb OnStage %</th>
                 <th col='scope'>Climb and Trap%</th>
                 <th col='scope'>Climb Spotlighted %</th>
                 <th col='scope'>Climb Harmony %</th>
-                <th col='scope'>Endgame Park %</th>
-                <th col='scope'>Organization Level</th>
-                <th col='scope'># Batteries</th>
-                <th col='scope'># Chargers</th>
-                <th col='scope'>Language</th>
-                <th col='scope'>Drive Train</th>
-                <th col='scope'>Auto Path</th>
-                <th col='scope'>Frame Dimensions</th>
-                <th col='scope'>Pit Comments</th>
-                <th col='scope'>Scout Flagged Matches</th>
-                <th col='scope'>Avg Strike Rating (0-5)</th>
-                <th col='scope'>Strike Comments</th>
-                <th col='scope'>Strike Vibes</th>
               </tr>
             </thead>
             <tbody id="dataTable">
@@ -120,6 +109,8 @@ thead th
         `  <td scope='row'>${safeLookup('weightedScore', matchData)}</td>`,
         `  <td scope='row'>${safeLookup('avgPoints', matchData)}</td>`,
         `  <td scope='row'>${safeLookup('maxPoints', matchData)}</td>`,
+        `  <td scope='row'>${safeLookup('shuttledNotes', matchData)}</td>`,
+        `  <td scope='row'>${safeLookup('shuttledNotes', matchData)}</td>`,
         `  <td scope='row'>${safeLookup('avgAutoPieces', matchData)}</td>`,
         `  <td scope='row'>${safeLookup('maxAutoPieces', matchData)}</td>`,
         `  <td scope='row'>${safeLookup('avgTeleopPieces', matchData)}</td>`,
@@ -200,6 +191,8 @@ thead th
       var weightedScore = 0;
       var totalPoints = 0;
       var maxPoints = 0;
+      var shuttledNotes = 0;
+      var maxShuttledNotes = 0;
       var totalAutoPieces = 0;
       var maxAutoPieces = 0;
       var totalTeleopPiece = 0;
@@ -220,6 +213,8 @@ thead th
         weightedScore += getWeightedScoreFirst(match);
         totalPoints += getMatchPoints(match);
         maxPoints = Math.max(maxPoints, getMatchPoints(match));
+        shuttledNotes += getShuttledNotes(match);
+        maxShuttledNotes = Math.max(shuttledNotes, getShuttledNotes(match));
         totalAutoPieces += getAutoPieces(match);
         maxAutoPieces = Math.max(maxAutoPieces, getAutoPieces(match));
         totalTeleopPiece += getTeleopPieces(match);
@@ -242,6 +237,8 @@ thead th
       lookup['weightedScore'] = (weightedScore / matchCount);
       lookup['avgPoints'] = (totalPoints / matchCount);
       lookup['maxPoints'] = (maxPoints);
+      lookup['shuttledNotes'] = (shuttledNotes / matchCount);
+      lookup['maxShuttledNotes'] = (maxShuttledNotes);
       lookup['avgAutoPieces'] = (totalAutoPieces / matchCount);
       lookup['maxAutoPieces'] = (maxAutoPieces);
       lookup['avgTeleopPieces'] = (totalTeleopPiece / matchCount);

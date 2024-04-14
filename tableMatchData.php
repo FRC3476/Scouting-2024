@@ -25,7 +25,7 @@
                     <th scope="col">Auto Speaker</th>
                     <th scope="col">Teleop Amp</th>
                     <th scope="col">Teleop Speaker</th>
-                    <th scope="col">Teleop Amplified Speaker</th>
+                    <th scope="col">Shuttled Notes</th>
                     <th scope="col">Teleop Stage</th>
                     <th scope="col">Teleop Trap</th>
                     <th scope="col">Spotlighted</th>
@@ -70,7 +70,7 @@ function createRow(rowData){
                   `  <td>${rowData['autoPath']}</td>`,
                   `  <td>${rowData['teleopAmpNote']}</td>`,
                   `  <td>${rowData['teleopSpeaker']}</td>`,
-                  `  <td>${rowData['teleopSpeakerAmplified']}</td>`,
+                  `  <td>${rowData['teleopShuttled']}</td>`,
                   `  <td>${rowData['teleopTrap']}</td>`,
                   `  <td>${rowData['climb']}</td>`,
                   `  <td>${rowData['climbSpotlighted']}</td>`,
