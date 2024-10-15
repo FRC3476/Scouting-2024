@@ -152,7 +152,7 @@ if (getOrPost('getUserMatchDicts')){
     $bNumber = $b['match_number'];
     
     if ($aLevel == $bLevel){
-      return $aMatch <=> $bMatch;
+      return $aNumber <=> $bNumber;
     }
     $lookup = array('p' => 0, 'qm' => 1, 'qf' => 2, 'sf' => 3, 'f' => 4);
     return $lookup[$aLevel] <=> $lookup[$bLevel];
